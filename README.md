@@ -53,9 +53,9 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |1|[Generating Multi-hop Reasoning Questions to Improve Machine Reading Comprehension](https://dl.acm.org/doi/pdf/10.1145/3366423.3380114)|WWW 2020|0|0|弱引，只引用了观点：三类多跳问题占比92%|
 |2|[Do Multi-Hop Question Answering Systems Know How to Answer the Single-Hop Sub-Questions?](https://arxiv.org/abs/2002.09919)|arXiv 2020|1（探索本质当然有用）|0|中引，作为对比模型来说明自己的研究问题：多跳QA系统能否回答单跳子问题；除此之外引用了DecompRC中划分子问题的方法|
 |3|[Generating Followup Questions for Interpretable Multi-hop Question Answering](https://arxiv.org/abs/2002.12344)|arXiv 2020|0|0|没细看，没多大价值|
-|4|[Multi-hop Question Answering via Reasoning Chains](https://arxiv.org/abs/1910.02610)|arXiv 2019||||
-|5|[Complex Factoid Question Answering with a Free-Text Knowledge Graph](https://dl.acm.org/doi/10.1145/3366423.3380197)|WWW 2020||||
-|6|[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020||[repo](https://github.com/facebookresearch/UnsupervisedDecomposition)||
+|4|[Multi-hop Question Answering via Reasoning Chains](https://arxiv.org/abs/1910.02610)|arXiv 2019|0|0|弱引|
+|5|[Complex Factoid Question Answering with a Free-Text Knowledge Graph](https://dl.acm.org/doi/10.1145/3366423.3380197)|WWW 2020|-|-|不是MRC，而是KBQA，所以没看|
+|6|[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020|1|[repo](https://github.com/facebookresearch/UnsupervisedDecomposition)|强引，提出了一种分解问题的方法|
 |7|[Answering Complex Open-domain Questions Through Iterative Query Generation](https://arxiv.org/abs/1910.07000)|EMNLP 2019||||
 |8|[Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering](https://arxiv.org/abs/1911.10470)|ICLR 2020||||
 |9|[Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019||||
@@ -71,8 +71,6 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |19|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020||||
 |20|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020||||
 |21|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|arXiv 2020||||
-
-
 
 
 
@@ -122,3 +120,51 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 
 ## 4. arXiv 2019：Multi-hop Question Answering via Reasoning Chains
 ### 4.1 动机
+通过对一个实例（问题和给定的文章）逐步建立推理链来推理出答案。推理链是原文中的句子所组成的序列，引导最终答案产生，推理链中相邻的两个句子一定要有一定的信息相关联，例如共享某一实体。  
+感觉该篇论文没啥参考价值，为了训练模型能够抽取出推理链，先用了远程监督的思想（基于NER和共指消解）标注了伪推理链。又有错误传播，又是远程监督训练数据噪声大。实验效果感觉也没多好。  
+
+### 4.2 有价值引文
+| 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: |
+|[Understanding dataset design choices for multi-hop reasoning](https://arxiv.org/abs/1904.12106)|NAACL 2019|[TODO]|
+|[Compositional Questions Do Not Necessitate Multi-hop Reasoning](https://arxiv.org/abs/1906.02900)|ACL 2019(short)|[TODO]|
+
+## 5. WWW 2020：Complex Factoid Question Answering with a Free-Text Knowledge Graph
+[TODO]
+
+## 6. EMNLP 2020：Unsupervised Question Decomposition for Question Answering
+### 6.1 引文
+正好是最新的一篇分解复杂问题的论文，然后根据几篇同类型论文的引文总结一下先有的关于分解复杂问题的工作：  
+| 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: |
+|[The Web as a Knowledge-Base for Answering Complex Questions](https://www.aclweb.org/anthology/N18-1059/)|NAACL 2018|大概看了一下，觉得论述在英文方面表述的很奇怪，在下一个论文中本篇作为引文举出，被阐述了主要区别。|
+|[Multi-hop Reading Comprehension through Question Decomposition and Rescoring](https://arxiv.org/abs/1906.02916)|ACL 2019|[민세원女神](https://shmsw25.github.io/)的paper，也是本md讨论的核心paper，不多说了，膜就完事了。|
+|[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020|本篇|
+
+### 6.2 模型
+- 收集问题：  
+首先作者收集了很多问题，S代表单跳问题集合，Q代表多跳问题集合。S初始化为SQuAD 2.0中的问题，Q初始化为HotpotQA中的问题。作者用Common Crawl中的以“wh”开头，以“？”结尾的句子来扩充Q和S，具体的扩充方法为：训练了一个fasttext文本分类器，将不同的问句分为“SQuAD 2.0”、“HotpotQA”以及“Common Crawl”三类，这个训练集共有60K条句子。然后将所有爬到的问题分类结果为“SQuAD 2.0”的问题用来扩充S，将结果为“HotpotQA”的问题用来扩充Q。通过以上步骤，S从130K扩充至10.1M，Q从90K扩充至2.4M。
+- 检索子问题：  
+对于一个多跳问题与子问题都用fasttext来表示（作者也尝试了用TF-IDF或BERT表示，但没有提升，这三个中fasttext表示是效果最好的）。给定一个多跳问题$q$，通过下式来选取子问题（基本思想为，子问题与原问题相关性尽可能大，且子问题集合尽可能覆盖全面）：
+$$
+(s_{1},s_{2}) = argmax[v^{T}_{q}v_{S1}+v^{T}_{q}v_{S2}-v^{T}_{s1}v_{S2}]
+$$
+- 后处理子问题：  
+由于我们得到子问题的方式是基于检索的，因此检索出的子问题与原问题可能不是关于同一个实体的。如果子问题中的实体没有出现在原问题$q$中，则将这个实体替换为$q$中的同类型（例如日期或地点）实体。
+- ONUS：  
+One-to-N Unsupervised Sequence transduction（ONUS）。在模型具体做法上，利用MLM任务在Q和伪分解子问题上微调了（1 epoch）了基于transformer的seq2seq模型。然后又在```back-translation```以及```denoising objective```两个任务上微调。  
+对于```denoising objective```任务，将问题$q$与对应子问题$d$都进行随机mask、丢弃部分字符、局部交换字符等加噪操作，然后让模型去复原。  
+对于```back-translation```：利用分解后的子问题$d$，去产生原问题$q$。  
+[TODO]
+
+
+# Part 3 开放式问答
+根据[ACL 2020 openqa Tutorial](https://github.com/danqi/acl2020-openqa-tutorial)整理  
+focu事实性的基于非结构化数据（文本）的open QA  
+
+## 1.数据集
+| 类型 | 数据集 |
+| :---: | :---: |
+| 推理挑战 | ```Facebook bAbI```（2015）、```AI2 ARC```（2018）、```Multi-RC```（2018）|
+| 多轮问答 | ```SQA```（2017）、```QuAC```（2018）、```CoQA```（2019）|
+| 多跳问答 | ```HotpotQA```（2018）、```OBQA```（2018）、```QASC```（2020）|
