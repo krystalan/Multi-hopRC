@@ -169,6 +169,22 @@ One-to-N Unsupervised Sequence transduction（ONUS）。在模型具体做法上
 6. 重组模型：  
 和单跳模型一致，只不过训练集的输入是子问题和子问题答案，输出是原始问题答案。每个(sub-question, sub-answer)之间用[SEP]相隔。
 
+## 7. EMNLP 2019：Answering Complex Open-domain Questions Through Iterative Query Generation
+### 7.1 动机
+还是为了解决短视检索问题。在多跳问题中，有些中间实体非常重要，但它一开始没有在问题中，所以需要对初次检索得到的文档中的内容进行二次检索。于是本文提出了```GOLDEN```（Gold Entity）检索模型，每一步模型会利用之前检索得到文档内容去产生一个新的query，再利用新的query去检索文档，以更好的适应多跳问题。 
+
+### 7.2 模型
+1. query生成：  
+每一次输入原问题和已经被检索到的文档，然后输出query，query是输入的一个span。可以看出query生成模型与QA模型很像，都是输入文本，输出一个目标，只不过这里的目标不是回答问题而是生成下一跳的query。自然采取的是单跳QA模型，这里选用的是```DrQA```。  
+对于训练数据，比较启发式的检索已有信息（问题与之前检索到的文档，如果是第一步则只有问题）和期望在下一跳查询到的文档之间具有最高重叠率的连续跨度，将这个连续跨度作为oracle query。计算重叠率的时候测试了多种方法，例如最长公共子序列、最长公共子串、前两者的结合。  
+2. 利用query检索新文档  
+就正常的基于BM25的检索，之后会提高一下那些标题能够匹配到query的文档的分值，具体提高多少看匹配的情况。  
+3. 生成答案  
+每次query出一篇新的文档，对于hotpotQA就query两次得到两个文档即可，然后利用一个QA模型产生答案，在```BiDAF++```模型上进行了修改：（1）由于两个文档之间没有顺序性，如果用一个RNN直接将concat后的文档进行编码则表示会受到被concat的两个文档的顺序影响，因此在编码时，对两个文档分别用一个共享的RNN进行编码，从而得到两个文档的表示。（2）将原有的注意力机制都改为self-att机制。  
+
+### 7.3 其余有价值观点
+作者在评价自己的方法（利用query不断检索新的文档）与分解子问题检索文档的方法时，说到：  
+>It is also more generally applicable than question decomposition approaches (Talmor and Berant, 2018; Min et al., 2019b), and does not require additional annotation for decomposition.
 
 # Part 3 开放式问答
 根据[ACL 2020 openqa Tutorial](https://github.com/danqi/acl2020-openqa-tutorial)整理  
