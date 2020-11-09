@@ -137,25 +137,37 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 正好是最新的一篇分解复杂问题的论文，然后根据几篇同类型论文的引文总结一下先有的关于分解复杂问题的工作：  
 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: |
-|[The Web as a Knowledge-Base for Answering Complex Questions](https://www.aclweb.org/anthology/N18-1059/)|NAACL 2018|大概看了一下，觉得论述在英文方面表述的很奇怪，在下一个论文中本篇作为引文举出，被阐述了主要区别。|
+|[The Web as a Knowledge-Base for Answering Complex Questions](https://www.aclweb.org/anthology/N18-1059/)|NAACL 2018|大概看了一下，觉得论述在英文方面表述的很奇怪，在민세원的论文中（该表格的下一项论文）本篇作为引文举出，被阐述了主要区别。|
 |[Multi-hop Reading Comprehension through Question Decomposition and Rescoring](https://arxiv.org/abs/1906.02916)|ACL 2019|[민세원女神](https://shmsw25.github.io/)的paper，也是本md讨论的核心paper，不多说了，膜就完事了。|
-|[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020|本篇|
+|[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020|本篇|  
+
+其余觉得想看的引文：
+| 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: |
+|[Revealing the Importance of Semantic Retrieval for Machine Reading at Scale](https://www.aclweb.org/anthology/D19-1258/)|EMNLP 2019|[TODO]|
+
 
 ### 6.2 模型
-- 收集问题：  
-首先作者收集了很多问题，S代表单跳问题集合，Q代表多跳问题集合。S初始化为SQuAD 2.0中的问题，Q初始化为HotpotQA中的问题。作者用Common Crawl中的以“wh”开头，以“？”结尾的句子来扩充Q和S，具体的扩充方法为：训练了一个fasttext文本分类器，将不同的问句分为“SQuAD 2.0”、“HotpotQA”以及“Common Crawl”三类，这个训练集共有60K条句子。然后将所有爬到的问题分类结果为“SQuAD 2.0”的问题用来扩充S，将结果为“HotpotQA”的问题用来扩充Q。通过以上步骤，S从130K扩充至10.1M，Q从90K扩充至2.4M。
-- 检索子问题：  
+1. 收集问题：  
+首先作者收集了很多问题，S代表单跳问题集合，Q代表多跳问题集合。S初始化为SQuAD 2.0中的问题，Q初始化为HotpotQA中的问题。作者用Common Crawl中的以“wh”开头，以“？”结尾的句子来扩充Q和S，具体的扩充方法为：训练了一个fasttext文本分类器，将不同的问句分为“SQuAD 2.0”、“HotpotQA”以及“Common Crawl”三类，这个训练集共有60K条句子。然后将所有“Common Crawl”中问题分类结果为“SQuAD 2.0”的问题用来扩充S，将结果为“HotpotQA”的问题用来扩充Q。通过以上步骤，S从130K扩充至10.1M，Q从90K扩充至2.4M。
+2. 检索子问题：  
 对于一个多跳问题与子问题都用fasttext来表示（作者也尝试了用TF-IDF或BERT表示，但没有提升，这三个中fasttext表示是效果最好的）。给定一个多跳问题$q$，通过下式来选取子问题（基本思想为，子问题与原问题相关性尽可能大，且子问题集合尽可能覆盖全面）：
 $$
 (s_{1},s_{2}) = argmax[v^{T}_{q}v_{S1}+v^{T}_{q}v_{S2}-v^{T}_{s1}v_{S2}]
 $$
-- 后处理子问题：  
-由于我们得到子问题的方式是基于检索的，因此检索出的子问题与原问题可能不是关于同一个实体的。如果子问题中的实体没有出现在原问题$q$中，则将这个实体替换为$q$中的同类型（例如日期或地点）实体。
-- ONUS：  
+3. 后处理子问题：  
+由于我们得到子问题的方式是基于检索的，因此检索出的子问题与原问题可能不是关于同一个实体的。如果子问题中的实体没有出现在原问题$q$中，则将这个实体替换为$q$中的同类型（例如日期或地点）实体。  
+这步对于```Seq2seq```（在测试时利用seq2seq模型生成子问题）以及```PseudoD```（在测试时直接利用上述方法来检索子问题）很重要，但是对```ONUS```模型没那么重要，因为```ONUS```要从分解后的子问题$d$重新构建出原问题$q$。
+4. ONUS：  
 One-to-N Unsupervised Sequence transduction（ONUS）。在模型具体做法上，利用MLM任务在Q和伪分解子问题上微调了（1 epoch）了基于transformer的seq2seq模型。然后又在```back-translation```以及```denoising objective```两个任务上微调。  
 对于```denoising objective```任务，将问题$q$与对应子问题$d$都进行随机mask、丢弃部分字符、局部交换字符等加噪操作，然后让模型去复原。  
 对于```back-translation```：利用分解后的子问题$d$，去产生原问题$q$。  
-[TODO]
+5. 单跳模型：  
+整体模型的思路和[DecompRC](https://arxiv.org/abs/1906.02916)差不多。   
+单跳QA模型的选择了```RoBERTa-large```，然后在SQuAD 2.0与HotpotQA-easy上进行预训练。预训练了两个单跳QA模型，然后进行集成。预训练好之后就当成一个黑盒不再改变参数了。  
+然后对于一个多跳问题，先利用```ONUS```分解成单跳问题，接着对于一个单跳问题，将问题与不同的段落分别送至单跳QA模型，模型会在该段落下得出答案span以及有无答案的概率（yes和no也视为一种span）。所以对于一个单跳问题，产生了 段落个数 个答案，成这些答案为单跳QA问题的候选答案。然后基于这些答案和答案概率计算每个候选答案概率，再将概率最大的答案span作为子问题的最终答案。   
+6. 重组模型：  
+和单跳模型一致，只不过训练集的输入是子问题和子问题答案，输出是原始问题答案。每个(sub-question, sub-answer)之间用[SEP]相隔。
 
 
 # Part 3 开放式问答
