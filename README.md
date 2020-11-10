@@ -61,7 +61,7 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |9|[Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019|1|[repo](https://github.com/jiangycTarheel/NMN-MultiHopQA)|中引，挺有意思的一项工作，分了不同的板块去完成不同的单跳任务|
 |10|[Asking Complex Questions with Multi-hop Answer-focused Reasoning](https://arxiv.org/abs/2009.07402)|arXiv 2020|0|[repo](https://github.com/Shawn617/Multi-hop-NQG)|弱引，QG工作|
 |11|[Low-Resource Generation of Multi-hop Reasoning Questions](https://www.aclweb.org/anthology/2020.acl-main.601/)|ACL 2020|0|0|弱引，QG工作|
-|12|[Logic-Guided Data Augmentation and Regularization for Consistent Question Answering](https://arxiv.org/abs/2004.10157)|ACL 2020||||
+|12|[Logic-Guided Data Augmentation and Regularization for Consistent Question Answering](https://arxiv.org/abs/2004.10157)|ACL 2020||[repo](https://github.com/AkariAsai/logic_guided_qa)||
 |13|[Transformer-XH: Multi-hop question answering with eXtra Hop attention](https://openreview.net/forum?id=r1eIiCNYwS)|ICLR 2020||||
 |14|[Robust Question Answering Through Sub-part Alignment](https://arxiv.org/abs/2004.14648)|arXiv 2020||||
 |15|[Learning to Order Sub-questions for Complex Question Answering](https://arxiv.org/abs/1911.04065)|arXiv 2019||||
@@ -219,6 +219,10 @@ $$
 也是一篇多跳问题生成的研究，利用少量的带标签的数据与大量无标注数据训练了QG模型。  
 实验时分别测试了只使用不同比例（10%~100%）的hotpotQA训练集，用自己的方法扩充伪数据来增加训练样本依次提升性能。    
 
+## 12. ACL 2020：Logic-Guided Data Augmentation and Regularization for Consistent Question Answering
+### 12.1 动机
+本论文主要的动机是结合逻辑规则和神经网络模型提高**比较题答案**的准确性和一致性。使用了逻辑和语言上的知识去增强带标签的训练数据，接着使用了一个基于一致性的归一化器来训练模型。所以这篇论文主要研究的点就是对比性的推理问题（在某一个属性方面对比两个实体或事件）。  
+[TODO]
 
 # Part 3 开放式问答
 根据[ACL 2020 openqa Tutorial](https://github.com/danqi/acl2020-openqa-tutorial)整理  
