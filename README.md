@@ -57,10 +57,10 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |5|[Complex Factoid Question Answering with a Free-Text Knowledge Graph](https://dl.acm.org/doi/10.1145/3366423.3380197)|WWW 2020|-|-|不是MRC，而是KBQA，所以没看|
 |6|[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020|1|[repo](https://github.com/facebookresearch/UnsupervisedDecomposition)|强引，提出了一种分解问题的方法|
 |7|[Answering Complex Open-domain Questions Through Iterative Query Generation](https://arxiv.org/abs/1910.07000)|EMNLP 2019|1|[repo](https://github.com/qipeng/golden-retriever)|中引，评价了DecompRC的方法，提出了另外一种方法|
-|8|[Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering](https://arxiv.org/abs/1911.10470)|ICLR 2020||||
+|8|[Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering](https://arxiv.org/abs/1911.10470)|ICLR 2020|1|[repo](https://github.com/AkariAsai/learning_to_retrieve_reasoning_paths)|中引，也是不断检索文档，只不过是推理路径|
 |9|[Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019||||
 |10|[Asking Complex Questions with Multi-hop Answer-focused Reasoning](https://arxiv.org/abs/2009.07402)|arXiv 2020||||
-|11|[Low-Resource Generation of Multi-hop Reasoning Questions](https://www.aclweb.org/anthology/2020.acl-main.601/)|ACL 2020||||
+|11|[Low-Resource Generation of Multi-hop Reasoning Questions](https://www.aclweb.org/anthology/2020.acl-main.601/)|ACL 2020|0|0|弱引，QG工作|
 |12|[Logic-Guided Data Augmentation and Regularization for Consistent Question Answering](https://arxiv.org/abs/2004.10157)|ACL 2020||||
 |13|[Transformer-XH: Multi-hop question answering with eXtra Hop attention](https://openreview.net/forum?id=r1eIiCNYwS)|ICLR 2020||||
 |14|[Robust Question Answering Through Sub-part Alignment](https://arxiv.org/abs/2004.14648)|arXiv 2020||||
@@ -185,6 +185,38 @@ One-to-N Unsupervised Sequence transduction（ONUS）。在模型具体做法上
 ### 7.3 其余有价值观点
 作者在评价自己的方法（利用query不断检索新的文档）与分解子问题检索文档的方法时，说到：  
 >It is also more generally applicable than question decomposition approaches (Talmor and Berant, 2018; Min et al., 2019b), and does not require additional annotation for decomposition.
+
+## 8. ICLR 2020：Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering
+### 8.1 动机
+还是短视检索问题，然后本篇论文作者的想法是在整个wikipedia上面去建立一个段落间的图，然后这个图中每个结点代表一个paragraph，结点之间的连线靠的是wikipedia的一些超链接和段落间的链接，这样不同paragraph之间的关系是依靠着语义建立起来的，而不是文本表面的匹配。由此来解决短视检索问题。
+### 8.2 模型
+1. 建立图  
+没什么好说的，就是根据超链接和段落间的链接建立的。构建出的图也比较稠密。
+2. 检索器  
+利用question和已经检索出的文档，从**候选集**里检索下一跳需要的文档。   
+先利用BERT编码**候选集**中的所有文档，然后利用已有的信息$h_{t}$（包含已检索到的文档与问题信息）计算当前步检索到别的文档的概率，以此来习得推理路径。然后根据当前步检索出的文档的表示再更新已有信息的表示$h_{t+1}$。**候选集的话在一开始是根据question基于TFIDF的方法检索到的，之后就是当前步新检索出的结点所连接的其余结点集合（这里有一个小trick，就是除了当前步新检索出的结点所连接的其余结点之外，还会加上上一次检索得到的结点列表中，除去那个被选中的结点之外，其余结点中排名最高的也会被加入。）**。在检索的过程中也用到了Beam Search，所以检索器最后会输出多条（取决于Beam size）路径之后再由阅读器处理。
+$$
+w_{i} = BERT_{[CLS]}(q,p_{i}) \\
+p(p_{i}|h_{t}) = \sigma(w_{i}h_{t}+b) \\
+h_{t+1} = RNN(h_{t},w_{i})
+$$  
+3. 数据增强与负采样
+- 数据增强：为了训练上述检索器，首先得到一条真值推理路径$g = [p_{1},p_{2},...,p_{g}]$（通过已有的标注数据来获得，$p_{g}$代表的是一个特殊符号[EOE]表示一条路径的终端。），然后增加一条新的推理路径$g^{'} = [p_{\alpha},p_{1},p_{2},...,p{g}]$, $p_{\alpha}$属于$C_{1}$，是TFIDF分最高的一个段落，并且和$p_{1}$相联系。增加这样的新路径有利于Retriever能够在第一次通过TFIDF没有检索到正确文档的情况下，也能进而检索出正确的推理路径。  
+- 负采样：两种负采样策略，基于TFIDF或基于超链接。单轮QA只用基于TFIDF，多轮则两个都用。负采样数为50。
+4. 阅读器  
+利用多任务学习来训练阅读器：（1）对于每条路径进行重排序、（2）阅读理解，在最有可能出现答案的路径上抽取出答案。  
+（1）对于路径选择任务来说，也是利用了BERT，输入问题q与一条路径（所有文档concat）给BERT，然后利用[CLS]获取整条路径的表示，接着通过分类任务预测出这条路径的重要程度。训练数据的话是通过构建负例来训练的。      
+对于阅读理解任务来说，直接使用BERT，输入concat后的文档与问题，输出答案区间，没有什么额外的特殊设计。    
+
+
+## 9. EMNLP 2019 
+[TODO]
+## 10. arXiv 2020:Asking Complex Questions with Multi-hop Answer-focused Reasoning
+[TODO]
+## 11. ACL 2020：Low-Resource Generation of Multi-hop Reasoning Questions
+也是一篇多跳问题生成的研究，利用少量的带标签的数据与大量无标注数据训练了QG模型。  
+实验时分别测试了只使用不同比例（10%~100%）的hotpotQA训练集，用自己的方法扩充伪数据来增加训练样本依次提升性能。    
+
 
 # Part 3 开放式问答
 根据[ACL 2020 openqa Tutorial](https://github.com/danqi/acl2020-openqa-tutorial)整理  
