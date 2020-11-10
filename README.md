@@ -58,7 +58,7 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |6|[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020|1|[repo](https://github.com/facebookresearch/UnsupervisedDecomposition)|强引，提出了一种分解问题的方法|
 |7|[Answering Complex Open-domain Questions Through Iterative Query Generation](https://arxiv.org/abs/1910.07000)|EMNLP 2019|1|[repo](https://github.com/qipeng/golden-retriever)|中引，评价了DecompRC的方法，提出了另外一种方法|
 |8|[Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering](https://arxiv.org/abs/1911.10470)|ICLR 2020|1|[repo](https://github.com/AkariAsai/learning_to_retrieve_reasoning_paths)|中引，也是不断检索文档，只不过是推理路径|
-|9|[Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019||||
+|9|[Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019||[repo](https://github.com/jiangycTarheel/NMN-MultiHopQA)||
 |10|[Asking Complex Questions with Multi-hop Answer-focused Reasoning](https://arxiv.org/abs/2009.07402)|arXiv 2020||||
 |11|[Low-Resource Generation of Multi-hop Reasoning Questions](https://www.aclweb.org/anthology/2020.acl-main.601/)|ACL 2020|0|0|弱引，QG工作|
 |12|[Logic-Guided Data Augmentation and Regularization for Consistent Question Answering](https://arxiv.org/abs/2004.10157)|ACL 2020||||
@@ -209,10 +209,12 @@ $$
 对于阅读理解任务来说，直接使用BERT，输入concat后的文档与问题，输出答案区间，没有什么额外的特殊设计。    
 
 
-## 9. EMNLP 2019 
+## 9. EMNLP 2019：Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning
 [TODO]
+
 ## 10. arXiv 2020:Asking Complex Questions with Multi-hop Answer-focused Reasoning
-[TODO]
+又是一个多跳问题生成的工作，貌似被EMNLP2020拒了？然后作者强调了自己的论文与[*Semantic graphs for generating deep questions.*](https://arxiv.org/abs/2004.12704)的不同
+
 ## 11. ACL 2020：Low-Resource Generation of Multi-hop Reasoning Questions
 也是一篇多跳问题生成的研究，利用少量的带标签的数据与大量无标注数据训练了QG模型。  
 实验时分别测试了只使用不同比例（10%~100%）的hotpotQA训练集，用自己的方法扩充伪数据来增加训练样本依次提升性能。    
