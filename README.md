@@ -58,8 +58,8 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |6|[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020|1|[repo](https://github.com/facebookresearch/UnsupervisedDecomposition)|强引，提出了一种分解问题的方法|
 |7|[Answering Complex Open-domain Questions Through Iterative Query Generation](https://arxiv.org/abs/1910.07000)|EMNLP 2019|1|[repo](https://github.com/qipeng/golden-retriever)|中引，评价了DecompRC的方法，提出了另外一种方法|
 |8|[Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering](https://arxiv.org/abs/1911.10470)|ICLR 2020|1|[repo](https://github.com/AkariAsai/learning_to_retrieve_reasoning_paths)|中引，也是不断检索文档，只不过是推理路径|
-|9|[Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019||[repo](https://github.com/jiangycTarheel/NMN-MultiHopQA)||
-|10|[Asking Complex Questions with Multi-hop Answer-focused Reasoning](https://arxiv.org/abs/2009.07402)|arXiv 2020||||
+|9|[Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019|1|[repo](https://github.com/jiangycTarheel/NMN-MultiHopQA)|中引，挺有意思的一项工作，分了不同的板块去完成不同的单跳任务|
+|10|[Asking Complex Questions with Multi-hop Answer-focused Reasoning](https://arxiv.org/abs/2009.07402)|arXiv 2020|0|[repo](https://github.com/Shawn617/Multi-hop-NQG)|弱引，QG工作|
 |11|[Low-Resource Generation of Multi-hop Reasoning Questions](https://www.aclweb.org/anthology/2020.acl-main.601/)|ACL 2020|0|0|弱引，QG工作|
 |12|[Logic-Guided Data Augmentation and Regularization for Consistent Question Answering](https://arxiv.org/abs/2004.10157)|ACL 2020||||
 |13|[Transformer-XH: Multi-hop question answering with eXtra Hop attention](https://openreview.net/forum?id=r1eIiCNYwS)|ICLR 2020||||
