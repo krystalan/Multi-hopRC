@@ -61,7 +61,7 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |9|[Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019|1|[repo](https://github.com/jiangycTarheel/NMN-MultiHopQA)|强引，挺有意思的一项工作，分了不同的板块去完成不同的单跳任务，也有拆分多跳问题为多个单跳问题的意图。|
 |10|[Asking Complex Questions with Multi-hop Answer-focused Reasoning](https://arxiv.org/abs/2009.07402)|arXiv 2020|0|[repo](https://github.com/Shawn617/Multi-hop-NQG)|弱引，QG工作|
 |11|[Low-Resource Generation of Multi-hop Reasoning Questions](https://www.aclweb.org/anthology/2020.acl-main.601/)|ACL 2020|0|0|弱引，QG工作|
-|12|[Logic-Guided Data Augmentation and Regularization for Consistent Question Answering](https://arxiv.org/abs/2004.10157)|ACL 2020||[repo](https://github.com/AkariAsai/logic_guided_qa)||
+|12|[Logic-Guided Data Augmentation and Regularization for Consistent Question Answering](https://arxiv.org/abs/2004.10157)|ACL 2020|1|[repo](https://github.com/AkariAsai/logic_guided_qa)|弱引，虽然这篇文章将的不是问题分解但我觉得也挺有意思，而且可能会有借鉴价值，讨论核心点是对比问题的数据增强|
 |13|[Transformer-XH: Multi-hop question answering with eXtra Hop attention](https://openreview.net/forum?id=r1eIiCNYwS)|ICLR 2020||||
 |14|[Robust Question Answering Through Sub-part Alignment](https://arxiv.org/abs/2004.14648)|arXiv 2020||||
 |15|[Learning to Order Sub-questions for Complex Question Answering](https://arxiv.org/abs/1911.04065)|arXiv 2019||||
@@ -238,7 +238,14 @@ context经过LSTM的上下文有关表示为$h$（二维向量），问题经过
 ## 12. ACL 2020：Logic-Guided Data Augmentation and Regularization for Consistent Question Answering
 ### 12.1 动机
 本论文主要的动机是结合逻辑规则和神经网络模型提高**比较题答案**的准确性和一致性。使用了逻辑和语言上的知识去增强带标签的训练数据，接着使用了一个基于一致性的归一化器来训练模型。所以这篇论文主要研究的点就是对比性的推理问题（在某一个属性方面对比两个实体或事件）。  
-[TODO]
+### 12.2 模型
+- 基于规则的数据增强
+例如有一个训练数据$X = {q, p, a}$，（1）基于**对称一致性**增强：得到$X^{'} = {q_{sym}, p, a_{sym}}$。（2）基于**传递一致性**增强：$(q_{1}, p, a_{1}) \wedge (q_{2}, p, a_{2}) \to (q_{trans}, p, a_{trans})$，其中$q_{1}$的结果是$q_{2}$的原因。
+- 训练目标   
+loss分为两部分，答案预测loss以及一致性loss：$L = L_{task}(X) + L_{cons}(X, X_{aug})$；其中一致性loss又分为两部分：$L_{cons} = \lambda_{sym}L_{sym} + \lambda_{trans}L_{trans}$。   
+- 退火（Annealing）：刚开始训练时只在答案预测loss上做训练，训练几轮之后再引入一致性loss。
+
+
 
 # Part 3 开放式问答
 根据[ACL 2020 openqa Tutorial](https://github.com/danqi/acl2020-openqa-tutorial)整理  
