@@ -210,7 +210,23 @@ $$
 
 
 ## 9. EMNLP 2019：Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning
-[TODO]
+### 9.1 动机
+使用模块化的思想，设计了三种不同的模块来完成不同的推理操作，每种模块只能完成一跳的推理，多个模块组合起来便可以完成一个多跳推理问题。    
+具体地，利用```Controller```来预测当前步的```Modular```，有三个不同的```Modular```：```Find```用于找到子问题的答案；```Relocate```使用```Find```模组找到的答案来化简问题并继续调用```Find```来搜索化简后的问题的答案；```Compare```模组用来比较前两个```Find```找到的实体信息，并输出一个向量进而判断答案是yes or no。除此之外，还有一个比较特殊的模组```NoOp```代表没有操作，就是跳过的一次，也就是当前步不需要进行任何推理行为的意思。  
+### 9.2 模型  
+context经过LSTM的上下文有关表示为$h$（二维向量），问题经过LSTM的上下文有关表示为$u$（二维向量），问题经过self-attention的表示为$qv$（一维固定向量）。   
+- Controller（控制器）  
+  - Controller计算下一步的推理行为（即计算下一步采用哪个模组）：Controller先计算问题在第t步的表示$q_{t} = W_{1,t}qv + b_{1,t}$，然后融入之前Controller的隐层表示（下面会讲）：$cq_{t} = W_{2}[c_{t-1};q_{t}] + b_{2}$ ，最后计算下一个模组的概率分布：$p_{t,i} = softmax(W_{3}cq_{t})$。这里的$W_{3}$会将参数降维至4表示四个模组（```Find```、```Relocate```、```Compare```以及```NoOp```）
+  - Controller更新当前步的隐层表示：在计算下一步推理模组时，使用到的$c_{t-1}$代表上一步的Controller隐层表示，那么当我们已经得到了下一步的推理模组时，需要更新Controller的隐层表示。具体来说，先计算$cq_{t}$（融合了问题表示与之前控制器的状态信息）对上下文$h$中每个token的权重：$e_{t,j} = W_{4}(cq_{t}u_{j}) + b_{4}$，$cv_{t} = softmax(e_{t})$，最后基于该权重来计算上下文的表示向量（一维）：$c_{t} = \sum_{j}cv_{t,j}u_{j}$。**向量$c_{t}$（1）既表示当前Controller的隐层状态，用于计算下一步模组选取的概率分布；（2）又代表着子问题的表示，因为它是在context上构建的，表示了当前步子问题**。
+- Modulers
+所有的模组输入都是问题表示$u$，上下文表示$h$以及子问题表示$c_{t}$。核心模组（```Find```与```Relocate```）的输出是基于bi-attention在context上构建的一个**attention map**。为了保证能够微分，且能够完成不同模组之间的交互，这个**attention map**会入栈和出栈。例如在对比问题上，我们先将两个实体/事件通过```Find```模组得到的attention map入栈，然后再使用```Compare```模组去对比，这时就要用到之前计算出的两个**attention map**，因此需要对这两个**attention map**做出栈操作。
+  - ```Find```：主要功能是基于子问题表示$c_{t}$，上下文表示$h$，先生成一个更加健壮的子问题表示$h^{'} = hc_{t}$，我的理解是$c_{t}$其实已经包含了权重平均后的context的表示，是一个一维向量，然后用它跟原先上下文表示$h$中每个token的表示做乘积，那么原先权重大的token，在这里乘积也应该更大，最终得到的$h^{'}$融入了子问题表示（同样也来源于上下文表示）和上下文表示，**但最重要的是$h^{'}$是一个二维向量**，所以它可以用来跟我们的问题表示$q$进行Bi-attention计算。接着，我们将Bi-attention计算的结果（是一个在context上的attention map）入栈。
+  - ```Relocate```：主要功能是用之前的```Find```模块找到的答案（本质是一个att map）来进行二跳检索，例如一个问题“A的妻子从事什么职业？”，我们先利用```Find```模块，context以及子问题表示（A的妻子）来在context上建立一个att map，这个att map代表着答案（源于context的某一处上下文），然后接着我们就可以利用```Relocate```模组，给它输入（1）第一步att map代表的答案影响后的上下文表示$h_{b}$。（2）原多跳问题表示$u$以及（3）当前步子问题表示，也就是Controller的隐层表示$c_{t}$。然后```Relocate```模组会输出另一个att map表示第二跳问题的答案（同样本质也是在context上的一个att map）。其余两个输入比较简单，我们来看一下$h_{b}$是如何构建的：首先我们将之前的att map出栈，然后利用该att map计算出答案表示：$b = \sum_{s}att_{1,s}h_{s}$，可以看出$b$是一个由context构建而成的一维向量，在这个att中，第一条问题的答案区间中的token的权重占比应当比较大，所以我们可以将$b$看成是答案的表示，然后再基于这个答案表示$b$构建一个二维的上下文表示（受第一跳问题答案影响的上下文表示）$h_{b} = hb$，这样我们就得到了$h_{b}$，最后我们调用```Find($u$, $h_{b}$, $c_{t}$)```得到一个新的att map代表二跳问题的答案，并将这个新的att map入栈。
+  - ```Compare```：主要功能是在某一属性上对比两个实体/事件。一般情况下再使用```Compare```模组之前，栈内会有两个att map，代表通过```Find```模组找到了关于这两个实体/事件的这一属性。然后将这两个att map出栈加工得到对应的属性表示，再进行分类计算出yes or no即可。我们来看一下具体操作，首先出栈两个att map，然后计算得到两个实体/事件相应的属性表示：$h_{s1} = \sum_{s} att_{1,s}h_{s}$与$h_{s2} = \sum_{s} att_{2,s}h_{s}$，然后我们构建一个新的向量，融入这两个属性的表示、子问题表示$c_{t}$以及这两个属性之间基于$c_{t}$的权重差距表示：$o_{in} = [c_{t}; h_{s1}; h_{s2}; c_{t}(h_{s1}-h_{s2})]$，然后进行线性与非线性变换处理得到：$m = W_{1}(ReLU(W_{2}o_{in}))$。
+  - ```NoOp```：跳过跳过，无操作，因为不可能每一步都有一个推理举动。
+- Prediction Layer：
+我们先把问题表示$qv$以及模组隐层状态表示$m$（好像是所有模组输出的加权平均？）concat起来预测这个问题的答案到底是span还是yes/no；如果是span的话，我们把栈内最后一个att map出栈，然后基于这个att map映射一下得到每个token为span start概率和span end概率，之后懂的都懂；如果是yes/no的话，把```compare```模组最后产生的向量$m$，然后做一个二分类预测。  
+
 
 ## 10. arXiv 2020:Asking Complex Questions with Multi-hop Answer-focused Reasoning
 又是一个多跳问题生成的工作，貌似被EMNLP2020拒了？然后作者强调了自己的论文与[*Semantic graphs for generating deep questions.*](https://arxiv.org/abs/2004.12704)的不同
