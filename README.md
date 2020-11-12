@@ -278,8 +278,8 @@ loss分为两部分，答案预测loss以及一致性loss：$L = L_{task}(X) + L
 对于hotpotQA(Distractor Setting)：先利用A来筛选与问题最相关的句子，然后送到答案预测组件进行答案预测，得到答案以后，利用B计算每个句子为支撑句的概率，将平均概率最高的两个paragraph挑选出来，再在这两个paragraph中基于B的预测分数找出支撑句。    
 对于hotpotQA(Fullwiki Setting)：先利用`SR-MRS`（[*Revealing the Importance of Semantic Retrieval for Machine Reading at Scale*](https://www.aclweb.org/anthology/D19-1258/)）提取出context，之后和Distractor Setting差不多。  
 
-
-
+### 17.3 效果
+这篇论文效果好像非常非常好，超了SOTA不少。
 
 # Part 3 开放式问答
 根据[ACL 2020 openqa Tutorial](https://github.com/danqi/acl2020-openqa-tutorial)整理  
