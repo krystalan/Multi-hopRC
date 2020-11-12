@@ -62,9 +62,9 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |10|[Asking Complex Questions with Multi-hop Answer-focused Reasoning](https://arxiv.org/abs/2009.07402)|arXiv 2020|0|[repo](https://github.com/Shawn617/Multi-hop-NQG)|弱引，QG工作|
 |11|[Low-Resource Generation of Multi-hop Reasoning Questions](https://www.aclweb.org/anthology/2020.acl-main.601/)|ACL 2020|0|0|弱引，QG工作|
 |12|[Logic-Guided Data Augmentation and Regularization for Consistent Question Answering](https://arxiv.org/abs/2004.10157)|ACL 2020|1|[repo](https://github.com/AkariAsai/logic_guided_qa)|弱引，虽然这篇文章将的不是问题分解但我觉得也挺有意思，而且可能会有借鉴价值，讨论核心点是对比问题的数据增强|
-|13|[Transformer-XH: Multi-hop question answering with eXtra Hop attention](https://openreview.net/forum?id=r1eIiCNYwS)|ICLR 2020||||
-|14|[Robust Question Answering Through Sub-part Alignment](https://arxiv.org/abs/2004.14648)|arXiv 2020||||
-|15|[Learning to Order Sub-questions for Complex Question Answering](https://arxiv.org/abs/1911.04065)|arXiv 2019||||
+|13|[Transformer-XH: Multi-hop question answering with eXtra Hop attention](https://openreview.net/forum?id=r1eIiCNYwS)|ICLR 2020|1|[repo](https://github.com/microsoft/Transformer-XH)|弱引，但我觉得这篇工作挺有意思的，让transformer在图结构上学习，评分686|
+|14|[Robust Question Answering Through Sub-part Alignment](https://arxiv.org/abs/2004.14648)|arXiv 2020|0|0|弱引，仅相关工作引用了一下，本身也不是多跳推理阅读理解工作|
+|15|[Learning to Order Sub-questions for Complex Question Answering](https://arxiv.org/abs/1911.04065)|arXiv 2019|1|0|中引，利用强化学习去选择最优的子问题回答顺序来得到最终答案|
 |16|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020||||
 |17|[A Simple Yet Strong Pipeline for HotpotQA](https://arxiv.org/abs/2004.06753)|arXiv 2020||||
 |18|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|arXiv 2019||||
@@ -139,7 +139,9 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 | :---: | :---: | :---: |
 |[The Web as a Knowledge-Base for Answering Complex Questions](https://www.aclweb.org/anthology/N18-1059/)|NAACL 2018|大概看了一下，觉得论述在英文方面表述的很奇怪，在민세원的论文中（该表格的下一项论文）本篇作为引文举出，被阐述了主要区别。|
 |[Multi-hop Reading Comprehension through Question Decomposition and Rescoring](https://arxiv.org/abs/1906.02916)|ACL 2019|[민세원女神](https://shmsw25.github.io/)的paper，也是本md讨论的核心paper，不多说了，膜就完事了。|
-|[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020|本篇|  
+|[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020|本篇| 
+|[Break it down: A question understanding benchmark](https://arxiv.org/abs/2001.11770)|TACL 2020|introduce a Question Decomposition Meaning Representation (QDMR) to explicitly model this process（分解问题）|  
+|[Complex question decomposition for semantic parsing](https://www.aclweb.org/anthology/P19-1440/)|ACL 2019|虽然不是阅读理解上的，但也是分解问题的工作|
 
 其余觉得想看的引文：
 | 论文 | 发表会议 | 备注 |
@@ -245,7 +247,22 @@ context经过LSTM的上下文有关表示为$h$（二维向量），问题经过
 loss分为两部分，答案预测loss以及一致性loss：$L = L_{task}(X) + L_{cons}(X, X_{aug})$；其中一致性loss又分为两部分：$L_{cons} = \lambda_{sym}L_{sym} + \lambda_{trans}L_{trans}$。   
 - 退火（Annealing）：刚开始训练时只在答案预测loss上做训练，训练几轮之后再引入一致性loss。
 
+## 13. ICLR 2020：Transformer-XH: Multi-hop question answering with eXtra Hop attention
+### 13.1 动机
+从名字上不难看出本论文是对`Transformer`的一个改进。以往的序列建模，不论是`Transformer`还是`Transformer-XL`都只是在文本表面的序列上进行建模的。而有些文本之间是存在着固有的结构（树或图）。例如在`Wikipedia`中，许多文档之间实际上是有联系的（体现在超链接上），以往的模型没有考虑到文本之间的图结构。这种图结构对于多跳推理阅读理解来说是非常重要的，因为多跳推理往往需要一条完整的推理链才能回答问题，而推理链就是在这样的图结构中产生的。所以本文在对文本建模时，使用到了另外一种注意力机制：e**X**tra **H**op attention。
+### 13.2 模型  
+直接说应用于hotpotQA的做法吧。
+1. 构建图结构：基于TFIDF抽取一些文档出来，再把与问题中出现过的实体相关的文档挑出来，形成一个初选文档集合，然后对于这个集合中的每一个文档，利用BERT计算出相关度，最后保留前K个相关度的文档。接着把这K个文档相连接的文档也搞出来组成最终文档集合。然后在这个最终文档集合上构建一个图结构，每个结点代表一个文档，边代表图中的超链接关系。
+2. 为每个文档中的token初始化，每个文档在输入到`Transformer-XH`之前，先tokenize，然后组成“[CLS] + question + [SEP] + anchor text + [SEP] + paragraph + [SEP]”的形式。其中anchor text指的是，指向这个文档的超链接上的文字（存在于父文档中）。然后在每层`Transformer-XH`中，所有的token都会现在本文档中进行`vanilla self-attention`（在论文中被称为in-sequence attention），然后重点来了，我们现在想让当前计算的这个文档能够get到其余和它相连接的文档的表示，具体的做法是（eXtra Hop attention）：用[CLS] token的表示获取代表本文档的query向量，然后与相连接的文档的[CLS] token表示进行self-attention。这样本文档的[CLS] token就融入了别的文档的表示。需要注意的是，在本层中[CLS] token经历了两个attention（in-sequence attention与eXtra Hop attention）的交互，所以最后还通过了拼接加线性层的方法将两者融入的信息结合起来。然后在下一层传递信息的时候，本文档中其他token的表示将会从本层和其他文档交互过的[CLS] token中也得到了来自其他文档中的信息。
+3. 基于每个文档的表示，预测每个文档包含答案的概率（二分类），选取最高概率的文档接着进行span预测，再得到最终答案。
 
+## 14. arXiv 2020：Robust Question Answering Through Sub-part Alignment
+将上下文和问题利用现有的工具分解成更小的单元（predicates and corresponding arguments），然后建立图中的结点，接着利用predicate argument relation和共现关系建立边，最后将问题对齐到上下文图中来寻找答案。  
+这样会获得更好的鲁棒性。在攻击实验上效果比较好。  
+但本文和多跳推理无关。   
+
+## 15. arXiv 2019：Learning to Order Sub-questions for Complex Question Answering
+利用强化学习对分解负责问题得到的子问题集合进行了排序以确认子问题的回答顺序。例如对一个复杂问题“那个城市被 由JK罗琳写过的小说改编成的电影 取过景且举办过奥运会”，分解可以得到三个问题：“JK罗琳写过的小说是？”、“哈利波特在哪些城市取过景？”、“哪些城市举办过奥运会？”。显然第三个问题很广泛，如果先回答第三个子问题，搜索空间就很大，所以有必要进行这个子问题序列的研究。需要注意的是第三个子问题，不受第一个和第二个问题回答的限制，因此它是自由的。有多种子问题回答的顺序都能够得到复杂多跳问题的答案，但我们人类在做这种题的时候就会考虑到每个子问题的难度情况来选择最轻松的顺序以得到最终答案。
 
 # Part 3 开放式问答
 根据[ACL 2020 openqa Tutorial](https://github.com/danqi/acl2020-openqa-tutorial)整理  
