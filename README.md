@@ -66,7 +66,7 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |14|[Robust Question Answering Through Sub-part Alignment](https://arxiv.org/abs/2004.14648)|arXiv 2020|0|0|弱引，仅相关工作引用了一下，本身也不是多跳推理阅读理解工作|
 |15|[Learning to Order Sub-questions for Complex Question Answering](https://arxiv.org/abs/1911.04065)|arXiv 2019|1|0|中引，利用强化学习去选择最优的子问题回答顺序来得到最终答案|
 |16|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020||||
-|17|[A Simple Yet Strong Pipeline for HotpotQA](https://arxiv.org/abs/2004.06753)|arXiv 2020||||
+|17|[A Simple Yet Strong Pipeline for HotpotQA](https://arxiv.org/abs/2004.06753)|arXiv 2020|1（效果很好）|[repo](https://github.com/deokhk/QUARK-pytorch)|弱引，不是分解问题的套路，而是一种非常简单的方法但达到了非常不错的效果，值得思考|
 |18|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020||||
 |19|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020||||
 |20|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020||||
