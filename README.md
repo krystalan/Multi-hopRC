@@ -67,7 +67,7 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |15|[Learning to Order Sub-questions for Complex Question Answering](https://arxiv.org/abs/1911.04065)|arXiv 2019|1|0|中引，利用强化学习去选择最优的子问题回答顺序来得到最终答案|
 |16|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020||||
 |17|[A Simple Yet Strong Pipeline for HotpotQA](https://arxiv.org/abs/2004.06753)|arXiv 2020||||
-|18|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|arXiv 2019||||
+|18|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020||||
 |19|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020||||
 |20|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020||||
 |21|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|arXiv 2020||||
@@ -142,12 +142,6 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020|本篇| 
 |[Break it down: A question understanding benchmark](https://arxiv.org/abs/2001.11770)|TACL 2020|introduce a Question Decomposition Meaning Representation (QDMR) to explicitly model this process（分解问题）|  
 |[Complex question decomposition for semantic parsing](https://www.aclweb.org/anthology/P19-1440/)|ACL 2019|虽然不是阅读理解上的，但也是分解问题的工作|
-
-其余觉得想看的引文：
-| 论文 | 发表会议 | 备注 |
-| :---: | :---: | :---: |
-|[Revealing the Importance of Semantic Retrieval for Machine Reading at Scale](https://www.aclweb.org/anthology/D19-1258/)|EMNLP 2019|[TODO]|
-
 
 ### 6.2 模型
 1. 收集问题：  
@@ -263,6 +257,29 @@ loss分为两部分，答案预测loss以及一致性loss：$L = L_{task}(X) + L
 
 ## 15. arXiv 2019：Learning to Order Sub-questions for Complex Question Answering
 利用强化学习对分解负责问题得到的子问题集合进行了排序以确认子问题的回答顺序。例如对一个复杂问题“那个城市被 由JK罗琳写过的小说改编成的电影 取过景且举办过奥运会”，分解可以得到三个问题：“JK罗琳写过的小说是？”、“哈利波特在哪些城市取过景？”、“哪些城市举办过奥运会？”。显然第三个问题很广泛，如果先回答第三个子问题，搜索空间就很大，所以有必要进行这个子问题序列的研究。需要注意的是第三个子问题，不受第一个和第二个问题回答的限制，因此它是自由的。有多种子问题回答的顺序都能够得到复杂多跳问题的答案，但我们人类在做这种题的时候就会考虑到每个子问题的难度情况来选择最轻松的顺序以得到最终答案。
+
+## 16. arXiv 2020：Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models
+[TODO]
+
+## 17. arXiv 2020：A Simple Yet Strong Pipeline for HotpotQA
+### 17.1 引文
+| 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: |
+|[Answering while summarizing:Multi-task learning for multi-hop QA with evidence extraction](https://arxiv.org/abs/1905.08511)|ACL 2019|[TODO]|
+|[Dynamically fused graph network for multi-hop reasoning](https://arxiv.org/abs/1905.06933)|ACL 2019|DFGN|
+|[Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents](https://arxiv.org/abs/1911.00484)|AAAI 2020|SAE| 
+### 17.2 模型
+- 句子评分组件  
+这个组件其实有两个不同的模型构成，一个模型（后称A）负责计算文章中每句话与问题的关联程度，另一个模型（后称B）负责计算文章中每句话能推导出答案的概率。但比较神奇的是，A和B的训练数据是一样的，只不过在输入上有略微的差别。它俩的输入模式都是：“[CLS] + question + [SEP] + paragraph + [SEP] + answer + [SEP]”。对于A来说，它只用计算文章中每句话和问题的关联程度就可，所以它不需要答案，故A的输入部分answer是用[MASK]来表示的。B的话是用来找支撑句的，所以会给模型输入答案（训练的时候是真实答案，测试的时候是已经生成的答案）。这里需要注意paragraph是整个输入进去的，所以不同句子只能通过segment id来判断。  
+- 答案预测组件  
+把A评分后的句子排序然后添加进来，最后按照段落和原顺序整理好，选出来的句子可能来自于不同的段落，那么段落之间的排序是靠每个段中句子的平均分数来决定的。选出来的句子最长不能超过508个token，最后四个token固定是`[SEP]`、`yes`、`no`和`noans`。这样回答的时候也能回答yes or no。预测就正常的span预测。
+
+整体过程：   
+对于hotpotQA(Distractor Setting)：先利用A来筛选与问题最相关的句子，然后送到答案预测组件进行答案预测，得到答案以后，利用B计算每个句子为支撑句的概率，将平均概率最高的两个paragraph挑选出来，再在这两个paragraph中基于B的预测分数找出支撑句。    
+对于hotpotQA(Fullwiki Setting)：先利用`SR-MRS`（[*Revealing the Importance of Semantic Retrieval for Machine Reading at Scale*](https://www.aclweb.org/anthology/D19-1258/)）提取出context，之后和Distractor Setting差不多。  
+
+
+
 
 # Part 3 开放式问答
 根据[ACL 2020 openqa Tutorial](https://github.com/danqi/acl2020-openqa-tutorial)整理  
