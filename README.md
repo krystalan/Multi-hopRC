@@ -67,8 +67,8 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |15|[Learning to Order Sub-questions for Complex Question Answering](https://arxiv.org/abs/1911.04065)|arXiv 2019|1|0|中引，利用强化学习去选择最优的子问题回答顺序来得到最终答案|
 |16|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020||||
 |17|[A Simple Yet Strong Pipeline for HotpotQA](https://arxiv.org/abs/2004.06753)|arXiv 2020|1（效果很好）|[repo](https://github.com/deokhk/QUARK-pytorch)|弱引，不是分解问题的套路，而是一种非常简单的方法但达到了非常不错的效果，值得思考|
-|18|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020||||
-|19|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020||||
+|18|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020|1|[repo](https://github.com/yuwfan/HGN)|弱引，但这篇文章还不错，构建了一个异质图包含四类结点和七类边|
+|19|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020|0|0|弱引，没啥感觉，把检索文档看成序列建模问题然后beam search|
 |20|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020||||
 |21|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|arXiv 2020||||
 
@@ -280,6 +280,12 @@ loss分为两部分，答案预测loss以及一致性loss：$L = L_{task}(X) + L
 
 ### 17.3 效果
 这篇论文效果好像非常非常好，超了SOTA不少。
+
+## 18. EMNLP 2020：Hierarchical Graph Network for Multi-hop Question Answering
+解决推理问题的一类做法就是利用GNN来完成不同结点之间的信息交流，以此达到推理的效果。作者更加细粒度的构建了一个异质图网络，包含了四类结点（问题结点、段落结点、句结点以及实体结点）还有七种类型的边。之后利用预训练模型为每个结点产生初始值，再根据GAT来完成结点之间的信息传递，最后基于各类结点的表示进行多任务联合训练：支撑句预测（基于句结点的表示）、paragraph预测（基于段落结点的表示）、答案区间预测（基于上下文表示和图结构融合之后的表示）、答案类型预测（基于context中CLS token的表示）以及实体预测（基于实体结点的表示）。
+
+## 19. arXiv 2020：Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval
+每次检索一篇新文档，将不断检索文档的过程视为一个语言建模任务，设计的也非常简单，在检索过程中有标注数据，最后在测试时，利用Beam search选择top-K段落然后送到具体下游任务模组中产生答案（在实际操作过程中，对于开放性多跳推理问题可能有一个重排序，也就是利用`BERT`模型进行文档间的相关性打分）。
 
 # Part 3 开放式问答
 根据[ACL 2020 openqa Tutorial](https://github.com/danqi/acl2020-openqa-tutorial)整理  
