@@ -65,7 +65,7 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |13|[Transformer-XH: Multi-hop question answering with eXtra Hop attention](https://openreview.net/forum?id=r1eIiCNYwS)|ICLR 2020|1|[repo](https://github.com/microsoft/Transformer-XH)|弱引，但我觉得这篇工作挺有意思的，让transformer在图结构上学习，评分686|
 |14|[Robust Question Answering Through Sub-part Alignment](https://arxiv.org/abs/2004.14648)|arXiv 2020|0|0|弱引，仅相关工作引用了一下，本身也不是多跳推理阅读理解工作|
 |15|[Learning to Order Sub-questions for Complex Question Answering](https://arxiv.org/abs/1911.04065)|arXiv 2019|1|0|中引，利用强化学习去选择最优的子问题回答顺序来得到最终答案|
-|16|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020||||
+|16|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020|1|[repo](http://github.com/allenai/modularqa)|强引，十分相关，也是在Modular Network上的工作|
 |17|[A Simple Yet Strong Pipeline for HotpotQA](https://arxiv.org/abs/2004.06753)|arXiv 2020|1（效果很好）|[repo](https://github.com/deokhk/QUARK-pytorch)|弱引，不是分解问题的套路，而是一种非常简单的方法但达到了非常不错的效果，值得思考|
 |18|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020|1|[repo](https://github.com/yuwfan/HGN)|弱引，但这篇文章还不错，构建了一个异质图包含四类结点和七类边|
 |19|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020|0|0|弱引，没啥感觉，把检索文档看成序列建模问题然后beam search|
@@ -259,7 +259,44 @@ loss分为两部分，答案预测loss以及一致性loss：$L = L_{task}(X) + L
 利用强化学习对分解负责问题得到的子问题集合进行了排序以确认子问题的回答顺序。例如对一个复杂问题“那个城市被 由JK罗琳写过的小说改编成的电影 取过景且举办过奥运会”，分解可以得到三个问题：“JK罗琳写过的小说是？”、“哈利波特在哪些城市取过景？”、“哪些城市举办过奥运会？”。显然第三个问题很广泛，如果先回答第三个子问题，搜索空间就很大，所以有必要进行这个子问题序列的研究。需要注意的是第三个子问题，不受第一个和第二个问题回答的限制，因此它是自由的。有多种子问题回答的顺序都能够得到复杂多跳问题的答案，但我们人类在做这种题的时候就会考虑到每个子问题的难度情况来选择最轻松的顺序以得到最终答案。
 
 ## 16. arXiv 2020：Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models
-[TODO]
+### 16.1 引文
+| 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: |
+|[QASC:A dataset for question answering via sentence composition](https://arxiv.org/abs/1910.11473)|AAAI 2020|[TODO]|
+|[Drop: A reading comprehension benchmark requiring discrete reasoning over paragraphs](https://arxiv.org/abs/1903.00161)|NAACL 2019|[TODO]|   
+|[Question answering as global reasoning over semantic abstractions](https://arxiv.org/abs/1906.03672)|AAAI 2018|[TODO]|
+|[Reinforced ranker-reader for open-domain question answering](https://arxiv.org/abs/1709.00023)|AAAI 2018|[TODO]|
+|[Numnet: Machine reading comprehension with numerical reasoning](https://arxiv.org/abs/1910.06701)|EMNLP 2019|[TODO]|
+
+### 16.2 Modular Networks在复杂QA上的工作
+| 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: |
+|[Self-assembling modular networks for interpretable multi-hop reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019|在`HotpotQA`上的工作|
+|[Neural module networks for reasoning over text](https://arxiv.org/abs/1912.04971)|ICLR 2020|NMN在`DROP`上的工作|
+|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020|本文，在`DROP`上的工作，也可以用于`HotpotQA`|
+
+### 16.3 对前人工作的叙述
+指出민세원的工作比较难以在新的问题中应用，而且无法保证分解后的子问题被现有模型解决。  
+
+### 16.4 模型
+分为两个模组，一个模组（`next-question generator`）负责产生下一个子问题，一个模组（`QA model`）负责回答简单子问题。对于一个复杂问题，`next-question generator`先对其输出一个子问题，然后`QA model`回答子问题，并将答案反馈给`next-question generator`，`next-question generator`再根据已有信息产生下一个子问题，`QA model`继续回答，重复上述过程，直至`next-question generator`产生结束符号[EOQ]。
+- `next-question generator`：
+  - 基于`BART`训练的一个下一个问题生成器，那我们来分析一下这个`next-question generator`的训练数据，首先它是一个文本生成任务，我们需要给`next-question generator`输入的是上下文，之前的子问题以及相应的答案。然后利用`next-question generator`来输出下一个子问题。所以我们需要一个训练数据，这个训练数据序列地标注了一个复杂问题，序列地产生每一个子问题与相应的答案，这样我们就可以训练`next-question generator`了。
+  - 但是标注这样的数据是非常费力的，所以采用了一个弱监督的思想，我们思考一下，在`SQuAD`数据集上，通常我们是告诉模型上下文与问题，然后让模型产生答案。如果我们反其道而行之，告诉模型上下文和答案，让模型产生问题。是不是就可以产生一个单跳问题生成器，但这个问题生成器只能用来生成`SQuAD`式的问题，因为只有一步。所以距离我们的目标还差一点。但`如果我们能够从复杂问题中序列得抽取出每个子问题对应的答案`，这样我们就可以利用上述训练好的单跳问题生成器，产生每一个子问题。这样我们不就有了“复杂问题-q1-a1-q2-a2-……-[EOQ]”，然后就可以用来训练我们的`next-question generator`了！
+  - 备注：刚刚我们说在`SQuAD`数据集上，训练一个问题生成器。给这个问题生成器输入的是`上下文和答案`，输出的是`问题`；我们思考一下，如果我们给问题生成器只输出`答案`然后让其输出`问题`，那么会发生什么？虽然模型也会输出一个`SQuAD`式的单跳问题，但模型的搜索空间大大增大了有么有？你现在不给上下文了，只给个答案，可以有更多的合理的问题，所以生成的问题空间将会飙升。作者也发现了这一点，所以说，如果我们给模型输入的提示越多，那么模型在decoder阶段的空间就越小。所以作者在问题生成器的输入上又新加了一项，叫做`问题预估词`，就是说，我们期望生成的问题中，出现这几个词汇。这样以来，输入数据就变成了`<上下文，答案，问题预估词>`。在训练的时候，`问题预估词`是从gold question中采样了一些关键词汇，也从其余问题中负采样了部分词汇。所以在复杂问题中，我们现在不仅仅`从复杂问题中序列得抽取出每个子问题对应的答案`，还要为每个子问题搞一个`问题预估词`集合。
+- `QA model`：用来回答子问题，就正常的单跳QA模型，在本篇论文中选取的是在`SQuAD 2.0`上训练好的`RoBERTa-Large`模型。
+
+### 16.5 Inference
+在模型推理的时候，一开始我们有一个复杂问题qc，然后我们利用`next-question generator`为其产生k个子问题，因为`next-question generator`产生问题是一个decoder的过程，所以作者利用了`nucleus sampling`（是`Beam Search`的改进版）来采样了top-k个问题，然后对于每个生成的简单问题，都会用`QA model`来回答，这个过程将会一直持续下去直到`next-question generator`产生[EOQ]为止。然后其实还有一个评分函数来给每个推理链打分，在推理的过程中会有剪枝处理。  
+
+### 16.6 如何在一开始针对于一个复杂问题序列地获取子问题对应的答案呢？
+在`HotpotQA`（distractor setting）中仅使用了17%的数据（hotpotqa-hard）用于训练/验证/测试分解模型。主要涵盖两类问题：  
+- Bridge Question：假设第二个段落中的标题实体是中间答案。d1通常包含了中间实体，d2则包含了多跳问题的答案。所以设定为了产生第一个子问题而给`next-question generator`的输入为：`z1 = <p1 = d1, a1 = e1, v1 = f(qc)>`，为了产生第二个子问题而给`next-question generator`的输入为：`z2 = <p2 = d2, a2 = a, v2 = f(qc) + e1 >`。其中a就是整个多跳问题的答案，f函数用于从question中抽取与输入的context相关的关键信息。如果最终的答案a在两个paragraph中都出现了，那么直接假设他是连接问题，例如“谁参演了X且导演了Y”，对于这样的问题，那么让a1 = a2 = a。
+- Comparison Question：那么对于每一个潜在的实体或者日期对，创造一个hint：`vi = <di, ei, v2 = f(qc)>`。
+
+### 16.7 评价与思考
+我觉得这个工作，工作量也创新点都很ok，它只能应用与`HotpotQA`（distractor setting），那如何能应用与openQA场景呢？弱监督思想很好，但是肯定会存在噪声，那么能否降低噪声呢？
+
 
 ## 17. arXiv 2020：A Simple Yet Strong Pipeline for HotpotQA
 ### 17.1 引文
