@@ -69,7 +69,7 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |17|[A Simple Yet Strong Pipeline for HotpotQA](https://arxiv.org/abs/2004.06753)|arXiv 2020|1（效果很好）|[repo](https://github.com/deokhk/QUARK-pytorch)|弱引，不是分解问题的套路，而是一种非常简单的方法但达到了非常不错的效果，值得思考|
 |18|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020|1|[repo](https://github.com/yuwfan/HGN)|弱引，但这篇文章还不错，构建了一个异质图包含四类结点和七类边|
 |19|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020|0|0|弱引，没啥感觉，把检索文档看成序列建模问题然后beam search|
-|20|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020||||
+|20|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020|1|0|弱引，迭代式检索工作|
 |21|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|arXiv 2020||||
 
 
@@ -322,7 +322,21 @@ loss分为两部分，答案预测loss以及一致性loss：$L = L_{task}(X) + L
 解决推理问题的一类做法就是利用GNN来完成不同结点之间的信息交流，以此达到推理的效果。作者更加细粒度的构建了一个异质图网络，包含了四类结点（问题结点、段落结点、句结点以及实体结点）还有七种类型的边。之后利用预训练模型为每个结点产生初始值，再根据GAT来完成结点之间的信息传递，最后基于各类结点的表示进行多任务联合训练：支撑句预测（基于句结点的表示）、paragraph预测（基于段落结点的表示）、答案区间预测（基于上下文表示和图结构融合之后的表示）、答案类型预测（基于context中CLS token的表示）以及实体预测（基于实体结点的表示）。
 
 ## 19. arXiv 2020：Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval
-每次检索一篇新文档，将不断检索文档的过程视为一个语言建模任务，设计的也非常简单，在检索过程中有标注数据，最后在测试时，利用Beam search选择top-K段落然后送到具体下游任务模组中产生答案（在实际操作过程中，对于开放性多跳推理问题可能有一个重排序，也就是利用`BERT`模型进行文档间的相关性打分）。
+每次检索一篇新文档，将不断检索文档的过程视为一个语言建模任务，设计的也非常简单，在检索过程中有标注数据，最后在测试时，利用Beam search选择top-K段落然后送到具体下游任务模组中产生答案（在实际操作过程中，对于开放性多跳推理问题可能有一个重排序，也就是利用`BERT`模型进行文档间的相关性打分）。  
+
+## 20. arXiv 2020：DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering
+### 20.1 引文
+| 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: |
+|[Multi-step Entity-centric Information Retrieval for Multi-Hop Question Answering](https://www.aclweb.org/anthology/D19-5816/)|EMNLP 2019|[TODO]|
+|[Differentiable Reasoning over a Virtual Knowledge Base](https://openreview.net/forum?id=SJxstlHFPH)|ICLR 2020|[TODO]|
+|[Multi-step Retriever-Reader Interaction for Scalable Open-domain Question Answering](https://openreview.net/forum?id=HkfPSh05K7)|ICLR 2020|[TODO]|
+|[Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs](https://www.aclweb.org/anthology/P19-1260/)|ACL 2019|[TODO]|
+### 20.2 模型
+对于OpenQA问题，其中一个框架就是Retriever and Reader，Retriever负责检索与复杂问题相关的文档，而Reader负责从检索出的文档中找到答案，本篇论文的工作集中在Retriever上，Reader只采用了非常标准的span prediction方法。本文在Retriever上采用了动态检索的思路，首先根据复杂问题，基于TFIDF检索一些相关文档，然后对利用文档中的共享实体关系建立一个图，每个结点代表一个文档中的实体，也就是说如果两个文档都包含A实体，则会有两个实体A的结点存在图中。用BERT初始化所有的文档token表示，然后最大/平均池化层获取结点初试表示，接着使用GAT来更新结点表示，再反过来更新源文档token中与实体相关的token的表示，然后再送入transformer中，使其他token也能更新表示。接着使用每个文档的[CLS] token来计算文档的重要程度。然后利用`GoldEn Retriever`中的query更新方法来更新question用于下一跳的检索，然后将检索出的新文档以同样的方法构建实体图。除此之外还有一个全局控制器，当正样本段落的数量大于阈值时，将会停止上述迭代。然后将已经检索到的文档按照重要程度选取其中top-K文档，进而利用Reader产生答案。
+
+## 21. arXiv 2020：Multi-Step Inference for Reasoning Over Paragraphs
+[TODO]
 
 # Part 3 开放式问答
 根据[ACL 2020 openqa Tutorial](https://github.com/danqi/acl2020-openqa-tutorial)整理  
