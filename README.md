@@ -70,7 +70,7 @@ CogQA（2019 ACL）对应的值为：49.4与48.9
 |18|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020|1|[repo](https://github.com/yuwfan/HGN)|弱引，但这篇文章还不错，构建了一个异质图包含四类结点和七类边|
 |19|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020|0|0|弱引，没啥感觉，把检索文档看成序列建模问题然后beam search|
 |20|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020|1|0|弱引，迭代式检索工作|
-|21|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|arXiv 2020||||
+|21|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|arXiv 2020|0|0|弱引，NMN工作，创新度不是很高。|
 
 
 
@@ -274,6 +274,7 @@ loss分为两部分，答案预测loss以及一致性loss：$L = L_{task}(X) + L
 |[Self-assembling modular networks for interpretable multi-hop reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019|在`HotpotQA`上的工作|
 |[Neural module networks for reasoning over text](https://arxiv.org/abs/1912.04971)|ICLR 2020|NMN在`DROP`上的工作|
 |[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020|本文，在`DROP`上的工作，也可以用于`HotpotQA`|
+|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|arXiv 2020|感觉本文，在NMN上的创新度不及其余文章，然后选取的数据集也不是主流的`HotpotQA`，而是`ROPES`|
 
 ### 16.3 对前人工作的叙述
 指出민세원的工作比较难以在新的问题中应用，而且无法保证分解后的子问题被现有模型解决。  
@@ -336,7 +337,20 @@ loss分为两部分，答案预测loss以及一致性loss：$L = L_{task}(X) + L
 对于OpenQA问题，其中一个框架就是Retriever and Reader，Retriever负责检索与复杂问题相关的文档，而Reader负责从检索出的文档中找到答案，本篇论文的工作集中在Retriever上，Reader只采用了非常标准的span prediction方法。本文在Retriever上采用了动态检索的思路，首先根据复杂问题，基于TFIDF检索一些相关文档，然后对利用文档中的共享实体关系建立一个图，每个结点代表一个文档中的实体，也就是说如果两个文档都包含A实体，则会有两个实体A的结点存在图中。用BERT初始化所有的文档token表示，然后最大/平均池化层获取结点初试表示，接着使用GAT来更新结点表示，再反过来更新源文档token中与实体相关的token的表示，然后再送入transformer中，使其他token也能更新表示。接着使用每个文档的[CLS] token来计算文档的重要程度。然后利用`GoldEn Retriever`中的query更新方法来更新question用于下一跳的检索，然后将检索出的新文档以同样的方法构建实体图。除此之外还有一个全局控制器，当正样本段落的数量大于阈值时，将会停止上述迭代。然后将已经检索到的文档按照重要程度选取其中top-K文档，进而利用Reader产生答案。
 
 ## 21. arXiv 2020：Multi-Step Inference for Reasoning Over Paragraphs
-[TODO]
+### 21.1 引文
+| 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: |
+|[Reasoning over paragraph effects in situations](https://arxiv.org/abs/1908.05852)|EMNLP 2019 workshop|[TODO]，ROPES多跳阅读理解数据集|
+|[Neural Module Networks](https://arxiv.org/abs/1511.02799)|CVPR 2016|[TODO]，看名字都能看出来NMN的发源地|
+|[Explore, Propose, and Assemble: An Interpretable Model for Multi-Hop Reading Comprehension](https://arxiv.org/abs/1906.05210)|ACL 2019|[TODO]|
+
+### 21.2 模型
+文本其实挺简单的，设计了三个模组：`SELECT`, `CHAIN`以及`PREDICT`。`SELECT`输入一串token的表示，生成单一向量。`CHAIN`输入X序列和z向量，输出X序列与z交互后的表示。`PREDICT`输入Y序列，输出答案。   
+然后该篇工作是在`ROPES`数据集上进行实验的，该数据集每一个question对应着两篇文章：Background和Situation。多跳的思路是：先分别给`SELECT`输入Question和Background来捕获这两个输入的单一向量以此来表示整个输入的信息。然后利用`CHAIN`模组让这两个单一向量进行交互，将交互的结果再与Situation经过`SELECT`后的表示进行`CHAIN`，接着得到的结果会进入`PREDICT`模组中来预测答案。由于`ROPES`数据集的每个样例格式比较固定，所以对于每个问题都采用上述方法进行答案预测。   
+
+### 21.3 评价
+感觉参考性不是很大，但也算是NMN的一个相关工作，论文的对比实验也不是很充分，没有和其余模型进行对比，只和自己设计的Baseline进行了简单的比较。无论在创新度还是工作量上来说感觉与其余几篇NMN论文对比而言稍显逊色。
+
 
 # Part 3 开放式问答
 根据[ACL 2020 openqa Tutorial](https://github.com/danqi/acl2020-openqa-tutorial)整理  
