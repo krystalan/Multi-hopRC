@@ -25,13 +25,13 @@
 |4|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020|没啥感觉，把检索文档看成序列建模问题然后beam search|
 |5|[Cognitive Graph for Multi-Hop Reading Comprehension at Scale](https://doi.org/10.18653/v1/P19-1259)|ACL 2019|就CogQA|
 
-## 1.4 动态检索文档
+## 1.4 动态检索文档（检索了不一定要用）
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
 |1|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020||
 
 
-## 1.4 分解问题相关
+## 1.4 分解问题相关（其实就是逐渐检索文档的一大主流）
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
 |1|[The Web as a Knowledge-Base for Answering Complex Questions](https://www.aclweb.org/anthology/N18-1059/)|NAACL 2018|大概看了一下，觉得论述在英文方面表述的很奇怪，在민세원的论文中（该表格的下一项论文）本篇作为引文举出，被阐述了主要区别。|
