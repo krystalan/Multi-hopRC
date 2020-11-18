@@ -65,6 +65,8 @@
 | :---: | :---: | :---: | :---: |
 |1|[A Simple Yet Strong Pipeline for HotpotQA](https://arxiv.org/abs/2004.06753)|arXiv 2020|一种非常简单的方法但达到了非常不错的效果，值得思考|
 |2|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020|构建了一个异质图包含四类结点和七类边，利用GNN来进行多跳推理|
+|3|[Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents](https://arxiv.org/abs/1911.00484)|AAAI 2020|SAE|
+|4|[Dynamically fused graph network for multi-hop reasoning](https://arxiv.org/abs/1905.06933)|ACL 2019|DFGN|
 
 ## [TODO]
 | 论文 | 发表会议 | 备注 |
@@ -85,7 +87,6 @@
 |[Avoiding Reasoning Shortcuts: Adversarial Evaluation, Training, and Model Development for Multi-Hop QA](https://www.aclweb.org/anthology/P19-1262)|ACL 2019|[TODO]|
 |[Multi-Hop Paragraph Retrieval for Open-Domain Question Answering](https://doi.org/10.18653/v1/P19-1222)|ACL 2019|[TODO]，训练了一个神经检索模型，利用问题和第一跳的信息来检索第二跳信息|
 |[Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs](https://www.aclweb.org/anthology/P19-1260/)|ACL 2019|[TODO]|
-|[Dynamically fused graph network for multi-hop reasoning](https://arxiv.org/abs/1905.06933)|ACL 2019|DFGN|
 |[Answering while Summarizing: Multi-task Learning for Multi-hop QA with Evidence Extraction](https://www.aclweb.org/anthology/P19-1225/)|ACL 2019|[TODO]，只用原始问题检索了一次文档|
 |[Compositional Questions Do Not Necessitate Multi-hop Reasoning](https://arxiv.org/abs/1906.02900)|ACL 2019(short)|[TODO]|
 |[BAG: Bi-directional Attention Entity Graph Convolutional Network for Multi-hop Reasoning Question Answering](https://www.aclweb.org/anthology/N19-1032)|NAACL 2019|[TODO]|
@@ -103,7 +104,6 @@
 |[Reasoning over paragraph effects in situations](https://arxiv.org/abs/1908.05852)|EMNLP 2019 workshop|[TODO]，ROPES多跳阅读理解数据集|
 |[Differentiable Reasoning over a Virtual Knowledge Base](https://openreview.net/forum?id=SJxstlHFPH)|ICLR 2020|[TODO]|
 |[Multi-step Retriever-Reader Interaction for Scalable Open-domain Question Answering](https://openreview.net/forum?id=HkfPSh05K7)|ICLR 2020|[TODO]|
-|[Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents](https://arxiv.org/abs/1911.00484)|AAAI 2020|SAE| 
 |[QASC:A dataset for question answering via sentence composition](https://arxiv.org/abs/1910.11473)|AAAI 2020|[TODO]|
 |[Multi-paragraph reasoning with knowledge-enhanced graph neural network](https://arxiv.org/abs/1911.02170v1)|arXiv 2019|[TODO]，只用原始问题检索了一次文档|
 |[Question answering as global reasoning over semantic abstractions](https://arxiv.org/abs/1906.03672)|AAAI 2018|[TODO]|
