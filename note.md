@@ -344,3 +344,23 @@ loss分为两部分，答案预测loss以及一致性loss：$L = L_{task}(X) + L
 除此之外，由于将复杂问题分解得太过细粒度将会导致查询次数增多，可能会造成错误的概率升高。于是作者又定义了三种high-level decomposition：`Select+Project`、`Select+Filter`以及`Filter+Group+Comparative`。   
 ### 3.QDMR for Open-domain QA  
 这里简单的将QDMR融合在了Open-domain QA任务当中，具体地，采用了`HotpotQA`(full wiki setting)。也是定义了一个规则来对多跳复杂问题进行分解，然后根据分解后不同类型的问题采取不同的操作，不断保存子问题的答案，最后一个子问题的答案将返回整个多跳复杂问题的最终答案。IR用了很简单的方式直接用基于TF-IDF的检索。单跳RC模型用的是BERTQA并在SQuAD上进行了预训练。  
+
+***
+## arXiv 2019：Multi-Paragraph Reasoning with Knowledge-enhanced Graph Neural Network
+### 1.模型
+提出了一种知识增强的GNN，用实体对多个段落进行推理。模型分为三个部分：编码部分、推理部分以及预测部分。   
+
+（1）编码部分    
+使用了Character-level encoder、Self-attention Layer以及Bi-attention Layer 将问题和段落编码至低维表示。具体地：    
+$$
+Q = Self\_Att(Char\_Enc(Q)) \\
+P_{i} = Self\_Att(Char\_Enc(P_{i}))\\
+P^{'}_{i} = Bi\_Att(Q,P_{i})
+$$      
+（2）推理部分    
+1. 建立了一个KG：利用`spaCy`抽取段落中的实体mention，并作为KG中的结点。然后考虑了两种边：①共指，如果两个实体mention指的是一个实体，那么这两个结点间建立一条边。②如果两个实体有关系，它们间也建立一条边。    
+2. 利用原文中的表示初始化每一个结点。如果一个结点对应原文中多个地方，那么使用max-pooling得到其表示。（每一个span表示是词向量通过一层FFN后的平均值）
+3. 图上每个结点进行信息传播。在传播的同时也会更新paragraph的表示（之前paragraph中token的表示与结点上token更新后的表示进行一个融合）。   
+
+（3）预测部分   
+正常预测答案。
