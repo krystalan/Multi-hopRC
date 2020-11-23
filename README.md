@@ -44,7 +44,7 @@
 |1|[The Web as a Knowledge-Base for Answering Complex Questions](https://www.aclweb.org/anthology/N18-1059/)|NAACL 2018|大概看了一下，觉得论述在英文方面表述的很奇怪，在민세원的论文中（该表格的下一项论文）本篇作为引文举出，被阐述了主要区别。|
 |2|[Multi-hop Reading Comprehension through Question Decomposition and Rescoring](https://arxiv.org/abs/1906.02916)|ACL 2019|[민세원女神](https://shmsw25.github.io/)的paper，不多说了，膜就完事了。|
 |3|[Unsupervised Question Decomposition for Question Answering](https://arxiv.org/abs/2002.09758)|EMNLP 2020|定义了一种无监督的方法来分解出子问题| 
-|4|[Break it down: A question understanding benchmark](https://arxiv.org/abs/2001.11770)|TACL 2020|[TODO]introduce a Question Decomposition Meaning Representation (QDMR) to explicitly model this process（分解问题）|  
+|4|[Break it down: A question understanding benchmark](https://arxiv.org/abs/2001.11770)|TACL 2020|从10个复杂问题的QA数据集中提取问题并标注分解，一共定义了13个基本分解操作，以及3个高级分解。提出了`BREAK`数据集，包含了83978个复杂问题及其对应的分解。又提出了`BreakRC`模型，将考虑问题分解应用于`HotpotQA`(fullwiki setting)中|  
 |5|[Complex question decomposition for semantic parsing](https://www.aclweb.org/anthology/P19-1440/)|ACL 2019|虽然不是阅读理解上的，但也是分解问题的工作|
 |6|[Learning to Order Sub-questions for Complex Question Answering](https://arxiv.org/abs/1911.04065)|arXiv 2019|利用强化学习去**选择最优的子问题回答顺序**来得到最终答案|
 |7|[Generating Followup Questions for Interpretable Multi-hop Question Answering](https://arxiv.org/abs/2002.12344)|arXiv 2020|`non-Open` 也是分解问题的工作，但感觉有点简单？|
