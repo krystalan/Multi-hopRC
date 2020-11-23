@@ -333,4 +333,14 @@ loss分为两部分，答案预测loss以及一致性loss：$L = L_{task}(X) + L
 （1）当训练集和测试集都是多选数据集的时候，模型（注意是论文中进行实验的模型）就不会多跳推理    
 （2）Span式的数据集更加健壮一些，但仍然有一些问题不需要多跳推理也能回答     
 （3）给多选式数据集增加选项并不能从本质改变这一现象     
-（4）Span式的训练数据更加健壮（powerful）
+（4）Span式的训练数据更加健壮（powerful）  
+
+***
+## TACL 2020：BREAK It Down: A Question Understanding Benchmark
+### 1.数据收集
+从10个QA数据集中收集了83978个复杂问题，并让众包工人进行问题分解的标注。   
+### 2.分解类型
+13个QDMR Operators：QDMR是Question Decomposition Meaning Representation，用论文中表示的是复杂问题分解后的集合。在分解的过程中有13种不同类型的分解操作，例如：`Select`、`Filter`、`Aggregate`以及`Comparative`等。    
+除此之外，由于将复杂问题分解得太过细粒度将会导致查询次数增多，可能会造成错误的概率升高。于是作者又定义了三种high-level decomposition：`Select+Project`、`Select+Filter`以及`Filter+Group+Comparative`。   
+### 3.QDMR for Open-domain QA  
+这里简单的将QDMR融合在了Open-domain QA任务当中，具体地，采用了`HotpotQA`(full wiki setting)。也是定义了一个规则来对多跳复杂问题进行分解，然后根据分解后不同类型的问题采取不同的操作，不断保存子问题的答案，最后一个子问题的答案将返回整个多跳复杂问题的最终答案。IR用了很简单的方式直接用基于TF-IDF的检索。单跳RC模型用的是BERTQA并在SQuAD上进行了预训练。  
