@@ -4,12 +4,12 @@
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
 |1|[HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering](https://arxiv.org/abs/1809.09600)|EMNLP 2018|`HotpotQA` **抽取式** 每个QA对有10个（distractor setting）或百万级（full wiki setting）对应的paragraph|
-|2|[Looking Beyond the Surface: A Challenge Set for Reading Comprehension over Multiple Sentences](https://www.aclweb.org/anthology/N18-1023/)|NAACL 2018|[TODO]|
+|2|[Looking Beyond the Surface: A Challenge Set for Reading Comprehension over Multiple Sentences](https://www.aclweb.org/anthology/N18-1023/)|NAACL 2018|[TODO] `MultiRC`|
 |3|[Constructing Datasets for Multi-hop Reading Comprehension Across Documents](https://arxiv.org/abs/1710.06481)|TACL 2018|`Wikihop`与`MedHop` **多选式** 每个QA对有数量不等（5~20）个对应的paragraph，还有候选答案集合|
 |4|[Reasoning Over Paragraph Effects in Situations](https://arxiv.org/abs/1908.05852)|EMNLP MRQA Workshop 2019|`ROPES` **抽取式** 每个QA对对应两个paragraph，一个称为*background*是说明文，另一个是*situation*由众包工人创建，回答问题需要把*background*中的知识应用与*situation*才可|
 |5|[DROP: A Reading Comprehension Benchmark Requiring Discrete Reasoning Over Paragraphs](https://arxiv.org/abs/1903.00161)|NAACL 2019|`DROP` **答案不一定出现在原文中 需要通过计算、计数等操作得到** 每个QA对都有一个对应的paragraph|  
 |6|[DREAM: A Challenge Data Set and Models for Dialogue-Based Reading Comprehension](https://www.aclweb.org/anthology/Q19-1014/)|TACL 2019|[TODO]|
-|7|[QASC:A dataset for question answering via sentence composition](https://arxiv.org/abs/1910.11473)|AAAI 2020|[TODO]
+|7|[QASC:A dataset for question answering via sentence composition](https://arxiv.org/abs/1910.11473)|AAAI 2020|[TODO] `QASC`|
 
 
 ## 2 数据增强
@@ -36,6 +36,7 @@
 |2|[Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering](https://arxiv.org/abs/1911.10470)|ICLR 2020|`Open` 不断检索文档，在整个wikipedia的文章上建立了一个图，然后一直跳|
 |3|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020|`Open` 没啥感觉，把检索文档看成序列建模问题然后beam search|
 |4|[Cognitive Graph for Multi-Hop Reading Comprehension at Scale](https://doi.org/10.18653/v1/P19-1259)|ACL 2019|`Open` 就CogQA|
+|5|[Unsupervised Alignment-based Iterative Evidence Retrieval for Multi-hop Question Answering](https://www.aclweb.org/anthology/2020.acl-main.414)|ACL 2020|[TODO]|
 
 ## 5 动态检索文档（检索了不一定要用）
 | 序号 | 论文 | 发表会议 | 备注 |
@@ -85,7 +86,6 @@
 | :---: | :---: | :---: |
 |[Improving Multi-hop Question Answering over Knowledge Graphs using Knowledge Base Embeddings](https://www.aclweb.org/anthology/2020.acl-main.412)|ACL 2020|KGQA|
 |[Query Graph Generation for Answering Multi-hop Complex Questions from Knowledge Bases](https://www.aclweb.org/anthology/2020.acl-main.91)|ACL 2020|KBQA|
-|[Unsupervised Alignment-based Iterative Evidence Retrieval for Multi-hop Question Answering](https://www.aclweb.org/anthology/2020.acl-main.414)|ACL 2020|[TODO]|
 |[Is Multihop QA in DiRe Condition? Measuring and Reducing Disconnected Reasoning](https://www.aclweb.org/anthology/2020.emnlp-main.712)|EMNLP 2020|[TODO]|
 |[Learning to Explain: Datasets and Models for Identifying Valid Reasoning Chains in Multihop Question-Answering](https://arxiv.org/abs/2010.03274)|EMNLP 2020|[TODO]|
 |[Scalable Multi-Hop Relational Reasoning for Knowledge-Aware Question Answering](https://arxiv.org/abs/2005.00646)|EMNLP 2020|[TODO]|
@@ -101,6 +101,7 @@
 |[Answering while Summarizing: Multi-task Learning for Multi-hop QA with Evidence Extraction](https://www.aclweb.org/anthology/P19-1225/)|ACL 2019|[TODO]，只用原始问题检索了一次文档|
 |[BAG: Bi-directional Attention Entity Graph Convolutional Network for Multi-hop Reasoning Question Answering](https://www.aclweb.org/anthology/N19-1032)|NAACL 2019|[TODO]| 
 |[What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1281)|EMNLP 2019|[TODO]|
+|[PullNet: Open Domain Question Answering with Iterative Retrieval on Knowledge Bases and Text](https://arxiv.org/abs/1904.09537)|EMNLP 2019|[TODO]|
 |[Identifying Supporting Facts for Multi-hop Question Answering with Document Graph Networks](https://www.aclweb.org/anthology/D19-5306)|EMNLP 2019|[TODO]|
 |[Quick and (not so) Dirty: Unsupervised Selection of Justification Sentences for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1260)|EMNLP 2019|[TODO]|
 |[Simple yet Effective Bridge Reasoning for Open-Domain Multi-Hop Question Answering](https://www.aclweb.org/anthology/D19-5806)|EMNLP 2019|[TODO]|
