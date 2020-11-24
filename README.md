@@ -89,11 +89,11 @@
 | :---: | :---: | :---: | :---: |
 |1|[Repurposing Entailment for Multi-Hop Question Answering Tasks](https://www.aclweb.org/anthology/N19-1302)|NAACL 2019|`Textual entailment` `OpenBookQA`与`MultiRC` 使用文本蕴含模型来完成多跳推理问答，模型分为两部分：相关句提取与信息聚合。相关句提取对每个候选句计算其蕴含假设（由答案和问题构成）的概率，这些概率表示每句的重要程度。信息聚合则利用上一步计算的概率为不同的句子聚合表示，最后再通过一个文本蕴含模型得到最终的蕴含概率。|   
 
-## 12. Numerical Multi-hop Reading Comprehension
+## 12. Numerical Reasoning
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
 |0|[DROP: A Reading Comprehension Benchmark Requiring Discrete Reasoning Over Paragraphs](https://arxiv.org/abs/1903.00161)|NAACL 2019|`DROP` **答案不一定出现在原文中 需要通过计算、计数等操作得到** 每个QA对都有一个对应的paragraph| 
-|1*|[Numnet: Machine reading comprehension with numerical reasoning](https://arxiv.org/abs/1910.06701)|EMNLP 2019|[TODO] `DROP`|
+|1*|[Numnet: Machine reading comprehension with numerical reasoning](https://arxiv.org/abs/1910.06701)|EMNLP 2019|`DROP` 从context中构建一个异质有向图出来，结点都代表context中出现的数字，分为两类：在问题中出现的数字与在段落中出现的数字。边也分为两类，根据数字间的大小关系进行连接，两类边刚好互补。|
 |2*|[Question Directed Graph Attention Network for Numerical Reasoning over Text](https://arxiv.org/abs/2009.07448)|EMNLP 2020|`no-Open` 在`DROP`上的工作，所以自然不用多次检索，每个QA对给定了一个paragraph。建立了一个异质图，结点有：数字（八大类型）、实体，边有：相同类型的数字之间的边以及数字和实体在一句话内共现的边。主要的idea就是在图上引入了数字的类型以及与数字相关的实体，是针对于`NumNet`的改进|   
 |3|[Neural module networks for reasoning over text](https://arxiv.org/abs/1912.04971)|ICLR 2020|`non-Open` NMN在`DROP`上的工作，设计了10个模组|
 |4|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020|`non-Open` 在`DROP`上的工作，也可以用于`HotpotQA`，两个模组`next-question generator`与`QA model`|  
