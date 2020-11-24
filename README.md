@@ -10,7 +10,7 @@
 |5|[DREAM: A Challenge Data Set and Models for Dialogue-Based Reading Comprehension](https://www.aclweb.org/anthology/Q19-1014/)|TACL 2019|`Dream` **多选式** 10197个问题，并在英语考试题中收集6444个多轮多方的对话数据。多个选择题对应一个多轮多方对话数据，只有一个候选答案正确|
 |6|[Looking Beyond the Surface: A Challenge Set for Reading Comprehension over Multiple Sentences](https://www.aclweb.org/anthology/N18-1023/)|NAACL 2018|`MultiRC` **多选式** 每个实例包含一个问题，多个sentences以及答案候选集，根据sentences去选择正确的答案，且可能有多个候选答案正确，每个实例的候选答案数量不一定一致|
 |7|[QASC:A dataset for question answering via sentence composition](https://arxiv.org/abs/1910.11473)|AAAI 2020|`QASC` **多选式** 也是基于多个句子间的推理从候选答案中选出正确答案的数据集。含有9980个八项选择题，每个问题都被标注了两个fact sentences用来推理出最终的答案。还提供了一个包含了17M个句子的语料库，所有的fact sentences都在里面|
-|8|[Learning to Explain: Datasets and Models for Identifying Valid Reasoning Chains in Multihop Question-Answering](https://arxiv.org/abs/2010.03274)|EMNLP 2020|`eQASC`、`eQASC-perturbed`以及`eOBQA` **多选式** 这个工作其实是在研究多跳推理问题的可解释性。在`QASC`数据集的基础上，针对于每个问题又标注了多个推理链（有效或无效都有）构成了`eQASC`，接着又将推理链模板化（使推理链更加通用）构成了`eQASC-perturbed`数据集，最后为了进行out-domain test，也基于`OpenBookQA`数据集标注了推理链形成了`eOBQA`并进行测试|
+|8|[Learning to Explain: Datasets and Models for Identifying Valid Reasoning Chains in Multihop Question-Answering](https://arxiv.org/abs/2010.03274)|EMNLP 2020|`eQASC`、`eQASC-perturbed`以及`eOBQA` `Textual entailment` **多选式** 这个工作其实是在研究多跳推理问题的可解释性。在`QASC`数据集的基础上，针对于每个问题又标注了多个推理链（有效或无效都有）构成了`eQASC`，接着又将推理链模板化（使推理链更加通用）构成了`eQASC-perturbed`数据集，最后为了进行out-domain test，也基于`OpenBookQA`数据集标注了推理链形成了`eOBQA`并进行测试|
 
 ## 2 数据增强
 | 序号 | 论文 | 发表会议 | 备注 |
@@ -81,7 +81,12 @@
 |3|[Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents](https://arxiv.org/abs/1911.00484)|AAAI 2020|`non-Open` SAE|
 |4|[Dynamically fused graph network for multi-hop reasoning](https://arxiv.org/abs/1905.06933)|ACL 2019|`non-Open` DFGN|
 |5|[Multi-paragraph reasoning with knowledge-enhanced graph neural network](https://arxiv.org/abs/1911.02170v1)|arXiv 2019|`Open`&`no-Open` 主要贡献在于，从paragraphs上建立了一个KG，然后利用GNN更新结点表示，结点表示更新之后返回来更新paragraphs的表示，最后进行答案预测|
-|6|[Question Directed Graph Attention Network for Numerical Reasoning over Text](https://arxiv.org/abs/2009.07448)|EMNLP 2020|`no-Open` 在`DROP`上的工作，所以自然不用多次检索，每个QA对给定了一个paragraph。建立了一个异质图，结点有：数字（八大类型）、实体，边有：相同类型的数字之间的边以及数字和实体在一句话内共现的边。主要的idea就是在图上引入了数字的类型以及与数字相关的实体，是针对于`NumNet`的改进|
+|6|[Question Directed Graph Attention Network for Numerical Reasoning over Text](https://arxiv.org/abs/2009.07448)|EMNLP 2020|`no-Open` 在`DROP`上的工作，所以自然不用多次检索，每个QA对给定了一个paragraph。建立了一个异质图，结点有：数字（八大类型）、实体，边有：相同类型的数字之间的边以及数字和实体在一句话内共现的边。主要的idea就是在图上引入了数字的类型以及与数字相关的实体，是针对于`NumNet`的改进|   
+
+## 11.与其他任务相关联  
+| 序号 | 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: | :---: |
+|1|[Repurposing Entailment for Multi-Hop Question Answering Tasks](https://www.aclweb.org/anthology/N19-1302)|NAACL 2019|`Textual entailment` `OpenBookQA`与`MultiRC` 使用文本蕴含模型来完成多跳推理问答，模型分为两部分：相关句提取与信息聚合。相关句提取对每个候选句计算其蕴含假设（由答案和问题构成）的概率，这些概率表示每句的重要程度。信息聚合则利用上一步计算的概率为不同的句子聚合表示，最后再通过一个文本蕴含模型得到最终的蕴含概率。|
 
 ## [PLAN]
 | 论文 | 发表会议 | 备注 |
@@ -90,7 +95,6 @@
 |[Query Graph Generation for Answering Multi-hop Complex Questions from Knowledge Bases](https://www.aclweb.org/anthology/2020.acl-main.91)|ACL 2020|`KBQA/KGQA`|
 |[Is Multihop QA in DiRe Condition? Measuring and Reducing Disconnected Reasoning](https://www.aclweb.org/anthology/2020.emnlp-main.712)|EMNLP 2020|[TODO]|
 |[Scalable Multi-Hop Relational Reasoning for Knowledge-Aware Question Answering](https://arxiv.org/abs/2005.00646)|EMNLP 2020|`CommonQA` 提出了一种结合GNN与关系路径编码的知识推理与获取知识表示的方式。先抽取知识路径，再利用改进后的GNN在路径上进行信息传播。|
-|[Repurposing Entailment for Multi-Hop Question Answering Tasks](https://www.aclweb.org/anthology/N19-1302)|ACL 2019|[TODO]|
 |[Exploiting Explicit Paths for Multi-hop Reading Comprehension](https://www.aclweb.org/anthology/P19-1263)|ACL 2019|[TODO]|
 |[Adapting Meta Knowledge Graph Information for Multi-Hop Reasoning over Few-Shot Relations](https://www.aclweb.org/anthology/D19-1334)|ACL 2019|[TODO]|
 |[Explore, Propose, and Assemble: An Interpretable Model for Multi-Hop Reading Comprehension](https://arxiv.org/abs/1906.05210)|ACL 2019|[TODO]|
