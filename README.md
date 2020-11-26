@@ -29,6 +29,7 @@
 |3|[Do Multi-hop Readers Dream of Reasoning Chains?](https://www.aclweb.org/anthology/D19-5813)|EMNLP 2019|个人觉得这篇其实没有NAACL 2019那篇那么精彩，但也是不错的，作者也是做了一些分析实验，然后得出结论：一些单跳模型在面对`HotpotQA`问题也能做的还不错，然后推理链其实是有用的，但现在没有被挖掘的很深入，未来可能会有大用处。|
 |4|[Compositional Questions Do Not Necessitate Multi-hop Reasoning](https://arxiv.org/abs/1906.02900)|ACL 2019(short)|作者发现`hotpotQA`中许多多跳问题都能够被单跳模型回答正确，于是展开了分析|
 |5|[Understanding dataset design choices for multi-hop reasoning](https://arxiv.org/abs/1904.12106)|NAACL 2019|非常棒的一个工作，精彩精彩。在`HotpotQA`和`Wikihop`数据集上展开研究，发现多跳阅读理解数据集单跳也能回答对，`Wikihop`不看文章也能答对，Span式的多跳数据集优于多选式的，即使Span式的数据集中有很多问题单跳也能答对|
+|6|[Is Multihop QA in DiRe Condition? Measuring and Reducing Disconnected Reasoning](https://www.aclweb.org/anthology/2020.emnlp-main.712)|EMNLP 2020|`HotpotQA`上的一个研究，也是探索了当前多跳模型到底有没有推理能力。作者将推理分为连贯推理（connected resoning）与不连贯推理。连贯推理是我们希望能够赋予模型的能力，也就是在多个文档中进行信息间的交互以此得到答案。而不连贯推理则是不交互信息就得到答案。作者设计了一些实验去探索模型通过不连贯推理所能达到的分数以此来说明现有的模型可能并没有达到我们想要赋予他们多跳推理能力的初衷。除此之外，作者还设计了一种方案将数据集进行转换以此让模型更难cheat。该工作有着非常高的借鉴价值。对于模型设计者来说，可以帮助我们鉴别自己设计的模型到底有没有连贯推理，对于数据集制造者来说，可以让其明白自己的数据集容不容易被cheat|
 
 ## 4 逐渐检索文档（检索到了就要用）
 | 序号 | 论文 | 发表会议 | 备注 |
@@ -38,7 +39,7 @@
 |3|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020|`Open` 没啥感觉，把检索文档看成序列建模问题然后beam search|
 |4|[Cognitive Graph for Multi-Hop Reading Comprehension at Scale](https://doi.org/10.18653/v1/P19-1259)|ACL 2019|`Open` 就CogQA|
 |5|[Unsupervised Alignment-based Iterative Evidence Retrieval for Multi-hop Question Answering](https://www.aclweb.org/anthology/2020.acl-main.414)|ACL 2020|`Open`&`non-Open` 在`MultiRC`以及`QASC`上的工作，做与问题相关的支撑句的检索。采用无监督的对其方法。每次检索会修改query，修改的规则主要是当前检索到的句子没有包含query中的那些terms，检索也使用了基本的基于词向量语义相似度的方式，属于无监督模型。但达到了很好的效果。|  
-|6|[PullNet: Open Domain Question Answering with Iterative Retrieval on Knowledge Bases and Text](https://arxiv.org/abs/1904.09537)|EMNLP 2019|[TODO]|
+|6|[PullNet: Open Domain Question Answering with Iterative Retrieval on Knowledge Bases and Text](https://arxiv.org/abs/1904.09537)|EMNLP 2019|`MetaQA`、`WebQuestionsSP`以及`Complex WebQ` [TODO]|
 
 ## 5 动态检索文档（检索了不一定要用）
 | 序号 | 论文 | 发表会议 | 备注 |
@@ -108,7 +109,6 @@
 | :---: | :---: | :---: |
 |[Improving Multi-hop Question Answering over Knowledge Graphs using Knowledge Base Embeddings](https://www.aclweb.org/anthology/2020.acl-main.412)|ACL 2020|`KGQA`|
 |[Query Graph Generation for Answering Multi-hop Complex Questions from Knowledge Bases](https://www.aclweb.org/anthology/2020.acl-main.91)|ACL 2020|`KBQA/KGQA`|
-|[Is Multihop QA in DiRe Condition? Measuring and Reducing Disconnected Reasoning](https://www.aclweb.org/anthology/2020.emnlp-main.712)|EMNLP 2020|[TODO]|
 |[Scalable Multi-Hop Relational Reasoning for Knowledge-Aware Question Answering](https://arxiv.org/abs/2005.00646)|EMNLP 2020|`CommonQA` 提出了一种结合GNN与关系路径编码的知识推理与获取知识表示的方式。先抽取知识路径，再利用改进后的GNN在路径上进行信息传播。|
 |[Adapting Meta Knowledge Graph Information for Multi-Hop Reasoning over Few-Shot Relations](https://www.aclweb.org/anthology/D19-1334)|ACL 2019|[TODO]|
 |[Explore, Propose, and Assemble: An Interpretable Model for Multi-Hop Reading Comprehension](https://arxiv.org/abs/1906.05210)|ACL 2019|[TODO]|
