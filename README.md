@@ -42,6 +42,7 @@
 |5|[Unsupervised Alignment-based Iterative Evidence Retrieval for Multi-hop Question Answering](https://www.aclweb.org/anthology/2020.acl-main.414)|ACL 2020|`Open`&`non-Open` 在`MultiRC`以及`QASC`上的工作，做与问题相关的支撑句的检索。采用无监督的对其方法。每次检索会修改query，修改的规则主要是当前检索到的句子没有包含query中的那些terms，检索也使用了基本的基于词向量语义相似度的方式，属于无监督模型。但达到了很好的效果。|  
 |6|[PullNet: Open Domain Question Answering with Iterative Retrieval on Knowledge Bases and Text](https://arxiv.org/abs/1904.09537)|EMNLP 2019|`MetaQA`、`WebQuestionsSP`以及`Complex WebQ` `Open` 从两种实体源中检索知识资源：文本语料库与知识库。作者定义了问题子图（question subgraph）这一概念，它的作用是包含足够多的与问题相关的信息然后以此来回答一个问题，该图是迭代生成的，且分为三类结点：①实体结点（存在于KB中）②文本结点（通常情况下是文本语料库中某个实体的mention）③事实结点（KB中的事实三元组）。一开始先仅利用问题中的信息来初始化问题子图，之后进行T轮迭代扩充，每次扩充会选取问题子图中的部分结点，对每一个选取到的结点，为其检索其相关的（1）文档（2）事实，对于（1）还会进一步利用实体链接模型提取其中的实体mention，对于（2）来说会提取三元组中的头尾实体。这样的构建直到问题子图可以回答问题为止，之后再进行答案预测。|
 |7|[Explore, Propose, and Assemble: An Interpretable Model for Multi-Hop Reading Comprehension](https://arxiv.org/abs/1906.05210)|ACL 2019|分为三部分，三部分联合优化。Document Explore：一个级联的memory network迭代式地选取相关文档；Answer Proposer：对于推理树上的每一个从跟到结点的推理路径提出一个proposed答案；Evidence Assembler：从每一条推理路径上提取包含proposed答案的关键句，并将这些关键句结合起来以预测最终的答案。|
+|8|[Multi-Hop Paragraph Retrieval for Open-Domain Question Answering](https://doi.org/10.18653/v1/P19-1222)|ACL 2019|`Open` 主要在开放式的多跳QA中做检索方面的迭代式探索尝试[TODO]|
 
 ## 5 动态检索文档（检索了不一定要用）
 | 序号 | 论文 | 发表会议 | 备注 |
@@ -113,7 +114,6 @@
 |[Query Graph Generation for Answering Multi-hop Complex Questions from Knowledge Bases](https://www.aclweb.org/anthology/2020.acl-main.91)|ACL 2020|`KBQA/KGQA`|
 |[Scalable Multi-Hop Relational Reasoning for Knowledge-Aware Question Answering](https://arxiv.org/abs/2005.00646)|EMNLP 2020|`CommonQA` 提出了一种结合GNN与关系路径编码的知识推理与获取知识表示的方式。先抽取知识路径，再利用改进后的GNN在路径上进行信息传播。|
 |[Adapting Meta Knowledge Graph Information for Multi-Hop Reasoning over Few-Shot Relations](https://www.aclweb.org/anthology/D19-1334)|ACL 2019|`KGQA`|
-|[Multi-Hop Paragraph Retrieval for Open-Domain Question Answering](https://doi.org/10.18653/v1/P19-1222)|ACL 2019|[TODO]，训练了一个神经检索模型，利用问题和第一跳的信息来检索第二跳信息|
 |[Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs](https://www.aclweb.org/anthology/P19-1260/)|ACL 2019|[TODO]|
 |[Answering while Summarizing: Multi-task Learning for Multi-hop QA with Evidence Extraction](https://www.aclweb.org/anthology/P19-1225/)|ACL 2019|[TODO]，只用原始问题检索了一次文档|
 |[BAG: Bi-directional Attention Entity Graph Convolutional Network for Multi-hop Reasoning Question Answering](https://www.aclweb.org/anthology/N19-1032)|NAACL 2019|[TODO]| 
