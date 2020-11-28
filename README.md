@@ -39,7 +39,7 @@
 |3|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020|`Open` 没啥感觉，把检索文档看成序列建模问题然后beam search|
 |4|[Cognitive Graph for Multi-Hop Reading Comprehension at Scale](https://doi.org/10.18653/v1/P19-1259)|ACL 2019|`Open` 就CogQA|
 |5|[Unsupervised Alignment-based Iterative Evidence Retrieval for Multi-hop Question Answering](https://www.aclweb.org/anthology/2020.acl-main.414)|ACL 2020|`Open`&`non-Open` 在`MultiRC`以及`QASC`上的工作，做与问题相关的支撑句的检索。采用无监督的对其方法。每次检索会修改query，修改的规则主要是当前检索到的句子没有包含query中的那些terms，检索也使用了基本的基于词向量语义相似度的方式，属于无监督模型。但达到了很好的效果。|  
-|6|[PullNet: Open Domain Question Answering with Iterative Retrieval on Knowledge Bases and Text](https://arxiv.org/abs/1904.09537)|EMNLP 2019|`MetaQA`、`WebQuestionsSP`以及`Complex WebQ` [TODO]|
+|6|[PullNet: Open Domain Question Answering with Iterative Retrieval on Knowledge Bases and Text](https://arxiv.org/abs/1904.09537)|EMNLP 2019|`MetaQA`、`WebQuestionsSP`以及`Complex WebQ` `Open`[TODO]|
 
 ## 5 动态检索文档（检索了不一定要用）
 | 序号 | 论文 | 发表会议 | 备注 |
@@ -110,7 +110,7 @@
 |[Improving Multi-hop Question Answering over Knowledge Graphs using Knowledge Base Embeddings](https://www.aclweb.org/anthology/2020.acl-main.412)|ACL 2020|`KGQA`|
 |[Query Graph Generation for Answering Multi-hop Complex Questions from Knowledge Bases](https://www.aclweb.org/anthology/2020.acl-main.91)|ACL 2020|`KBQA/KGQA`|
 |[Scalable Multi-Hop Relational Reasoning for Knowledge-Aware Question Answering](https://arxiv.org/abs/2005.00646)|EMNLP 2020|`CommonQA` 提出了一种结合GNN与关系路径编码的知识推理与获取知识表示的方式。先抽取知识路径，再利用改进后的GNN在路径上进行信息传播。|
-|[Adapting Meta Knowledge Graph Information for Multi-Hop Reasoning over Few-Shot Relations](https://www.aclweb.org/anthology/D19-1334)|ACL 2019|[TODO]|
+|[Adapting Meta Knowledge Graph Information for Multi-Hop Reasoning over Few-Shot Relations](https://www.aclweb.org/anthology/D19-1334)|ACL 2019|`KGQA`|
 |[Explore, Propose, and Assemble: An Interpretable Model for Multi-Hop Reading Comprehension](https://arxiv.org/abs/1906.05210)|ACL 2019|[TODO]|
 |[Avoiding Reasoning Shortcuts: Adversarial Evaluation, Training, and Model Development for Multi-Hop QA](https://www.aclweb.org/anthology/P19-1262)|ACL 2019|[TODO]|
 |[Multi-Hop Paragraph Retrieval for Open-Domain Question Answering](https://doi.org/10.18653/v1/P19-1222)|ACL 2019|[TODO]，训练了一个神经检索模型，利用问题和第一跳的信息来检索第二跳信息|
