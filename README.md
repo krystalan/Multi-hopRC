@@ -133,6 +133,6 @@
 |[What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1281)|EMNLP 2019|`OpenBookQA` `CommonQA`|
 |[Quick and (not so) Dirty: Unsupervised Selection of Justification Sentences for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1260)|EMNLP 2019|`ARC`、`MultiRC` 提出了一种无监督的支撑句选取方法，基本思路是最大化选取句子的相关度，最小化选取supporting fact的overlap以及最大化问题和答案的覆盖度。|
 |[Differentiable Reasoning over a Virtual Knowledge Base](https://openreview.net/forum?id=SJxstlHFPH)|ICLR 2020|在`HotpotQA`上效果不是很好，主要在`MetaQA`达到了比较好的效果，让模型在纯文本的语料库上也能够模仿在知识库上做检索。所以是Virtual Knowledge Base|
-|[Multi-step Retriever-Reader Interaction for Scalable Open-domain Question Answering](https://openreview.net/forum?id=HkfPSh05K7)|ICLR 2020|[TODO]|
+|[Multi-step Retriever-Reader Interaction for Scalable Open-domain Question Answering](https://openreview.net/forum?id=HkfPSh05K7)|ICLR 2019|[TODO]|
 |[Question answering as global reasoning over semantic abstractions](https://arxiv.org/abs/1906.03672)|AAAI 2018|[TODO]|
 
