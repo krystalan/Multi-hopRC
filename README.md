@@ -114,7 +114,7 @@
 ## 14.与其他领域的结合
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
-|1|[Answering while Summarizing: Multi-task Learning for Multi-hop QA with Evidence Extraction](https://www.aclweb.org/anthology/P19-1225/)|ACL 2019|[TODO]，只用原始问题检索了一次文档|
+|1|[Answering while Summarizing: Multi-task Learning for Multi-hop QA with Evidence Extraction](https://www.aclweb.org/anthology/P19-1225/)|ACL 2019|`多跳阅读理解`、`抽取式文本摘要`以及`文本蕴含` 可解释性研究，受抽取式文本摘要的灵感，提出了QFE(Query Focused Extractor)模型。创新度不是很高，和原始的HotpotQA baseline挺像的。只不过多了一个支撑句预测层，该层就是他设计的QFE模型|
 |2|[Multi-hop Inference for Question-driven Summarization](https://www.aclweb.org/anthology/2020.emnlp-main.547/)|EMNLP 2020|[TODO]|
 
 
