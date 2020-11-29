@@ -111,6 +111,8 @@
 | :---: | :---: | :---: | :---: |
 |1|[Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs](https://www.aclweb.org/anthology/P19-1260/)|ACL 2019|`non-Open` 提出了HDE(Heterogeneous Document-Entity)图，图上包含了三类结点：文档结点、候选答案结点以及从文档中抽取的实体mention结点。这些结点的表示通过*co-attention*以及*self-attentive pooling*得到，在这些结点中又定义了7类边，例如：如果候选答案在某文档中出现了至少一次，那么该候选答案结点与文档结点相连。之后使用GNN-based表示更新算法为每个结点更新表示，最后由候选答案结点以及该候选答案中出现的实体mention结点共同为该候选答案进行打分。|   
 |2|[BAG: Bi-directional Attention Entity Graph Convolutional Network for Multi-hop Reasoning Question Answering](https://www.aclweb.org/anthology/N19-1032)|NAACL 2019|`non-Open` `Wikihop` 建立了一个比较简单的图，图上的结点都是实体结点，共有两类边：不同段落间相同实体之间的边以及同一段落任意两个实体结点之间也存在一条边。之后使用`Glove`、`ELMo`、`NER`以及`POS`来做特征的初始化，然后使用GCN去更新表示，最后对每一个实体结点进行其为答案的概率预测。| 
+|3|[Identifying Supporting Facts for Multi-hop Question Answering with Document Graph Networks](https://www.aclweb.org/anthology/D19-5306)|EMNLP 2019|`HotpotQA` 构建了DGN(Document Graph Network)并在上面传递信息以及识别supporting fact。Document Grpah包含两类结点：段落结点以及句子结点。以及两类边：如果句子存在于某文档中，则该句子结点与文档结点相连。如果一个文档中的实体被另一个文档所引用，则这两个文档之间相连。（注意没有句子与句子之间的边，因为会大大增加模型的复杂度且带来不了显著提升）。在构建Document Graph之后有一个过滤的步骤，根据问题，对所有段落中的每句话去计算其与问题的相似度。最终选取topk个**句子**。这些句子与文档之间构成原先Document Graph中的一个子图。然后结点的表示与问题的表示进行*Bi-Linear Attention*与*Self-Attention*得到结点的初始化表示，之后利用GNN系列算法更新表示，最终对句子结点进行supporting fact的预测。|
+
 
 ## 14.与其他领域的结合
 | 序号 | 论文 | 发表会议 | 备注 |
@@ -127,7 +129,6 @@
 |[Scalable Multi-Hop Relational Reasoning for Knowledge-Aware Question Answering](https://arxiv.org/abs/2005.00646)|EMNLP 2020|`CommonQA` 提出了一种结合GNN与关系路径编码的知识推理与获取知识表示的方式。先抽取知识路径，再利用改进后的GNN在路径上进行信息传播。|
 |[Adapting Meta Knowledge Graph Information for Multi-Hop Reasoning over Few-Shot Relations](https://www.aclweb.org/anthology/D19-1334)|ACL 2019|`KGQA`|
 |[What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1281)|EMNLP 2019|`OpenBookQA` `CommonQA`|
-|[Identifying Supporting Facts for Multi-hop Question Answering with Document Graph Networks](https://www.aclweb.org/anthology/D19-5306)|EMNLP 2019|[TODO]|
 |[Quick and (not so) Dirty: Unsupervised Selection of Justification Sentences for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1260)|EMNLP 2019|[TODO]|
 |[Simple yet Effective Bridge Reasoning for Open-Domain Multi-Hop Question Answering](https://www.aclweb.org/anthology/D19-5806)|EMNLP 2019|[TODO]|
 |[Multi-step Entity-centric Information Retrieval for Multi-Hop Question Answering](https://www.aclweb.org/anthology/D19-5816/)|EMNLP 2019|[TODO]|
