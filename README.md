@@ -129,7 +129,7 @@
 |[Scalable Multi-Hop Relational Reasoning for Knowledge-Aware Question Answering](https://arxiv.org/abs/2005.00646)|EMNLP 2020|`CommonQA` 提出了一种结合GNN与关系路径编码的知识推理与获取知识表示的方式。先抽取知识路径，再利用改进后的GNN在路径上进行信息传播。|
 |[Adapting Meta Knowledge Graph Information for Multi-Hop Reasoning over Few-Shot Relations](https://www.aclweb.org/anthology/D19-1334)|ACL 2019|`KGQA`|
 |[What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1281)|EMNLP 2019|`OpenBookQA` `CommonQA`|
-|[Quick and (not so) Dirty: Unsupervised Selection of Justification Sentences for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1260)|EMNLP 2019|[TODO]|
+|[Quick and (not so) Dirty: Unsupervised Selection of Justification Sentences for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1260)|EMNLP 2019|`ARC`、`MultiRC` 提出了一种无监督的支撑句选取方法，基本思路是最大化选取句子的相关度，最小化选取supporting fact的overlap以及最大化问题和答案的覆盖度。|
 |[Simple yet Effective Bridge Reasoning for Open-Domain Multi-Hop Question Answering](https://www.aclweb.org/anthology/D19-5806)|EMNLP 2019|[TODO]|
 |[Multi-step Entity-centric Information Retrieval for Multi-Hop Question Answering](https://www.aclweb.org/anthology/D19-5816/)|EMNLP 2019|[TODO]|
 |[Differentiable Reasoning over a Virtual Knowledge Base](https://openreview.net/forum?id=SJxstlHFPH)|ICLR 2020|在`HotpotQA`上效果不是很好，主要在`MetaQA`达到了比较好的效果，让模型在纯文本的语料库上也能够模仿在知识库上做检索。所以是Virtual Knowledge Base|
