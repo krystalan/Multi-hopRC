@@ -46,7 +46,8 @@
 |6|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020|`Open` 动态检索文档，只有最终确定的才进入到下一步|  
 
 ## 5.推理链
-> 就没有检索文档
+> 最终形成一条推理链。
+
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
 |1|[Exploiting Explicit Paths for Multi-hop Reading Comprehension](https://www.aclweb.org/anthology/P19-1263)|ACL 2019|`Wikihop`与`OpenBookQA` `Open`&`non-Open` 这篇工作主要的贡献在于多跳阅读理解的可解释性，为了在文本数据上达到多跳的效果，会有两种方法：GNN或者路径抽取，GNN可解释性非常差，因为它是隐式地完成信息传递。而路径抽取的方法解释性强，但如果跳数增多的话会有语义漂移问题。不过`Wikihop`或者`OpenBookQA`数据集都是两跳，所以好像不严重？然后作者就通过在问题中提取头实体，在候选答案中提取尾实体，然后在**全部候选文档**中抽取多个推理链，接着对推理链的实体做表示初始化然后隐式提取关系，再通过关系计算路径的表示。最后会对路径进行打分，然后根据分数得到最终的答案概率分布。我个人觉得这篇工作利用两个实体的表示去直接计算他们的关系表示这里有点粗糙了，因为两个实体之间可能存在着不止一种关系，而利用作者所给的式子则无法对这种多样的关系进行学习。|
