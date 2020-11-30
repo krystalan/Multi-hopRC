@@ -33,28 +33,29 @@
 |5|[Multi-paragraph reasoning with knowledge-enhanced graph neural network](https://arxiv.org/abs/1911.02170v1)|arXiv 2019|`Open`&`no-Open` 主要贡献在于，从paragraphs上建立了一个KG，然后利用GNN更新结点表示，结点表示更新之后返回来更新paragraphs的表示，最后进行答案预测|
 |6|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020|构建了一个异质图包含四类结点和七类边，利用GNN来进行多跳推理|
 
-## 4.多次检索文档
->多次检索文档，可解释性优于GNN-based models。其中PullNet也使用到了GNN算法
+## 4.迭代式检索文档
+>多次检索文档，可解释性优于GNN-based models。其中PullNet也使用到了GNN算法。这里的分类认为：多次检索文档，需要不断更新query然后以此来不断地进行迭代式检测。注意这种方法包括两大流派：生成推理链以及分解问题，这两个流派将在之后阐述，先介绍迭代式检索文档中不属于这两个流派的工作。
 
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
-|1|[Cognitive Graph for Multi-Hop Reading Comprehension at Scale](https://doi.org/10.18653/v1/P19-1259)|ACL 2019|`Open` 就CogQA|
-|2|[Explore, Propose, and Assemble: An Interpretable Model for Multi-Hop Reading Comprehension](https://arxiv.org/abs/1906.05210)|ACL 2019|分为三部分，三部分联合优化。Document Explore：一个级联的memory network迭代式地选取相关文档；Answer Proposer：对于推理树上的每一个从跟到结点的推理路径提出一个proposed答案；Evidence Assembler：从每一条推理路径上提取包含proposed答案的关键句，并将这些关键句结合起来以预测最终的答案。|
-|3|[Multi-Hop Paragraph Retrieval for Open-Domain Question Answering](https://doi.org/10.18653/v1/P19-1222)|ACL 2019|`Open` 主要在开放式的多跳QA中做检索方面的迭代式探索尝试，提出了MUPPET(MUlti-hoP Paragraph rETrieval)，共有两个模块组成：**段落和问题编码器**以及**段落阅读器**。编码器负责获取段落的表示以及将问题编码成搜索向量，阅读器通过搜索向量基于最大化内积的方法检索相关度高的段落。在每次迭代中，搜索向量会由前几步检索得到的文档的表示所印象，所以每次迭代中的搜索向量不一样，因此才能迭代式地检索到不同的段落。|
-|4|[Revealing the Importance of Semantic Retrieval for Machine Reading at Scale](https://www.aclweb.org/anthology/D19-1258/)|EMNLP 2019|`Open` 只用原始问题检索了一次文档，但在这一次检索中，先利用了基于TFIDF的方法筛选一遍，然后对于每个paragraph又通过语义相似度计算再筛选一遍，然后将还剩下的paragraph分解成句子，再在句子级别利用语义相似度计算得到最终所有的支撑句。最终利用支撑句和问题进行答案预测| 
-|5|[Multi-step Entity-centric Information Retrieval for Multi-Hop Question Answering](https://www.aclweb.org/anthology/D19-5816/)|EMNLP 2019|也是在检索文档上做了探索。从第一次检索到的文档上分析并利用其中的实体信息进行后续的多跳分析。|
-|6|[Simple yet Effective Bridge Reasoning for Open-Domain Multi-Hop Question Answering](https://www.aclweb.org/anthology/D19-5806)|EMNLP 2019|`Open`&`non-Open` 在短视检索上进行探索的工作，`Bridge Reasoner`输入的是开始文档（通过IR得到），然后进行span预测，预测出桥梁实体，进而再产生候选答案段落，`Passage Reader`提取最终答案。|  
-|7|[PullNet: Open Domain Question Answering with Iterative Retrieval on Knowledge Bases and Text](https://arxiv.org/abs/1904.09537)|EMNLP 2019|`MetaQA`、`WebQuestionsSP`以及`Complex WebQ` `Open` 从两种实体源中检索知识资源：文本语料库与知识库。作者定义了问题子图（question subgraph）这一概念，它的作用是包含足够多的与问题相关的信息然后以此来回答一个问题，该图是迭代生成的，且分为三类结点：①实体结点（存在于KB中）②文本结点（通常情况下是文本语料库中某个实体的mention）③事实结点（KB中的事实三元组）。一开始先仅利用问题中的信息来初始化问题子图，之后进行T轮迭代扩充，每次扩充会选取问题子图中的部分结点，对每一个选取到的结点，为其检索其相关的（1）文档（2）事实，对于（1）还会进一步利用实体链接模型提取其中的实体mention，对于（2）来说会提取三元组中的头尾实体。这样的构建直到问题子图可以回答问题为止，之后再进行答案预测。|
-|8|[Answering Complex Open-domain Questions Through Iterative Query Generation](https://arxiv.org/abs/1910.07000)|EMNLP 2019|`Open` GOLDEN模型|
-|9|[Unsupervised Alignment-based Iterative Evidence Retrieval for Multi-hop Question Answering](https://www.aclweb.org/anthology/2020.acl-main.414)|ACL 2020|`Open`&`non-Open` 在`MultiRC`以及`QASC`上的工作，做与问题相关的支撑句的检索。采用无监督的对其方法。每次检索会修改query，修改的规则主要是当前检索到的句子没有包含query中的那些terms，检索也使用了基本的基于词向量语义相似度的方式，属于无监督模型。但达到了很好的效果。|  
-|10|[Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering](https://arxiv.org/abs/1911.10470)|ICLR 2020|`Open` 不断检索文档，在整个wikipedia的文章上建立了一个图，然后一直跳|
-|11|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020|`Open` 没啥感觉，把检索文档看成序列建模问题然后beam search|
-|12|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020|`Open` 动态检索文档，只有最终确定的才进入到下一步|  
+|1|[Explore, Propose, and Assemble: An Interpretable Model for Multi-Hop Reading Comprehension](https://arxiv.org/abs/1906.05210)|ACL 2019|分为三部分，三部分联合优化。Document Explore：一个级联的memory network迭代式地选取相关文档；Answer Proposer：对于推理树上的每一个从跟到结点的推理路径提出一个proposed答案；Evidence Assembler：从每一条推理路径上提取包含proposed答案的关键句，并将这些关键句结合起来以预测最终的答案。|
+|2|[Multi-Hop Paragraph Retrieval for Open-Domain Question Answering](https://doi.org/10.18653/v1/P19-1222)|ACL 2019|`Open` 主要在开放式的多跳QA中做检索方面的迭代式探索尝试，提出了MUPPET(MUlti-hoP Paragraph rETrieval)，共有两个模块组成：**段落和问题编码器**以及**段落阅读器**。编码器负责获取段落的表示以及将问题编码成搜索向量，阅读器通过搜索向量基于最大化内积的方法检索相关度高的段落。在每次迭代中，搜索向量会由前几步检索得到的文档的表示所影响，所以每次迭代中的搜索向量不一样，因此才能迭代式地检索到不同的段落。|
+|3|[Revealing the Importance of Semantic Retrieval for Machine Reading at Scale](https://www.aclweb.org/anthology/D19-1258/)|EMNLP 2019|`Open` 只用原始问题检索了一次文档，但在这一次检索中，先利用了基于TFIDF的方法筛选一遍，然后对于每个paragraph又通过语义相似度计算再筛选一遍，然后将还剩下的paragraph分解成句子，再在句子级别利用语义相似度计算得到最终所有的支撑句。最终利用支撑句和问题进行答案预测。虽然只检索了一次，但其实在第一次的基础上进行了后续的多次筛选与更加细粒度的检索。| 
+|4|[Unsupervised Alignment-based Iterative Evidence Retrieval for Multi-hop Question Answering](https://www.aclweb.org/anthology/2020.acl-main.414)|ACL 2020|`Open`&`non-Open` 在`MultiRC`以及`QASC`上的工作，做与问题相关的支撑句的检索。采用无监督的对其方法。每次检索会修改query，修改的规则主要是当前检索到的句子没有包含query中的那些terms，检索也使用了基本的基于词向量语义相似度的方式，属于无监督模型。但达到了很好的效果。|  
+|5|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020|`Open` 没啥感觉，把检索文档看成序列建模问题然后beam search|
+|6|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020|`Open` 动态检索文档，只有最终确定的才进入到下一步|  
 
 ## 5.推理链
+> 就没有检索文档
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
-|1|[Exploiting Explicit Paths for Multi-hop Reading Comprehension](https://www.aclweb.org/anthology/P19-1263)|ACL 2019|`Wikihop`与`OpenBookQA` `Open`&`non-Open` 这篇工作主要的贡献在于多跳阅读理解的可解释性，为了在文本数据上达到多跳的效果，会有两种方法：GNN或者路径抽取，GNN可解释性非常差，因为它是隐式地完成信息传递。而路径抽取的方法解释性强，但如果跳数增多的话会有语义漂移问题。不过`Wikihop`或者`OpenBookQA`数据集都是两跳，所以好像不严重？然后作者就通过在问题中提取头实体，在候选答案中提取尾实体，然后在候选文档中试图抽取多个推理链，接着对推理链的实体做表示初始化然后隐式提取关系，再通过关系计算路径的表示。最后会对路径进行打分，然后根据分数得到最终的答案概率分布。我个人觉得这篇工作利用两个实体的表示去直接计算他们的关系表示这里有点粗糙了，因为两个实体之间可能存在着不止一种关系，而利用作者所给的式子则无法对这种多样的关系进行学习。|
+|1|[Exploiting Explicit Paths for Multi-hop Reading Comprehension](https://www.aclweb.org/anthology/P19-1263)|ACL 2019|`Wikihop`与`OpenBookQA` `Open`&`non-Open` 这篇工作主要的贡献在于多跳阅读理解的可解释性，为了在文本数据上达到多跳的效果，会有两种方法：GNN或者路径抽取，GNN可解释性非常差，因为它是隐式地完成信息传递。而路径抽取的方法解释性强，但如果跳数增多的话会有语义漂移问题。不过`Wikihop`或者`OpenBookQA`数据集都是两跳，所以好像不严重？然后作者就通过在问题中提取头实体，在候选答案中提取尾实体，然后在**全部候选文档**中抽取多个推理链，接着对推理链的实体做表示初始化然后隐式提取关系，再通过关系计算路径的表示。最后会对路径进行打分，然后根据分数得到最终的答案概率分布。我个人觉得这篇工作利用两个实体的表示去直接计算他们的关系表示这里有点粗糙了，因为两个实体之间可能存在着不止一种关系，而利用作者所给的式子则无法对这种多样的关系进行学习。|
+|2|[Cognitive Graph for Multi-Hop Reading Comprehension at Scale](https://doi.org/10.18653/v1/P19-1259)|ACL 2019|`Open` 就CogQA|
+|3|[Multi-step Entity-centric Information Retrieval for Multi-Hop Question Answering](https://www.aclweb.org/anthology/D19-5816/)|EMNLP 2019|也是在检索文档上做了探索。从第一次检索到的文档上分析并利用其中的实体信息进行后续的多跳分析。|
+|4|[Simple yet Effective Bridge Reasoning for Open-Domain Multi-Hop Question Answering](https://www.aclweb.org/anthology/D19-5806)|EMNLP 2019|`Open`&`non-Open` 在短视检索上进行探索的工作，`Bridge Reasoner`输入的是开始文档（通过IR得到），然后进行span预测，预测出桥梁实体，进而再产生候选答案段落，`Passage Reader`提取最终答案。|  
+|5|[PullNet: Open Domain Question Answering with Iterative Retrieval on Knowledge Bases and Text](https://arxiv.org/abs/1904.09537)|EMNLP 2019|`MetaQA`、`WebQuestionsSP`以及`Complex WebQ` `Open` 从两种实体源中检索知识资源：文本语料库与知识库。作者定义了问题子图（question subgraph）这一概念，它的作用是包含足够多的与问题相关的信息然后以此来回答一个问题，该图是迭代生成的，且分为三类结点：①实体结点（存在于KB中）②文本结点（通常情况下是文本语料库中某个实体的mention）③事实结点（KB中的事实三元组）。一开始先仅利用问题中的信息来初始化问题子图，之后进行T轮迭代扩充，每次扩充会选取问题子图中的部分结点，对每一个选取到的结点，为其检索其相关的（1）文档（2）事实，对于（1）还会进一步利用实体链接模型提取其中的实体mention，对于（2）来说会提取三元组中的头尾实体。这样的构建直到问题子图可以回答问题为止，之后再进行答案预测。|
+|6|[Answering Complex Open-domain Questions Through Iterative Query Generation](https://arxiv.org/abs/1910.07000)|EMNLP 2019|`Open` GOLDEN模型|
+|7|[Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering](https://arxiv.org/abs/1911.10470)|ICLR 2020|`Open` 不断检索文档，在整个wikipedia的文章上建立了一个图，然后一直跳|
 
 
 ## 6.分解问题相关
