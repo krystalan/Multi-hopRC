@@ -116,6 +116,8 @@
 
 
 ## 11.Numerical Reasoning
+>在DROP数据集上的一些研究，主要要求模型具有计数，数学运算等能力。
+
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
 |0|[DROP: A Reading Comprehension Benchmark Requiring Discrete Reasoning Over Paragraphs](https://arxiv.org/abs/1903.00161)|NAACL 2019|`DROP` **答案不一定出现在原文中 需要通过计算、计数等操作得到** 每个QA对都有一个对应的paragraph| 
