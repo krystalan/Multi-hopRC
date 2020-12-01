@@ -6,7 +6,7 @@
 |1|[HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering](https://arxiv.org/abs/1809.09600)|EMNLP 2018|`HotpotQA` **抽取式** 每个QA对有10个（distractor setting）或百万级（full wiki setting）对应的paragraph|
 |2|[Constructing Datasets for Multi-hop Reading Comprehension Across Documents](https://arxiv.org/abs/1710.06481)|TACL 2018|`Wikihop`与`MedHop` **多选式** 每个QA对有数量不等（平均14，最多64）个对应的paragraph，还有候选答案集合|
 |3|[Can a Suit of Armor Conduct Electricity? A New Dataset for Open Book Question Answering](https://www.aclweb.org/anthology/D18-1260/)|EMNLP 2018|`OpenBookQA` `CommonQA` **多选式** 包含了两部分5957个多选问题（每题四个选项），1326个初级科学事实。科学事实通常不能够直接回答问题，对于一个问题，应当先检索相关的科学事实，然后加上常识（不在本数据集中提供，通常用`ConceptNet`）才能得到答案。需要多跳推理，也需要常识推理。|
-|4|[The NarrativeQA Reading Comprehension Challenge](https://arxiv.org/abs/1712.07040)|TACL 2018|[TODO] `NarrativeQA`|
+|4|[The NarrativeQA Reading Comprehension Challenge](https://arxiv.org/abs/1712.07040)|TACL 2018|`NarrativeQA` 包含来自于书本和电影剧本的1567个完整故事，数据集划分为不重叠的训练、验证和测试三个部分，共有 46765个问题答案对|
 |5|[Reasoning Over Paragraph Effects in Situations](https://arxiv.org/abs/1908.05852)|EMNLP MRQA Workshop 2019|`ROPES` **抽取式** 每个QA对对应两个paragraph，一个称为*background*是说明文，另一个是*situation*由众包工人创建，回答问题需要把*background*中的知识应用与*situation*才可|
 |6|[DROP: A Reading Comprehension Benchmark Requiring Discrete Reasoning Over Paragraphs](https://arxiv.org/abs/1903.00161)|NAACL 2019|`DROP` **答案不一定出现在原文中 需要通过计算、计数等操作得到** 每个QA对都有一个对应的paragraph|  
 |7|[DREAM: A Challenge Data Set and Models for Dialogue-Based Reading Comprehension](https://www.aclweb.org/anthology/Q19-1014/)|TACL 2019|`Dream` **多选式** 10197个问题，并在英语考试题中收集6444个多轮多方的对话数据。多个选择题对应一个多轮多方对话数据，只有一个候选答案正确|
