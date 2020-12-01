@@ -159,3 +159,35 @@
 |[Multi-step Retriever-Reader Interaction for Scalable Open-domain Question Answering](https://openreview.net/forum?id=HkfPSh05K7)|ICLR 2019|[TODO]|
 |[Question answering as global reasoning over semantic abstractions](https://arxiv.org/abs/1906.03672)|AAAI 2018|[TODO]|
 
+## Leaderboard of HotpotQA
+### 1. ANS (distractor setting)
+| 模型 | 对应论文 | 所属类别 | EM(Test) | F1(Test) | EM(dev) | F1(dev) |TOP|
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| SAE(AAAI 2020) | 2.1 | （1） | 66.92 | 79.62 | 67.70 | 80.75 | | 
+| QUARK(arXiv 2020) | 2.2 | （1） | - | - | 67.75 | 81.21 | |
+| HGN(EMNLP 2020) | 3.6 | （2） | 69.22 | 82.19 | - | - | |
+| KGNN(arXiv 2019) | 3.5 | （2） | 50.81 | 65.75 | - | - | |
+| DFGN(ACL 2019) | 3.2 | （2） | 56.31 | 69.69 | - | - | |
+| ICLR 2020 | 5.7 | （4） | - | - | 81.2 | 68.0 | |
+| DECOMPRC(ACL 2019) | 6.2 | （5） | - | 70.57 | - | - | |
+| Unsupervised(EMNLP 2020) | 6.5 | （5） | 66.33 | 79.34 | - | 80.1 | |
+| MODULARQA(arXiv 2020) | 7.4 | （6） | - | - | - | 61.8 | |
+| TheirNMN(EMNLP 2019) | 7.1 | （6） | 49.58 | 62.71 | 50.67 | 63.35 | |
+| C2F Reader(EMNLP 2020) | 10.5 | （8） | 67.98 | 81.24 | - | - | |
+
+### 2. ANS (fullwiki setting)
+| 模型 | 对应论文 | 所属类别 | EM(Test) | F1(Test) |TOP|
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| QUARK(arXiv 2020) | 2.2 | （1） | 55.50 | 67.51 | |
+| HGN(EMNLP 2020) | 3.6 | （2） | 59.74 | 71.41 | |
+| KGNN(arXiv 2019) | 3.5 | （2） | 27.65 | 37.19 | |
+| DDRQA(arXiv 2020) | 4.6 | （3） | 62.9 | 76.9 | |
+| whole pip(EMNLP 2019) | 4.3 | （3） | 45.30 | 57.30 | |
+| MUPPET(ACL 2019) | 4.2 | （3） | 31.07 | 40.42 | |
+| ICLR 2020 | 5.7 | （4） | 60.0 | 73.0 | |
+| GOLDEN(EMNLP 2019) | 5.6 | （4） | 37.92 | 48.58 | |
+| CogQA(ACL 2019) | 5.2 | （4） | 37.1 | 48.9 | |
+| Transformer-XH(ICLR 2020) | 8.1 | （7） | 51.6 | 64.1 | |
+
+
+
