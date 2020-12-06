@@ -18,8 +18,7 @@
 ## 2.改进传统单步阅读理解方法
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
-|1|[Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents](https://arxiv.org/abs/1911.00484)|AAAI 2020|`non-Open` SAE|
-|2|[A Simple Yet Strong Pipeline for HotpotQA](https://arxiv.org/abs/2004.06753)|arXiv 2020|一种非常简单的方法但达到了非常不错的效果，值得思考|
+|1|[A Simple Yet Strong Pipeline for HotpotQA](https://arxiv.org/abs/2004.06753)|arXiv 2020|一种非常简单的方法但达到了非常不错的效果，值得思考|
 
 
 
@@ -34,7 +33,8 @@
 |4*|[BAG: Bi-directional Attention Entity Graph Convolutional Network for Multi-hop Reasoning Question Answering](https://www.aclweb.org/anthology/N19-1032)|NAACL 2019|`non-Open` `Wikihop` 建立了一个比较简单的图，图上的结点都是实体结点，共有两类边：不同段落间相同实体之间的边以及同一段落任意两个实体结点之间也存在一条边。之后使用`Glove`、`ELMo`、`NER`以及`POS`来做特征的初始化，然后使用GCN去更新表示，最后对每一个实体结点进行其为答案的概率预测。| 
 |5*|[Multi-paragraph reasoning with knowledge-enhanced graph neural network](https://arxiv.org/abs/1911.02170v1)|arXiv 2019|`Open`&`no-Open` 主要贡献在于，从paragraphs上建立了一个KG，然后利用GNN更新结点表示，结点表示更新之后返回来更新paragraphs的表示，最后进行答案预测|
 |6*|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020|构建了一个异质图包含四类结点和七类边，利用GNN来进行多跳推理|
-|7|[Is Graph Structure Necessary for Multi-hop Question Answering?](https://www.aclweb.org/anthology/2020.emnlp-main.583)|EMNLP 2020|`non-Open` 改进了`DFGN`模型，探索了图结构在多跳QA中是否必要，结论是：如果PTM是特征提取器的话就重要，如果微调PTM的话其实图结构不是很重要|
+|7|[Is Graph Structure Necessary for Multi-hop Question Answering?](https://www.aclweb.org/anthology/2020.emnlp-main.583)|EMNLP 2020|`non-Open` 改进了`DFGN`模型，探索了图结构在多跳QA中是否必要，结论是：如果PTM是特征提取器的话就重要，如果微调PTM的话其实图结构不是很重要| 
+|8*|[Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents](https://arxiv.org/abs/1911.00484)|AAAI 2020|`non-Open` SAE|
 
 (*代表仅属于本分类下的工作)
 
@@ -166,12 +166,12 @@
 ### 1. ANS (distractor setting)
 | 模型 | 对应论文 | 所属类别 | EM(Test) | F1(Test) | EM(dev) | F1(dev) |TOP|
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **SAE** (AAAI 2020) | 2.1 | （1） | **66.92** | **79.62** | **67.70** | **80.75** | TOP-4 | 
 | **QUARK** (arXiv 2020) | 2.2 | （1） | - | - | **67.75** | **81.21** | TOP-3 |
 | **HGN** (EMNLP 2020) | 3.6 | （2） | **69.22** | **82.19** | - | - | TOP-1 |
 | **C2F Reader** (EMNLP 2020) | 3.7 | （2） | **67.98** | **81.24** | - | - | TOP-2 |
 | KGNN (arXiv 2019) | 3.5 | （2） | 50.81 | 65.75 | - | - | |
 | DFGN (ACL 2019) | 3.2 | （2） | 56.31 | 69.69 | - | - | |
+| **SAE** (AAAI 2020) | 3.8 | （2） | **66.92** | **79.62** | **67.70** | **80.75** | TOP-4 | 
 | ICLR 2020 | 5.7 | （4） | - | - | 81.2 | 68.0 | |
 | DECOMPRC (ACL 2019) | 6.2 | （5） | - | 70.57 | - | - | |
 | **Unsupervised** (EMNLP 2020) | 6.5 | （5） | **66.33** | **79.34** | - | **80.1** | TOP-5 |
@@ -194,7 +194,7 @@
 
 ### 3. 所属类别及入选TOP数量：  
 （1）基于单步阅读理解模型改进：2 （其中一个同时入选两个setting）   
-（2）基于GNN：2 （其中一个同时入选两个setting）  
+（2）基于GNN：3 （其中一个同时入选两个setting）  
 （3）迭代式文档检索：1  
 （4）推理链：1   
 （5）分解问题：1  
