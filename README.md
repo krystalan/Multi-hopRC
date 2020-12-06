@@ -28,12 +28,15 @@
 
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
-|1|[Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs](https://www.aclweb.org/anthology/P19-1260/)|ACL 2019|`non-Open` 提出了HDE(Heterogeneous Document-Entity)图，图上包含了三类结点：文档结点、候选答案结点以及从文档中抽取的实体mention结点。这些结点的表示通过*co-attention*以及*self-attentive pooling*得到，在这些结点中又定义了7类边，例如：如果候选答案在某文档中出现了至少一次，那么该候选答案结点与文档结点相连。之后使用GNN-based表示更新算法为每个结点更新表示，最后由候选答案结点以及该候选答案中出现的实体mention结点共同为该候选答案进行打分。|  
-|2|[Dynamically fused graph network for multi-hop reasoning](https://arxiv.org/abs/1905.06933)|ACL 2019|`non-Open` DFGN|   
-|3|[Identifying Supporting Facts for Multi-hop Question Answering with Document Graph Networks](https://www.aclweb.org/anthology/D19-5306)|EMNLP 2019|`HotpotQA` 构建了DGN(Document Graph Network)并在上面传递信息以及识别supporting fact。Document Grpah包含两类结点：段落结点以及句子结点。以及两类边：如果句子存在于某文档中，则该句子结点与文档结点相连。如果一个文档中的实体被另一个文档所引用，则这两个文档之间相连。（注意没有句子与句子之间的边，因为会大大增加模型的复杂度且带来不了显著提升）。在构建Document Graph之后有一个过滤的步骤，根据问题，对所有段落中的每句话去计算其与问题的相似度。最终选取topk个**句子**。这些句子与文档之间构成原先Document Graph中的一个子图。然后结点的表示与问题的表示进行*Bi-Linear Attention*与*Self-Attention*得到结点的初始化表示，之后利用GNN系列算法更新表示，最终对句子结点进行supporting fact的预测。|
-|4|[BAG: Bi-directional Attention Entity Graph Convolutional Network for Multi-hop Reasoning Question Answering](https://www.aclweb.org/anthology/N19-1032)|NAACL 2019|`non-Open` `Wikihop` 建立了一个比较简单的图，图上的结点都是实体结点，共有两类边：不同段落间相同实体之间的边以及同一段落任意两个实体结点之间也存在一条边。之后使用`Glove`、`ELMo`、`NER`以及`POS`来做特征的初始化，然后使用GCN去更新表示，最后对每一个实体结点进行其为答案的概率预测。| 
-|5|[Multi-paragraph reasoning with knowledge-enhanced graph neural network](https://arxiv.org/abs/1911.02170v1)|arXiv 2019|`Open`&`no-Open` 主要贡献在于，从paragraphs上建立了一个KG，然后利用GNN更新结点表示，结点表示更新之后返回来更新paragraphs的表示，最后进行答案预测|
-|6|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020|构建了一个异质图包含四类结点和七类边，利用GNN来进行多跳推理|
+|1*|[Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs](https://www.aclweb.org/anthology/P19-1260/)|ACL 2019|`non-Open` 提出了HDE(Heterogeneous Document-Entity)图，图上包含了三类结点：文档结点、候选答案结点以及从文档中抽取的实体mention结点。这些结点的表示通过*co-attention*以及*self-attentive pooling*得到，在这些结点中又定义了7类边，例如：如果候选答案在某文档中出现了至少一次，那么该候选答案结点与文档结点相连。之后使用GNN-based表示更新算法为每个结点更新表示，最后由候选答案结点以及该候选答案中出现的实体mention结点共同为该候选答案进行打分。|  
+|2*|[Dynamically fused graph network for multi-hop reasoning](https://arxiv.org/abs/1905.06933)|ACL 2019|`non-Open` DFGN|   
+|3*|[Identifying Supporting Facts for Multi-hop Question Answering with Document Graph Networks](https://www.aclweb.org/anthology/D19-5306)|EMNLP 2019|`HotpotQA` 构建了DGN(Document Graph Network)并在上面传递信息以及识别supporting fact。Document Grpah包含两类结点：段落结点以及句子结点。以及两类边：如果句子存在于某文档中，则该句子结点与文档结点相连。如果一个文档中的实体被另一个文档所引用，则这两个文档之间相连。（注意没有句子与句子之间的边，因为会大大增加模型的复杂度且带来不了显著提升）。在构建Document Graph之后有一个过滤的步骤，根据问题，对所有段落中的每句话去计算其与问题的相似度。最终选取topk个**句子**。这些句子与文档之间构成原先Document Graph中的一个子图。然后结点的表示与问题的表示进行*Bi-Linear Attention*与*Self-Attention*得到结点的初始化表示，之后利用GNN系列算法更新表示，最终对句子结点进行supporting fact的预测。|
+|4*|[BAG: Bi-directional Attention Entity Graph Convolutional Network for Multi-hop Reasoning Question Answering](https://www.aclweb.org/anthology/N19-1032)|NAACL 2019|`non-Open` `Wikihop` 建立了一个比较简单的图，图上的结点都是实体结点，共有两类边：不同段落间相同实体之间的边以及同一段落任意两个实体结点之间也存在一条边。之后使用`Glove`、`ELMo`、`NER`以及`POS`来做特征的初始化，然后使用GCN去更新表示，最后对每一个实体结点进行其为答案的概率预测。| 
+|5*|[Multi-paragraph reasoning with knowledge-enhanced graph neural network](https://arxiv.org/abs/1911.02170v1)|arXiv 2019|`Open`&`no-Open` 主要贡献在于，从paragraphs上建立了一个KG，然后利用GNN更新结点表示，结点表示更新之后返回来更新paragraphs的表示，最后进行答案预测|
+|6*|[Hierarchical Graph Network for Multi-hop Question Answering](https://arxiv.org/abs/1911.03631)|EMNLP 2020|构建了一个异质图包含四类结点和七类边，利用GNN来进行多跳推理|
+|7|[Is Graph Structure Necessary for Multi-hop Question Answering?](https://www.aclweb.org/anthology/2020.emnlp-main.583)|EMNLP 2020|`non-Open` 改进了`DFGN`模型，探索了图结构在多跳QA中是否必要，结论是：如果PTM是特征提取器的话就重要，如果微调PTM的话其实图结构不是很重要|
+
+(*代表仅属于本分类下的工作)
 
 ## 4.迭代式检索文档
 >多次检索文档，可解释性优于GNN-based models。其中PullNet也使用到了GNN算法。这里的分类认为：多次检索文档，需要不断更新query然后以此来不断地进行迭代式检测。注意这种方法包括两大流派：生成推理链以及分解问题，这两个流派将在之后阐述，先介绍迭代式检索文档中不属于这两个流派的工作。
@@ -166,6 +169,7 @@
 | **SAE** (AAAI 2020) | 2.1 | （1） | **66.92** | **79.62** | **67.70** | **80.75** | TOP-4 | 
 | **QUARK** (arXiv 2020) | 2.2 | （1） | - | - | **67.75** | **81.21** | TOP-3 |
 | **HGN** (EMNLP 2020) | 3.6 | （2） | **69.22** | **82.19** | - | - | TOP-1 |
+| **C2F Reader** (EMNLP 2020) | 3.7 | （2） | **67.98** | **81.24** | - | - | TOP-2 |
 | KGNN (arXiv 2019) | 3.5 | （2） | 50.81 | 65.75 | - | - | |
 | DFGN (ACL 2019) | 3.2 | （2） | 56.31 | 69.69 | - | - | |
 | ICLR 2020 | 5.7 | （4） | - | - | 81.2 | 68.0 | |
@@ -173,7 +177,6 @@
 | **Unsupervised** (EMNLP 2020) | 6.5 | （5） | **66.33** | **79.34** | - | **80.1** | TOP-5 |
 | MODULARQA (arXiv 2020) | 7.4 | （6） | - | - | - | 61.8 | |
 | TheirNMN (EMNLP 2019) | 7.1 | （6） | 49.58 | 62.71 | 50.67 | 63.35 | |
-| **C2F Reader** (EMNLP 2020) | 10.5 | （8） | **67.98** | **81.24** | - | - | TOP-2 |
 
 ### 2. ANS (fullwiki setting)
 | 模型 | 对应论文 | 所属类别 | EM(Test) | F1(Test) |TOP|
@@ -191,10 +194,9 @@
 
 ### 3. 所属类别及入选TOP数量：  
 （1）基于单步阅读理解模型改进：2 （其中一个同时入选两个setting）   
-（2）基于GNN：1 （同时入选两个setting）  
+（2）基于GNN：2 （其中一个同时入选两个setting）  
 （3）迭代式文档检索：1  
 （4）推理链：1   
 （5）分解问题：1  
 （6）NMN：0   
 （7）PTM：1   
-（8）C2F Reader：1
