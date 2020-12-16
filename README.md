@@ -146,7 +146,35 @@
 |3|[A Unified MRC Framework for Named Entity Recognition](https://arxiv.org/abs/1910.11476)|ACL 2020|[TODO]|
 |3|[Multi-hop Inference for Question-driven Summarization](https://www.aclweb.org/anthology/2020.emnlp-main.547/)|EMNLP 2020|[TODO]|
 
+## 13.OBQA
+> 这个模块主要总结一下在OpenBookQA上的已有工作
 
+| 序号 | 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: | :---: |
+|1| [Careful Selection of Knowledge to Solve Open Book Question Answering](https://arxiv.org/abs/1907.10738)| ACL 2019||
+|2| [How Additional Knowledge can Improve Natural Language Commonsense Question Answering?](https://arxiv.org/abs/1909.08855) | arXiv 2019 | |
+|3| [Improving Question Answering with External Knowledge](https://arxiv.org/abs/1902.00993) | MRQA@EMNLP 2019 | |
+|4| [Context Modeling with Evidence Filter for Multiple Choice Question Answering](https://arxiv.org/abs/2010.02649) | arXiv 2020 | 扫了一眼，挺短的 |
+|5| [Alignment over Heterogeneous Embeddings for Question Answering](https://www.aclweb.org/anthology/N19-1274/) | NAACL 2019 | |
+|6| [Learning to Explain: Datasets and Models for Identifying Valid Reasoning Chains in Multihop Question-Answering](https://arxiv.org/abs/2010.03274) | EMNLP 2020 | |
+|7| [Connecting the Dots: A Knowledgeable Path Generator for Commonsense Question Answering](https://arxiv.org/abs/2005.00691s) | EMNLP 2020 Findings | |
+|8| [Improving Commonsense Question Answering by Graph-based Iterative Retrieval over Multiple Knowledge Sources](https://arxiv.org/abs/2011.02705) | COLING 2020 | |
+|9| [Using the Hammer Only on Nails: A Hybrid Method for Evidence Retrieval for Question Answering](https://arxiv.org/abs/2009.10791) | arXiv 2020 | |
+|10| [How Additional Knowledge can Improve Natural Language Commonsense Question Answering?](https://arxiv.org/abs/1909.08855) | arXiv 2019 | |
+|11| [What Does My QA Model Know? Devising Controlled Probes Using Expert Knowledge](https://www.mitpressjournals.org/doi/full/10.1162/tacl_a_00331) | TACL 2019 | | 
+|12| [ISAAQ -- Mastering Textbook Questions with Pre-trained Transformers and Bottom-Up and Top-Down Attention](https://arxiv.org/abs/2010.00562) | EMNLP 2020 | |
+|13| [What do we expect from Multiple-choice QA Systems?](https://arxiv.org/abs/2011.10647) | EMNLP 2020 Findings | |
+|14| [Neural Conversational QA: Learning to Reason v.s. Exploiting Patterns](https://arxiv.org/abs/1909.03759) | |
+|15| [Designing Templates for Eliciting Commonsense Knowledge from Pretrained Sequence-to-Sequence Models](https://www.aclweb.org/anthology/2020.coling-main.307/) | COLING 2020 | | 
+|16|[Scalable Multi-Hop Relational Reasoning for Knowledge-Aware Question Answering](https://arxiv.org/abs/2005.00646)|EMNLP 2020|`CommonQA` 提出了一种结合GNN与关系路径编码的知识推理与获取知识表示的方式。先抽取知识路径，再利用改进后的GNN在路径上进行信息传播。|
+|17|[What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1281)|EMNLP 2019|`OpenBookQA` `CommonQA`|
+|18|[Differentiable Open-Ended Commonsense Reasoning](https://arxiv.org/abs/2010.14439)|arXiv 2020| |
+|19|[Natural Language QA Approaches using Reasoning with External Knowledge](https://arxiv.org/abs/2003.03446)|arXiv 2020| |
+|20|[KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning](https://arxiv.org/abs/1909.02151)| EMNLP 2019 ||21|Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension | ACL 2019 | 只有related work部分有用，总结的挺好的 |
+|22|[Learning Contextualized Knowledge Structures for Commonsense Reasoning](https://arxiv.org/abs/2010.12873) | arXiv 2020 | |
+|23|[Knowledge Fusion and Semantic Knowledge Ranking for Open Domain Question Answering](https://arxiv.org/abs/2004.03101)| arXiv 2020 | |
+|24|[Do Transformers Dream of Inference, or Can Pretrained Generative Models Learn Implicit Inferential Rules?](https://www.semanticscholar.org/paper/Do-Transformers-Dream-of-Inference%2C-or-Can-Models-Liang-Surdeanu/bd2239d6cea24604ff3687d37f3d475f6d7b12bc) | INSIGHTS 2020 | |
+|25|[Commonsense Reasoning for Natural Language Understanding: A Survey of Benchmarks, Resources, and Approaches](https://arxiv.org/abs/1904.01172) | arXiv 2019 | |
 
 
 ## [PLAN]
@@ -154,9 +182,7 @@
 | :---: | :---: | :---: |
 |[Improving Multi-hop Question Answering over Knowledge Graphs using Knowledge Base Embeddings](https://www.aclweb.org/anthology/2020.acl-main.412)|ACL 2020|`KGQA`|
 |[Query Graph Generation for Answering Multi-hop Complex Questions from Knowledge Bases](https://www.aclweb.org/anthology/2020.acl-main.91)|ACL 2020|`KBQA/KGQA`|
-|[Scalable Multi-Hop Relational Reasoning for Knowledge-Aware Question Answering](https://arxiv.org/abs/2005.00646)|EMNLP 2020|`CommonQA` 提出了一种结合GNN与关系路径编码的知识推理与获取知识表示的方式。先抽取知识路径，再利用改进后的GNN在路径上进行信息传播。|
 |[Adapting Meta Knowledge Graph Information for Multi-Hop Reasoning over Few-Shot Relations](https://www.aclweb.org/anthology/D19-1334)|ACL 2019|`KGQA`|
-|[What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1281)|EMNLP 2019|`OpenBookQA` `CommonQA`|
 |[Quick and (not so) Dirty: Unsupervised Selection of Justification Sentences for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1260)|EMNLP 2019|`ARC`、`MultiRC` 提出了一种无监督的支撑句选取方法，基本思路是最大化选取句子的相关度，最小化选取supporting fact的overlap以及最大化问题和答案的覆盖度。|
 |[Differentiable Reasoning over a Virtual Knowledge Base](https://openreview.net/forum?id=SJxstlHFPH)|ICLR 2020|在`HotpotQA`上效果不是很好，主要在`MetaQA`达到了比较好的效果，让模型在纯文本的语料库上也能够模仿在知识库上做检索。所以是Virtual Knowledge Base|
 |[Multi-step Retriever-Reader Interaction for Scalable Open-domain Question Answering](https://openreview.net/forum?id=HkfPSh05K7)|ICLR 2019|[TODO]|
@@ -166,7 +192,7 @@
 ### 1. ANS (distractor setting)
 | 模型 | 对应论文 | 所属类别 | EM(Test) | F1(Test) | EM(dev) | F1(dev) |TOP|
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **QUARK** (arXiv 2020) | 2.2 | （1） | - | - | **67.75** | **81.21** | TOP-3 |
+| **QUARK** (arXiv 2020) | 2.1 | （1） | - | - | **67.75** | **81.21** | TOP-3 |
 | DFGN (ACL 2019) | 3.2 | （2） | 56.31 | 69.69 | - | - | |
 | KGNN (arXiv 2019) | 3.5 | （2） | 50.81 | 65.75 | - | - | |
 | **HGN** (EMNLP 2020) | 3.6 | （2） | **69.22** | **82.19** | - | - | TOP-1 |
