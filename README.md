@@ -157,7 +157,7 @@
 |4| [Context Modeling with Evidence Filter for Multiple Choice Question Answering](https://arxiv.org/abs/2010.02649) | arXiv 2020 | 扫了一眼，挺短的 |
 |5| [Alignment over Heterogeneous Embeddings for Question Answering](https://www.aclweb.org/anthology/N19-1274/) | NAACL 2019 | |
 |6| [Learning to Explain: Datasets and Models for Identifying Valid Reasoning Chains in Multihop Question-Answering](https://arxiv.org/abs/2010.03274) | EMNLP 2020 | |
-|7| [Connecting the Dots: A Knowledgeable Path Generator for Commonsense Question Answering](https://arxiv.org/abs/2005.00691s) | EMNLP 2020 Findings | |
+|7| [Connecting the Dots: A Knowledgeable Path Generator for Commonsense Question Answering](https://arxiv.org/abs/2005.00691) | EMNLP 2020 Findings | |
 |8| [Improving Commonsense Question Answering by Graph-based Iterative Retrieval over Multiple Knowledge Sources](https://arxiv.org/abs/2011.02705) | COLING 2020 | |
 |9| [Using the Hammer Only on Nails: A Hybrid Method for Evidence Retrieval for Question Answering](https://arxiv.org/abs/2009.10791) | arXiv 2020 | |
 |10| [How Additional Knowledge can Improve Natural Language Commonsense Question Answering?](https://arxiv.org/abs/1909.08855) | arXiv 2019 | |
