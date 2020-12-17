@@ -1,5 +1,22 @@
 
 # 多跳阅读理解相关论文
+
+## 目录
+- [1.数据集](#1数据集)   
+- [2.改进传统单步阅读理解方法](#2改进传统单步阅读理解方法)    
+- [3.利用GNN进行多跳推理](#3利用gnn进行多跳推理)   
+- [4.迭代式检索文档](#4迭代式检索文档)    
+- [5.推理链](#5推理链)    
+- [6.分解问题相关](#6分解问题相关)    
+- [7.神经模块网络NMN](#7neural-module-networks)     
+- [8.PTM for MhRC](#8针对于多跳mrc问题的ptm改进)    
+- [9.数据增强](#9数据增强)    
+- [10.本质方面的探索](#10在本质方面的探索)    
+- [11.数学推理能力](#11numerical-reasoning)     
+- [12.与其他任务相关联](#12与其他任务相关联)    
+- [13.OBQA](#13obqa)    
+- [Leaderboard](#leaderboard-of-hotpotqa)    
+
 ## 1.数据集
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
@@ -95,6 +112,7 @@
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
 |1|[Transformer-XH: Multi-hop question answering with eXtra Hop attention](https://openreview.net/forum?id=r1eIiCNYwS)|ICLR 2020|让transformer在图结构上也进行学习，评分686|
+|2|[CogLTX: Applying BERT to Long Texts](http://keg.cs.tsinghua.edu.cn/jietang/publications/NIPS20-Ding-et-al-CogLTX.pdf)|NIPS 2020|在长文本上应用BERT，并且使得BERT有一定的推理能力，重点句迭代选取最后保留对于当前任务最相关的句子，进行下一轮计算。|
 
 ## 9.数据增强
 | 序号 | 论文 | 发表会议 | 备注 |
