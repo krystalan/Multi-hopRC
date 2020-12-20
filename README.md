@@ -99,13 +99,25 @@
 ## 7.Neural Module Networks
 >最先在VQA中使用，后也引用至多跳阅读理解领域，肥肠复杂，因为要定义好肥肠多的模组功能以及每个模组分别在什么场景下出现。
 
-| 序号 | 论文 | 发表会议 | 备注 |
-| :---: | :---: | :---: | :---: |
-|0|[Deep Compositional Question Answering with Neural Module Networks](https://arxiv.org/abs/1511.02799)|CVPR 2016|NMN鼻祖，在VQA中定义了多个模组来完成不同的操作：`Attention`定位图像中某Obj的位置 `Re-attention`在att map上进行位置迁移等等|
-|1|[Self-assembling modular networks for interpretable multi-hop reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019|`non-Open` 在`HotpotQA`上的工作，入栈出栈，三个模组`Find`、`Relocate`以及`Compare`|
-|2|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|EMNLP 2020|`non-Open` 感觉本文，在NMN上的创新度不及其余文章，然后选取的数据集也不是主流的`HotpotQA`，而是`ROPES`|
-|3|[Neural module networks for reasoning over text](https://arxiv.org/abs/1912.04971)|ICLR 2020|`non-Open` NMN在`DROP`上的工作，设计了10个模组|
-|4|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020|`non-Open` 在`DROP`上的工作，也可以用于`HotpotQA`，两个模组`next-question generator`与`QA model`|
+| 序号 | 论文 | 发表会议 | 备注 | repo |
+| :---: | :---: | :---: | :---: |:---: |
+|1|[Deep Compositional Question Answering with Neural Module Networks](https://arxiv.org/abs/1511.02799)|CVPR 2016|NMN鼻祖，在VQA中定义了多个模组来完成不同的操作：`Attention`定位图像中某Obj的位置 `Re-attention`在att map上进行位置迁移等等||
+|2|[Learning to Compose Neural Networks for Question Answering](https://arxiv.org/abs/1601.01705)|NAACL 2016|||
+|3|[Learning to Reason: End-to-End Module Networks for Visual Question Answering](https://arxiv.org/abs/1704.05526)|ICCV 2017|`N2NMN`||
+|4|[Inferring and Executing Programs for Visual Reasoning](https://arxiv.org/abs/1705.03633)|ICCV 2017|`PG+EE`||
+|5|[Using Syntax to Ground Referring Expressions in Natural Images](https://arxiv.org/abs/1805.10547)|AAAI 2018|`GroundNet`||
+|6|[Transparency by Design: Closing the Gap Between Performance and Interpretability in Visual Reasoning](https://arxiv.org/abs/1803.05268)|CVPR 2018|`TbD`||
+|7|[Explainable neural computation via stack neural module networks](https://arxiv.org/abs/1807.08556)|ECCV 2018| use continuous and soft layout prediction and maintain a differentiable stack-based data structure to store the predicted modules’ output. This approach to optimize the modular network is shown to be superior to using a Reinforcement Learning approach which makes hard module decisions.||
+|8|[Neural Compositional Denotational Semantics for Question Answering](https://arxiv.org/abs/1808.09942)|EMNLP 2018 | | | 
+|9|[Routing Networks: Adaptive Selection of Non-Linear Functions for Multi-Task Learning](https://openreview.net/forum?id=ry8dvM-R-)|ICLR 2018|||
+|10|[Modular Networks: Learning to Decompose Neural Computation](https://arxiv.org/abs/1811.05249)|NIPS 2018|||
+|11|[Self-assembling modular networks for interpretable multi-hop reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019|`non-Open` 在`HotpotQA`上的工作，入栈出栈，三个模组`Find`、`Relocate`以及`Compare`||
+|12|[Explore, Propose, and Assemble: An Interpretable Model for Multi-Hop Reading Comprehension](https://arxiv.org/abs/1906.05210)| ACL 2019 |分为三部分，三部分联合优化。Document Explore：一个级联的memory network迭代式地选取相关文档；Answer Proposer：对于推理树上的每一个从跟到结点的推理路径提出一个proposed答案；Evidence Assembler：从每一条推理路径上提取包含proposed答案的关键句，并将这些关键句结合起来以预测最终的答案。| |
+|13|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|EMNLP 2020|`non-Open` 感觉本文，在NMN上的创新度不及其余文章，然后选取的数据集也不是主流的`HotpotQA`，而是`ROPES`||
+|14|[Neural module networks for reasoning over text](https://arxiv.org/abs/1912.04971)|ICLR 2020|`non-Open` NMN在`DROP`上的工作，设计了10个模组||
+|15|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020|`non-Open` 在`DROP`上的工作，也可以用于`HotpotQA`，两个模组`next-question generator`与`QA model`||
+
+
 
 
 
