@@ -182,9 +182,9 @@
 
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
-|1| [Careful Selection of Knowledge to Solve Open Book Question Answering](https://arxiv.org/abs/1907.10738)| ACL 2019|一个比较复杂的工作，先基于问题产生hypothesis，再基于hypo检索相关fact，利用fact以及hypo之间的差异去检索missing knowledge。接着根据fact以及missing knowledge去综合为每个候选选项打分，最终分数高的为答案选项。可以看出该篇工作设计的流程较为复杂，达到了6个modular，取得的效果也一般，在测试集上达到了72的acc|
+|1| [Careful Selection of Knowledge to Solve Open Book Question Answering](https://arxiv.org/abs/1907.10738)| ACL 2019|一个比较复杂的工作，先基于问题产生hypothesis，再基于hypo检索相关fact，利用fact以及hypo之间的差异去检索missing knowledge。接着根据fact以及missing knowledge去综合为每个候选选项打分，最终分数高的为答案选项。可以看出该篇工作设计的流程较为复杂，达到了6个modular，取得的效果也一般，在OBQA测试集上达到了72的acc|
 |2| [How Additional Knowledge can Improve Natural Language Commonsense Question Answering?](https://arxiv.org/abs/1909.08855) | arXiv 2019 | |
-|3| [Improving Question Answering with External Knowledge](https://arxiv.org/abs/1902.00993) | MRQA@EMNLP 2019 | |
+|3| [Improving Question Answering with External Knowledge](https://arxiv.org/abs/1902.00993) | MRQA@EMNLP 2019 | 本文主要利用了无结构化的外部知识（wikipedia）来提升OBQA的效果，设定了不同的方法来吸收open-domain(wiki)与in-domain(其余数据集)中的sentences与corpus中检索得到的sentences，一起输入至模型，并预测答案，在OBQA测试集上达到了68的acc |
 |4| [Context Modeling with Evidence Filter for Multiple Choice Question Answering](https://arxiv.org/abs/2010.02649) | arXiv 2020 | 该文基于对`OpenBookQA`的观察，针对于支撑句提出了两个假设：（1）如果一个句子与四个选项的关联度都差不多，那么这个句子很有可能对推理答案没有用。（2）如果一个句子与一个选项的关联度高，而与其余的选项关联度低，那么该句很有可能是支撑句。以往的工作都是将不同的选项进行独立判断，所以没有使用到这两个启发式的假设。作者提出的模型中先独立的抽取了支撑句，然后根据支撑句与其余选项的关联进行调整以得到最终的支撑句。由于本文没有使用任何外部知识（例如`ConceptNet`）所以效果自然不好，在`OpenBookQA`测试集上仅达到了65.6的acc |
 |5| [Alignment over Heterogeneous Embeddings for Question Answering](https://www.aclweb.org/anthology/N19-1274/) | NAACL 2019 | |
 |6| [Learning to Explain: Datasets and Models for Identifying Valid Reasoning Chains in Multihop Question-Answering](https://arxiv.org/abs/2010.03274) | EMNLP 2020 | 在`OBQA`部分数据的基础上人工添加了推理链形成`eOBQA`数据集 |
