@@ -185,7 +185,7 @@
 |1| [Careful Selection of Knowledge to Solve Open Book Question Answering](https://arxiv.org/abs/1907.10738)| ACL 2019|一个比较复杂的工作，先基于问题产生hypothesis，再基于hypo检索相关fact，利用fact以及hypo之间的差异去检索missing knowledge。接着根据fact以及missing knowledge去综合为每个候选选项打分，最终分数高的为答案选项。可以看出该篇工作设计的流程较为复杂，达到了6个modular，取得的效果也一般，在OBQA测试集上达到了72的acc|
 |2|[Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension](https://pdfs.semanticscholar.org/e704/6bf945ad6326537a1ac78a96fd2f45acc900.pdf?_ga=2.8782581.1586501600.1609492089-1005375774.1592035873) | ACL 2019 | 只有related work部分有用，总结的挺好的 |
 |3| [Improving Question Answering with External Knowledge](https://arxiv.org/abs/1902.00993) | MRQA@EMNLP 2019 | 本文主要利用了无结构化的外部知识（wikipedia）来提升OBQA的效果，设定了不同的方法来吸收open-domain(wiki)与in-domain(其余数据集)中的sentences与corpus中检索得到的sentences，一起输入至模型，并预测答案，在OBQA测试集上达到了68的acc |
-|4|[KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning](https://arxiv.org/abs/1909.02151)| EMNLP 2019 |
+|4|[KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning](https://arxiv.org/abs/1909.02151)| EMNLP 2019 |一篇非常有借鉴意义的工作，虽然是在`CommonsenseQA`上的工作，但其提出的框架已经被利用在不同的常识QA中了。首先根据QA对建立schema graph，再利用GCN更新图中结点的表示，之后利用LSTM去编码不同的路径信息，再使用attention机制综合所有路径的信息得到graph vector，最终使用graph vector来计算QA对的成立概率。|
 |5|[What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering](https://www.aclweb.org/anthology/D19-1281)|EMNLP 2019|`OpenBookQA` `CommonQA`|
 |6| [Alignment over Heterogeneous Embeddings for Question Answering](https://www.aclweb.org/anthology/N19-1274/) | NAACL 2019 | |
 |7| [What Does My QA Model Know? Devising Controlled Probes Using Expert Knowledge](https://www.mitpressjournals.org/doi/full/10.1162/tacl_a_00331) | TACL 2019 | | 
