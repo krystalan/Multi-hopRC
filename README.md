@@ -193,7 +193,6 @@
 |8| [Connecting the Dots: A Knowledgeable Path Generator for Commonsense Question Answering](https://arxiv.org/abs/2005.00691) | EMNLP 2020 Findings | 图2部分介绍了KG增强的QA模型框架，本文主要工作在于，已有的常识库，例如`ConceptNet`比较稀疏，可能仍然不能够填充从问题到正确答案的推理链，所以作者干脆直接在问题和答案中生成一条推理路径，这样的推理路径可能是KG中所没有的，以此来解决这个问题。其中生成推理路径的数据集是在KG上通过随机游走的方式得到的，并利用GPT2训练了一个路径生成模型。在`OpenBookQA`上达到了80.05(±0.68) |
 |9| [Improving Commonsense Question Answering by Graph-based Iterative Retrieval over Multiple Knowledge Sources](https://arxiv.org/abs/2011.02705) | COLING 2020 | 在多个知识库（`ConceptNet`、`Wikipedia`以及`Cambridge Dictionary`）中进行常识的捕获，基于图的迭代式检索，根据初始化结点（利用问题和候选答案中的concept作初始化结点）以及缩小范围化的关系在`ConceptNet`上迭代式得产生结构化图，在`Wikipedia`上进行相似度计算并保留top10文本（句子级），其中问题和候选答案中的concept均会在`Cambridge Dictionary`中查找相应的解释并拼接在后面。消融实验证明了这三个知识库都起到了作用。在`CommonseQA`上进行了验证。|
 |10| [Designing Templates for Eliciting Commonsense Knowledge from Pretrained Sequence-to-Sequence Models](https://www.aclweb.org/anthology/2020.coling-main.307/) | COLING 2020(short) | 设计模板，利用预训练语言模型当中捕获的隐式知识来完成多跳推理，选用了T5语言模型，将多项选择问题建模成NLI（自然语言推断）问题，设计模板将原问题和答案拆分成前提与假设，判断是否能通过前提来推断出假设。在`OBQA`的测试集上达到了83.2的acc | 
-|11|[Differentiable Open-Ended Commonsense Reasoning](https://arxiv.org/abs/2010.14439)|arXiv 2020| |
 |12|[Natural Language QA Approaches using Reasoning with External Knowledge](https://arxiv.org/abs/2003.03446)|arXiv 2020| |
 |13|[Learning Contextualized Knowledge Structures for Commonsense Reasoning](https://arxiv.org/abs/2010.12873) | arXiv 2020 | |
 |14|[Knowledge Fusion and Semantic Knowledge Ranking for Open Domain Question Answering](https://arxiv.org/abs/2004.03101)| arXiv 2020 | |
@@ -209,7 +208,8 @@
 |2| [Multilingual Universal Sentence Encoder for Semantic Retrieval](https://arxiv.org/abs/1907.04307) | ACL 2020 | 提出了`USE-QA`，是一个基于transformer的信息检索系统，效果算是基于transformer的深度语义检索中最好的。 |
 |3| [Dense Passage Retrieval for Open-Domain Question Answering](https://arxiv.org/abs/2004.04906) | EMNLP 2020 | [TODO] |
 |4| [Using the Hammer Only on Nails: A Hybrid Method for Evidence Retrieval for Question Answering](https://arxiv.org/abs/2009.10791) | arXiv 2020 | 提出了一个混合的检索系统，综合了`BM25`（传统的信息检索方法）和`USE-QA`（基于transformer的信息检索方法）。出发点是由于基于transformer的信息检索方法忽略了词表面token overlap的这一有效信号，所以想让两种方法进行结合。结合的方法其实非常简单，就是对一个query，先利用传统IR检索系统（例如`BM25`）进行检索，得到的top分值如果大于一个阈值，则相信检索结果，若小于该阈值，则选择不相信传统IR的检索结果，转而使用基于transformer的检索系统。 |
-|5| [Learning Dense Representations of Phrases at Scale](https://arxiv.org/abs/2012.12624) | arXiv 2020 | [TODO] 推特上宣称在OpenQA上比之前的检索模型强15%~25%，可以将其视为一个dense KB。 |
+|5|[Differentiable Open-Ended Commonsense Reasoning](https://arxiv.org/abs/2010.14439)|arXiv 2020|林禹臣，提出了开放式常识推理任务，以往的常识推理数据集大多都是候选答案式的，但这样的设定离真实场景还有距离。修改了原有的数据集，并提出了`DrFact`模型，可以在文本语料库上进行可微的多跳推理。其中使用到了`GenericsKB`知识语料库|
+|6|[Learning Dense Representations of Phrases at Scale](https://arxiv.org/abs/2012.12624) | arXiv 2020 | [TODO] 推特上宣称在OpenQA上比之前的检索模型强15%~25%，可以将其视为一个dense KB。 |
 
 ## 15.可解释性研究
 | 序号 | 论文 | 发表会议 | 备注 |
