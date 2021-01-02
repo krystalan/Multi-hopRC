@@ -17,7 +17,7 @@
 - [13.OBQA](#13obqa)    
 - [14.信息检索](#14信息检索)
 - [15.可解释性研究](#15可解释性研究)
-- [Leaderboard](#leaderboard-of-hotpotqa)    
+- [Leaderboard](#aleaderboard-of-hotpotqa)    
 
 ## 1.数据集
 | 序号 | 论文 | 发表会议 | 备注 |
@@ -193,13 +193,12 @@
 |8| [Connecting the Dots: A Knowledgeable Path Generator for Commonsense Question Answering](https://arxiv.org/abs/2005.00691) | EMNLP 2020 Findings | 图2部分介绍了KG增强的QA模型框架，本文主要工作在于，已有的常识库，例如`ConceptNet`比较稀疏，可能仍然不能够填充从问题到正确答案的推理链，所以作者干脆直接在问题和答案中生成一条推理路径，这样的推理路径可能是KG中所没有的，以此来解决这个问题。其中生成推理路径的数据集是在KG上通过随机游走的方式得到的，并利用GPT2训练了一个路径生成模型。在`OpenBookQA`上达到了80.05(±0.68) |
 |9| [Improving Commonsense Question Answering by Graph-based Iterative Retrieval over Multiple Knowledge Sources](https://arxiv.org/abs/2011.02705) | COLING 2020 | 在多个知识库（`ConceptNet`、`Wikipedia`以及`Cambridge Dictionary`）中进行常识的捕获，基于图的迭代式检索，根据初始化结点（利用问题和候选答案中的concept作初始化结点）以及缩小范围化的关系在`ConceptNet`上迭代式得产生结构化图，在`Wikipedia`上进行相似度计算并保留top10文本（句子级），其中问题和候选答案中的concept均会在`Cambridge Dictionary`中查找相应的解释并拼接在后面。消融实验证明了这三个知识库都起到了作用。在`CommonseQA`上进行了验证。|
 |10| [Designing Templates for Eliciting Commonsense Knowledge from Pretrained Sequence-to-Sequence Models](https://www.aclweb.org/anthology/2020.coling-main.307/) | COLING 2020 | 设计模板，利用预训练语言模型当中捕获的隐式知识来完成多跳推理，选用了T5语言模型，将多项选择问题建模成NLI（自然语言推断）问题，设计模板将原问题和答案拆分成前提与假设，判断是否能通过前提来推断出假设。在`OBQA`的测试集上达到了83.2的acc | 
-|11| [Neural Conversational QA: Learning to Reason v.s. Exploiting Patterns](https://arxiv.org/abs/1909.03759) | EMNLP 2020 |
-|12|[Differentiable Open-Ended Commonsense Reasoning](https://arxiv.org/abs/2010.14439)|arXiv 2020| |
-|13|[Natural Language QA Approaches using Reasoning with External Knowledge](https://arxiv.org/abs/2003.03446)|arXiv 2020| |
-|14|[Learning Contextualized Knowledge Structures for Commonsense Reasoning](https://arxiv.org/abs/2010.12873) | arXiv 2020 | |
-|15|[Knowledge Fusion and Semantic Knowledge Ranking for Open Domain Question Answering](https://arxiv.org/abs/2004.03101)| arXiv 2020 | |
-|16|[Do Transformers Dream of Inference, or Can Pretrained Generative Models Learn Implicit Inferential Rules?](https://www.semanticscholar.org/paper/Do-Transformers-Dream-of-Inference%2C-or-Can-Models-Liang-Surdeanu/bd2239d6cea24604ff3687d37f3d475f6d7b12bc) | INSIGHTS 2020 | |
-|17| [Context Modeling with Evidence Filter for Multiple Choice Question Answering](https://arxiv.org/abs/2010.02649) | arXiv 2020 | 该文基于对`OpenBookQA`的观察，针对于支撑句提出了两个假设：（1）如果一个句子与四个选项的关联度都差不多，那么这个句子很有可能对推理答案没有用。（2）如果一个句子与一个选项的关联度高，而与其余的选项关联度低，那么该句很有可能是支撑句。以往的工作都是将不同的选项进行独立判断，所以没有使用到这两个启发式的假设。作者提出的模型中先独立的抽取了支撑句，然后根据支撑句与其余选项的关联进行调整以得到最终的支撑句。由于本文没有使用任何外部知识（例如`ConceptNet`）所以效果自然不好，在`OpenBookQA`测试集上仅达到了65.6的acc |
+|11|[Differentiable Open-Ended Commonsense Reasoning](https://arxiv.org/abs/2010.14439)|arXiv 2020| |
+|12|[Natural Language QA Approaches using Reasoning with External Knowledge](https://arxiv.org/abs/2003.03446)|arXiv 2020| |
+|13|[Learning Contextualized Knowledge Structures for Commonsense Reasoning](https://arxiv.org/abs/2010.12873) | arXiv 2020 | |
+|14|[Knowledge Fusion and Semantic Knowledge Ranking for Open Domain Question Answering](https://arxiv.org/abs/2004.03101)| arXiv 2020 | |
+|15|[Do Transformers Dream of Inference, or Can Pretrained Generative Models Learn Implicit Inferential Rules?](https://www.semanticscholar.org/paper/Do-Transformers-Dream-of-Inference%2C-or-Can-Models-Liang-Surdeanu/bd2239d6cea24604ff3687d37f3d475f6d7b12bc) | INSIGHTS 2020 | |
+|16| [Context Modeling with Evidence Filter for Multiple Choice Question Answering](https://arxiv.org/abs/2010.02649) | arXiv 2020 | 该文基于对`OpenBookQA`的观察，针对于支撑句提出了两个假设：（1）如果一个句子与四个选项的关联度都差不多，那么这个句子很有可能对推理答案没有用。（2）如果一个句子与一个选项的关联度高，而与其余的选项关联度低，那么该句很有可能是支撑句。以往的工作都是将不同的选项进行独立判断，所以没有使用到这两个启发式的假设。作者提出的模型中先独立的抽取了支撑句，然后根据支撑句与其余选项的关联进行调整以得到最终的支撑句。由于本文没有使用任何外部知识（例如`ConceptNet`）所以效果自然不好，在`OpenBookQA`测试集上仅达到了65.6的acc |
 
 ## 14.信息检索
 > 因为许多数据集要面临检索过程，例如open-domain question answering，本部分记录一下自己看到过的主要在做检索工作的文章。
@@ -234,8 +233,8 @@
 |[Multi-step Retriever-Reader Interaction for Scalable Open-domain Question Answering](https://openreview.net/forum?id=HkfPSh05K7)|ICLR 2019|[TODO]|
 |[Question answering as global reasoning over semantic abstractions](https://arxiv.org/abs/1906.03672)|AAAI 2018|[TODO]|
 
-## Leaderboard of HotpotQA
-### 1. ANS (distractor setting)
+## A.Leaderboard of HotpotQA
+### A.1 ANS (distractor setting)
 | 模型 | 对应论文 | 所属类别 | EM(Test) | F1(Test) | EM(dev) | F1(dev) |TOP|
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **QUARK** (arXiv 2020) | 2.1 | （1） | - | - | **67.75** | **81.21** | TOP-3 |
@@ -251,7 +250,7 @@
 | MODULARQA (arXiv 2020) | 7.4 | （6） | - | - | - | 61.8 | |
 
 
-### 2. ANS (fullwiki setting)
+### A.2 ANS (fullwiki setting)
 | 模型 | 对应论文 | 所属类别 | EM(Test) | F1(Test) |TOP|
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | **QUARK (arXiv 2020)** | 2.2 | （1） | **55.50** | **67.51** | TOP-4 |
@@ -265,7 +264,7 @@
 | **ICLR 2020** | 5.7 | （4） | **60.0** | **73.0** | TOP-2 |
 | **Transformer-XH (ICLR 2020)** | 8.1 | （7） | **51.6** | **64.1** | TOP-5 |
 
-### 3. 所属类别及入选TOP数量：  
+### A.3 所属类别及入选TOP数量：  
 （1）基于单步阅读理解模型改进：1 （其中一个同时入选两个setting）   
 （2）基于GNN：3 （其中一个同时入选两个setting）  
 （3）迭代式文档检索：1  
