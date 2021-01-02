@@ -15,7 +15,8 @@
 - [11.数学推理能力](#11numerical-reasoning)     
 - [12.与其他任务相关联](#12与其他任务相关联)    
 - [13.OBQA](#13obqa)    
-- [14.可解释性研究](#14可解释性研究)
+- [14.信息检索](#14信息检索)
+- [15.可解释性研究](#15可解释性研究)
 - [Leaderboard](#leaderboard-of-hotpotqa)    
 
 ## 1.数据集
@@ -192,17 +193,25 @@
 |8| [Connecting the Dots: A Knowledgeable Path Generator for Commonsense Question Answering](https://arxiv.org/abs/2005.00691) | EMNLP 2020 Findings | 图2部分介绍了KG增强的QA模型框架，本文主要工作在于，已有的常识库，例如`ConceptNet`比较稀疏，可能仍然不能够填充从问题到正确答案的推理链，所以作者干脆直接在问题和答案中生成一条推理路径，这样的推理路径可能是KG中所没有的，以此来解决这个问题。其中生成推理路径的数据集是在KG上通过随机游走的方式得到的，并利用GPT2训练了一个路径生成模型。在`OpenBookQA`上达到了80.05(±0.68) |
 |9| [Improving Commonsense Question Answering by Graph-based Iterative Retrieval over Multiple Knowledge Sources](https://arxiv.org/abs/2011.02705) | COLING 2020 | 在多个知识库（`ConceptNet`、`Wikipedia`以及`Cambridge Dictionary`）中进行常识的捕获，基于图的迭代式检索，根据初始化结点（利用问题和候选答案中的concept作初始化结点）以及缩小范围化的关系在`ConceptNet`上迭代式得产生结构化图，在`Wikipedia`上进行相似度计算并保留top10文本（句子级），其中问题和候选答案中的concept均会在`Cambridge Dictionary`中查找相应的解释并拼接在后面。消融实验证明了这三个知识库都起到了作用。在`CommonseQA`上进行了验证。|
 |10| [Designing Templates for Eliciting Commonsense Knowledge from Pretrained Sequence-to-Sequence Models](https://www.aclweb.org/anthology/2020.coling-main.307/) | COLING 2020 | 设计模板，利用预训练语言模型当中捕获的隐式知识来完成多跳推理，选用了T5语言模型，将多项选择问题建模成NLI（自然语言推断）问题，设计模板将原问题和答案拆分成前提与假设，判断是否能通过前提来推断出假设。在`OBQA`的测试集上达到了83.2的acc | 
-|11| [Using the Hammer Only on Nails: A Hybrid Method for Evidence Retrieval for Question Answering](https://arxiv.org/abs/2009.10791) | arXiv 2020 | 提出了一个混合的检索系统，综合了BM25（传统的信息检索方法）和USE-QA（基于transformer的信息检索方法）。出发点是由于基于transformer的信息检索方法忽略了词表面token overlap的这一有效信号，所以想让两种方法进行结合。 |
-|12| [Neural Conversational QA: Learning to Reason v.s. Exploiting Patterns](https://arxiv.org/abs/1909.03759) | EMNLP 2020 |
-|13|[Differentiable Open-Ended Commonsense Reasoning](https://arxiv.org/abs/2010.14439)|arXiv 2020| |
-|14|[Natural Language QA Approaches using Reasoning with External Knowledge](https://arxiv.org/abs/2003.03446)|arXiv 2020| |
-|15|[Learning Contextualized Knowledge Structures for Commonsense Reasoning](https://arxiv.org/abs/2010.12873) | arXiv 2020 | |
-|16|[Knowledge Fusion and Semantic Knowledge Ranking for Open Domain Question Answering](https://arxiv.org/abs/2004.03101)| arXiv 2020 | |
-|17|[Do Transformers Dream of Inference, or Can Pretrained Generative Models Learn Implicit Inferential Rules?](https://www.semanticscholar.org/paper/Do-Transformers-Dream-of-Inference%2C-or-Can-Models-Liang-Surdeanu/bd2239d6cea24604ff3687d37f3d475f6d7b12bc) | INSIGHTS 2020 | |
-|18| [Context Modeling with Evidence Filter for Multiple Choice Question Answering](https://arxiv.org/abs/2010.02649) | arXiv 2020 | 该文基于对`OpenBookQA`的观察，针对于支撑句提出了两个假设：（1）如果一个句子与四个选项的关联度都差不多，那么这个句子很有可能对推理答案没有用。（2）如果一个句子与一个选项的关联度高，而与其余的选项关联度低，那么该句很有可能是支撑句。以往的工作都是将不同的选项进行独立判断，所以没有使用到这两个启发式的假设。作者提出的模型中先独立的抽取了支撑句，然后根据支撑句与其余选项的关联进行调整以得到最终的支撑句。由于本文没有使用任何外部知识（例如`ConceptNet`）所以效果自然不好，在`OpenBookQA`测试集上仅达到了65.6的acc |
+|11| [Neural Conversational QA: Learning to Reason v.s. Exploiting Patterns](https://arxiv.org/abs/1909.03759) | EMNLP 2020 |
+|12|[Differentiable Open-Ended Commonsense Reasoning](https://arxiv.org/abs/2010.14439)|arXiv 2020| |
+|13|[Natural Language QA Approaches using Reasoning with External Knowledge](https://arxiv.org/abs/2003.03446)|arXiv 2020| |
+|14|[Learning Contextualized Knowledge Structures for Commonsense Reasoning](https://arxiv.org/abs/2010.12873) | arXiv 2020 | |
+|15|[Knowledge Fusion and Semantic Knowledge Ranking for Open Domain Question Answering](https://arxiv.org/abs/2004.03101)| arXiv 2020 | |
+|16|[Do Transformers Dream of Inference, or Can Pretrained Generative Models Learn Implicit Inferential Rules?](https://www.semanticscholar.org/paper/Do-Transformers-Dream-of-Inference%2C-or-Can-Models-Liang-Surdeanu/bd2239d6cea24604ff3687d37f3d475f6d7b12bc) | INSIGHTS 2020 | |
+|17| [Context Modeling with Evidence Filter for Multiple Choice Question Answering](https://arxiv.org/abs/2010.02649) | arXiv 2020 | 该文基于对`OpenBookQA`的观察，针对于支撑句提出了两个假设：（1）如果一个句子与四个选项的关联度都差不多，那么这个句子很有可能对推理答案没有用。（2）如果一个句子与一个选项的关联度高，而与其余的选项关联度低，那么该句很有可能是支撑句。以往的工作都是将不同的选项进行独立判断，所以没有使用到这两个启发式的假设。作者提出的模型中先独立的抽取了支撑句，然后根据支撑句与其余选项的关联进行调整以得到最终的支撑句。由于本文没有使用任何外部知识（例如`ConceptNet`）所以效果自然不好，在`OpenBookQA`测试集上仅达到了65.6的acc |
 
+## 14.信息检索
+> 因为许多数据集要面临检索过程，例如open-domain question answering，本部分记录一下自己看到过的主要在做检索工作的文章。
 
-## 14.可解释性研究
+| 序号 | 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: | :---: |
+|1| The Probabilistic Relevance Framework: BM25 and Beyond | 2009 | `BM25`，传统信息检索的结晶，直接用[Lucene Java Implementation](https://lucene.apache.org/)即可 |
+|2| [Multilingual Universal Sentence Encoder for Semantic Retrieval](https://arxiv.org/abs/1907.04307) | ACL 2020 | 提出了`USE-QA`，是一个基于transformer的信息检索系统，效果算是基于transformer的深度语义检索中最好的。 |
+|3| [Using the Hammer Only on Nails: A Hybrid Method for Evidence Retrieval for Question Answering](https://arxiv.org/abs/2009.10791) | arXiv 2020 | 提出了一个混合的检索系统，综合了`BM25`（传统的信息检索方法）和`USE-QA`（基于transformer的信息检索方法）。出发点是由于基于transformer的信息检索方法忽略了词表面token overlap的这一有效信号，所以想让两种方法进行结合。结合的方法其实非常简单，就是对一个query，先利用传统IR检索系统（例如`BM25`）进行检索，得到的top分值如果大于一个阈值，则相信检索结果，若小于该阈值，则选择不相信传统IR的检索结果，转而使用基于transformer的检索系统。 |
+|4| [Learning Dense Representations of Phrases at Scale](https://arxiv.org/abs/2012.12624) | arXiv 2020 | [TODO] 推特上宣称在OpenQA上比之前的检索模型强15%~25%，可以将其视为一个dense KB。 |
+
+## 15.可解释性研究
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
 |1|[Exploiting Explicit Paths for Multi-hop Reading Comprehension](https://www.aclweb.org/anthology/P19-1263)|ACL 2019|`Wikihop`与`OpenBookQA` `Open`&`non-Open` 这篇工作主要的贡献在于多跳阅读理解的可解释性，为了在文本数据上达到多跳的效果，会有两种方法：GNN或者路径抽取，GNN可解释性非常差，因为它是隐式地完成信息传递。而路径抽取的方法解释性强，但如果跳数增多的话会有语义漂移问题。不过`Wikihop`或者`OpenBookQA`数据集都是两跳，所以好像不严重？然后作者就通过在问题中提取头实体，在候选答案中提取尾实体，然后在**全部候选文档**中抽取多个推理链，接着对推理链的实体做表示初始化然后隐式提取关系，再通过关系计算路径的表示。最后会对路径进行打分，然后根据分数得到最终的答案概率分布。我个人觉得这篇工作利用两个实体的表示去直接计算他们的关系表示这里有点粗糙了，因为两个实体之间可能存在着不止一种关系，而利用作者所给的式子则无法对这种多样的关系进行学习。|
