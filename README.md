@@ -15,7 +15,7 @@
 - [11.数学推理能力](#11numerical-reasoning)     
 - [12.与其他任务相关联](#12与其他任务相关联)    
 - [13.OBQA](#13obqa)    
-- [14.信息检索](#14信息检索)
+- [14.信息检索](#14信息检索包括rerank)
 - [15.可解释性研究](#15可解释性研究)
 - [Leaderboard](#aleaderboard-of-hotpotqa)    
 
@@ -202,8 +202,9 @@
 |14|[Do Transformers Dream of Inference, or Can Pretrained Generative Models Learn Implicit Inferential Rules?](https://www.semanticscholar.org/paper/Do-Transformers-Dream-of-Inference%2C-or-Can-Models-Liang-Surdeanu/bd2239d6cea24604ff3687d37f3d475f6d7b12bc) | INSIGHTS 2020 | |
 |15| [Context Modeling with Evidence Filter for Multiple Choice Question Answering](https://arxiv.org/abs/2010.02649) | arXiv 2020 | 该文基于对`OpenBookQA`的观察，针对于支撑句提出了两个假设：（1）如果一个句子与四个选项的关联度都差不多，那么这个句子很有可能对推理答案没有用。（2）如果一个句子与一个选项的关联度高，而与其余的选项关联度低，那么该句很有可能是支撑句。以往的工作都是将不同的选项进行独立判断，所以没有使用到这两个启发式的假设。作者提出的模型中先独立的抽取了支撑句，然后根据支撑句与其余选项的关联进行调整以得到最终的支撑句。由于本文没有使用任何外部知识（例如`ConceptNet`）所以效果自然不好，在`OpenBookQA`测试集上仅达到了65.6的acc |
 |16|[Benchmarking Knowledge-Enhanced Commonsense Question Answering via Knowledge-to-Text Transformation](https://arxiv.org/abs/2101.00797)|AAAI 2021|[TODO]|
+|17|[Understanding Few-Shot Commonsense Knowledge Models](https://arxiv.org/abs/2101.00297)|arXiv 2021||
 
-## 14.信息检索
+## 14.信息检索（包括rerank）
 > 因为许多数据集要面临检索过程，例如open-domain question answering，本部分记录一下自己看到过的主要在做检索工作的文章。
 
 | 序号 | 论文 | 发表会议 | 备注 |
@@ -214,6 +215,7 @@
 |4| [Using the Hammer Only on Nails: A Hybrid Method for Evidence Retrieval for Question Answering](https://arxiv.org/abs/2009.10791) | arXiv 2020 | 提出了一个混合的检索系统，综合了`BM25`（传统的信息检索方法）和`USE-QA`（基于transformer的信息检索方法）。出发点是由于基于transformer的信息检索方法忽略了词表面token overlap的这一有效信号，所以想让两种方法进行结合。结合的方法其实非常简单，就是对一个query，先利用传统IR检索系统（例如`BM25`）进行检索，得到的top分值如果大于一个阈值，则相信检索结果，若小于该阈值，则选择不相信传统IR的检索结果，转而使用基于transformer的检索系统。 |
 |5|[Differentiable Open-Ended Commonsense Reasoning](https://arxiv.org/abs/2010.14439)|arXiv 2020|林禹臣，提出了开放式常识推理任务，以往的常识推理数据集大多都是候选答案式的，但这样的设定离真实场景还有距离。修改了原有的数据集，并提出了`DrFact`模型，可以在文本语料库上进行可微的多跳推理。其中使用到了`GenericsKB`知识语料库|
 |6|[Learning Dense Representations of Phrases at Scale](https://arxiv.org/abs/2012.12624) | arXiv 2020 | 陈丹琦，一个phrase级别的信息检索工作，旨在为大量的phrase学习到一个稠密的表示，本文提出的方法`DensePhrase`卖点在于速度快，其准确度方面和`DPR`之间存在一点差距。为了学习到稠密的phrase表示，对于每一个候选phrase都会利用QG模型生成一个问题，以此来训练。在训练过程当中，还是用了蒸馏方法，在负采样方面也使用了一些技巧。 |
+|7|[Reader-Guided Passage Reranking for Open-Domain Question Answering](https://arxiv.org/abs/2101.00294)|arXiv 2021| rerank上的工作，号称不用任何训练就可以直接提升检索的概率（在rerank后） [TODO] |
 
 ## 15.可解释性研究
 | 序号 | 论文 | 发表会议 | 备注 |
