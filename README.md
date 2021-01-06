@@ -177,7 +177,9 @@
 |2|[Repurposing Entailment for Multi-Hop Question Answering Tasks](https://www.aclweb.org/anthology/N19-1302)|NAACL 2019|`Textual entailment` `OpenBookQA`与`MultiRC` 使用文本蕴含模型来完成多跳推理问答，模型分为两部分：相关句提取与信息聚合。相关句提取对每个候选句计算其蕴含假设（由答案和问题构成）的概率，这些概率表示每句的重要程度。信息聚合则利用上一步计算的概率为不同的句子聚合表示，最后再通过一个文本蕴含模型得到最终的蕴含概率。|   
 |3|[A Unified MRC Framework for Named Entity Recognition](https://arxiv.org/abs/1910.11476)|ACL 2020|[TODO]|
 |4|[Multi-hop Inference for Question-driven Summarization](https://www.aclweb.org/anthology/2020.emnlp-main.547/)|EMNLP 2020|[TODO]|
-|5|[A Joint Training Dual-MRC Framework for Aspect Based Sentiment Analysis](https://arxiv.org/abs/2101.00816)|AAAI 2021|[TODO]|
+|5|[Coreference Reasoning in Machine Reading Comprehension](https://arxiv.org/abs/2012.15573)|arXiv 2020|研究MRC模型的共指消解能力，已有的数据集例如：`DROP`、`DuoRC`、`MultiRC`等都需要MRC模型需要共指消解的能力才能很好的推理出答案，`Quoref`数据集是专门用于评估MRC模型能力的数据集，作者研究发现该数据集并不能够很好的反应出真实场景中的共指消解问题，因此设定了一些规则让标注员基于`Quoref`数据集中的文章，标注了200个更具有挑战性的QA对，以此来更好地检测模型的共指消解能力。除此之外，作者在训练MRC模型的时候，使用到了共指消解数据集进行转换后的数据以此来增强MRC模型的共指消解能力。|
+|6|[A Joint Training Dual-MRC Framework for Aspect Based Sentiment Analysis](https://arxiv.org/abs/2101.00816)|AAAI 2021|[TODO]|
+
 
 
 ## 13.OBQA
