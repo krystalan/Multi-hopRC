@@ -19,6 +19,12 @@
 - [15.可解释性研究](#15可解释性研究)
 - [Leaderboard](#aleaderboard-of-hotpotqa)    
 
+## 综述
+| 序号 | 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: | :---: |
+|1|[Natural Language QA Approaches using Reasoning with External Knowledge](https://arxiv.org/abs/2003.03446)|arXiv 2020| 是一篇Survey，总结了现有的利用外部知识完成QA的方法，包括数据集的整理，常用的外部知识整理还有使用外部知识的一些常用方法。知识方面，无结构知识：`Wikipedia Corpus`、`TorontoBookCorpus`、`ARC Corpus`、`WikiHow`、`RocStories`、`Story Cloze`等，结构化知识：`Yago`、`NELL`、`DBPedia`、`ConceptNet`、`WordNet`。对于无结构知识，可以考虑利用记忆网络来存储知识，对于结构化知识可以考虑利用GNN或Tree-based LSTM来存储知识。 |
+|2|[NeurIPS 2020 EfficientQA Competition: Systems, Analyses and Lessons Learned](https://arxiv.org/abs/2101.00133)|arXiv 2021|[TODO]|
+
 ## 1.数据集
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
@@ -187,7 +193,6 @@
 
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
-|0|[Natural Language QA Approaches using Reasoning with External Knowledge](https://arxiv.org/abs/2003.03446)|arXiv 2020| 是一篇Survey，总结了现有的利用外部知识完成QA的方法，包括数据集的整理，常用的外部知识整理还有使用外部知识的一些常用方法。知识方面，无结构知识：`Wikipedia Corpus`、`TorontoBookCorpus`、`ARC Corpus`、`WikiHow`、`RocStories`、`Story Cloze`等，结构化知识：`Yago`、`NELL`、`DBPedia`、`ConceptNet`、`WordNet`。对于无结构知识，可以考虑利用记忆网络来存储知识，对于结构化知识可以考虑利用GNN或Tree-based LSTM来存储知识。 |
 |1| [Careful Selection of Knowledge to Solve Open Book Question Answering](https://arxiv.org/abs/1907.10738)| ACL 2019|一个比较复杂的工作，先基于问题产生hypothesis，再基于hypo检索相关fact，利用fact以及hypo之间的差异去检索missing knowledge。接着根据fact以及missing knowledge去综合为每个候选选项打分，最终分数高的为答案选项。可以看出该篇工作设计的流程较为复杂，达到了6个modular，取得的效果也一般，在OBQA测试集上达到了72的acc|
 |2|[Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension](https://pdfs.semanticscholar.org/e704/6bf945ad6326537a1ac78a96fd2f45acc900.pdf?_ga=2.8782581.1586501600.1609492089-1005375774.1592035873) | ACL 2019 | 只有related work部分有用，总结的挺好的 |
 |3| [Improving Question Answering with External Knowledge](https://arxiv.org/abs/1902.00993) | MRQA@EMNLP 2019 | 本文主要利用了无结构化的外部知识（wikipedia）来提升OBQA的效果，设定了不同的方法来吸收open-domain(wiki)与in-domain(其余数据集)中的sentences与corpus中检索得到的sentences，一起输入至模型，并预测答案，在OBQA测试集上达到了68的acc |
