@@ -215,7 +215,7 @@
 |4| [Using the Hammer Only on Nails: A Hybrid Method for Evidence Retrieval for Question Answering](https://arxiv.org/abs/2009.10791) | arXiv 2020 | 提出了一个混合的检索系统，综合了`BM25`（传统的信息检索方法）和`USE-QA`（基于transformer的信息检索方法）。出发点是由于基于transformer的信息检索方法忽略了词表面token overlap的这一有效信号，所以想让两种方法进行结合。结合的方法其实非常简单，就是对一个query，先利用传统IR检索系统（例如`BM25`）进行检索，得到的top分值如果大于一个阈值，则相信检索结果，若小于该阈值，则选择不相信传统IR的检索结果，转而使用基于transformer的检索系统。 |
 |5|[Differentiable Open-Ended Commonsense Reasoning](https://arxiv.org/abs/2010.14439)|arXiv 2020|林禹臣，提出了开放式常识推理任务，以往的常识推理数据集大多都是候选答案式的，但这样的设定离真实场景还有距离。修改了原有的数据集，并提出了`DrFact`模型，可以在文本语料库上进行可微的多跳推理。其中使用到了`GenericsKB`知识语料库|
 |6|[Learning Dense Representations of Phrases at Scale](https://arxiv.org/abs/2012.12624) | arXiv 2020 | 陈丹琦，一个phrase级别的信息检索工作，旨在为大量的phrase学习到一个稠密的表示，本文提出的方法`DensePhrase`卖点在于速度快，其准确度方面和`DPR`之间存在一点差距。为了学习到稠密的phrase表示，对于每一个候选phrase都会利用QG模型生成一个问题，以此来训练。在训练过程当中，还是用了蒸馏方法，在负采样方面也使用了一些技巧。 |
-|7|[HopRetriever: Retrieve Hops over Wikipedia to Answer Complex Questions](https://arxiv.org/abs/2012.15534)| AAAI 2021||
+|7|[HopRetriever: Retrieve Hops over Wikipedia to Answer Complex Questions](https://arxiv.org/abs/2012.15534)| AAAI 2021| 一个比较新颖的工作，和`CogQA`的思路有一点像，从已有文档上进行下一跳的检索，每次检索的单位就是hop，一个hop包含了一个超链接以及目标文档，将超链接通过mention左右加特殊符号的方式通过PTM获得表示，这里的表示就代表着从当前文档到下一文档的结构关系，而下一个文档中的非结构文本信息则直接与问题拼接并通过PTM获得，最后将这两部分信息融合，再来计算概率，选中概率最高的目标文档当做本次检索的结果。 |
 |8|[Reader-Guided Passage Reranking for Open-Domain Question Answering](https://arxiv.org/abs/2101.00294)|arXiv 2021| rerank上的工作，号称不用任何训练就可以直接提升检索的概率（在rerank后） [TODO] |
 
 ## 15.可解释性研究
