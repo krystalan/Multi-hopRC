@@ -25,6 +25,11 @@
 |1|[Natural Language QA Approaches using Reasoning with External Knowledge](https://arxiv.org/abs/2003.03446)|arXiv 2020| 是一篇Survey，总结了现有的利用外部知识完成QA的方法，包括数据集的整理，常用的外部知识整理还有使用外部知识的一些常用方法。知识方面，无结构知识：`Wikipedia Corpus`、`TorontoBookCorpus`、`ARC Corpus`、`WikiHow`、`RocStories`、`Story Cloze`等，结构化知识：`Yago`、`NELL`、`DBPedia`、`ConceptNet`、`WordNet`。对于无结构知识，可以考虑利用记忆网络来存储知识，对于结构化知识可以考虑利用GNN或Tree-based LSTM来存储知识。 |
 |2|[NeurIPS 2020 EfficientQA Competition: Systems, Analyses and Lessons Learned](https://arxiv.org/abs/2101.00133)|arXiv 2021|[TODO]|
 
+## 工具
+| 序号 | 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: | :---: |
+|1|[SF-QA: Simple and Fair Evaluation Library for Open-domain Question Answering](https://arxiv.org/abs/2101.01910)|arXiv 2021|[repo](https://github.com/soco-ai/SF-QA)|
+
 ## 1.数据集
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
@@ -39,6 +44,8 @@
 |9|[R4C: A Benchmark for Evaluating RC Systems to Get the Right Answer for the Right Reason](https://arxiv.org/abs/1910.04601)|ACL 2020|`R4C` **给出半结构化的derivation** 对`HotpotQA`数据集进行了标注，一共标注了约5K个实例，每个实例被标注了三个*derivation*。`R4C`觉得*Supporting Sentence*是一个非常粗粒度的概念，因为一句*Supporting Sentence*里面可能有些内容并不是推理答案所必须的，而另一部分是必须的，因此作者标注了更加细粒度的*derivation*，这是一种半结构化的形式来表达推理信息，比*Supporting Sentences*更加有挑战性，也对模型的可解释性要求更高。|
 |10|[QASC:A dataset for question answering via sentence composition](https://arxiv.org/abs/1910.11473)|AAAI 2020|`QASC` **多选式** 也是基于多个句子间的推理从候选答案中选出正确答案的数据集。含有9980个八项选择题，每个问题都被标注了两个fact sentences用来推理出最终的答案。还提供了一个包含了17M个句子的语料库，所有的fact sentences都在里面|
 |11|[Learning to Explain: Datasets and Models for Identifying Valid Reasoning Chains in Multihop Question-Answering](https://arxiv.org/abs/2010.03274)|EMNLP 2020|`eQASC`、`eQASC-perturbed`以及`eOBQA` `Textual entailment` **多选式** 这个工作其实是在研究多跳推理问题的可解释性。在`QASC`数据集的基础上，针对于每个问题又标注了多个推理链（有效或无效都有）构成了`eQASC`，接着又将推理链模板化（使推理链更加通用）构成了`eQASC-perturbed`数据集，最后为了进行out-domain test，也基于`OpenBookQA`数据集标注了推理链形成了`eOBQA`并进行测试|  
+|12|[Did Aristotle Use a Laptop? A Question Answering Benchmark with Implicit Reasoning Strategies](https://arxiv.org/abs/2101.02235)|TACL 2021||
+
 
 ## 2.改进传统单步阅读理解方法
 | 序号 | 论文 | 发表会议 | 备注 |
@@ -185,6 +192,7 @@
 |4|[Multi-hop Inference for Question-driven Summarization](https://www.aclweb.org/anthology/2020.emnlp-main.547/)|EMNLP 2020|[TODO]|
 |5|[Coreference Reasoning in Machine Reading Comprehension](https://arxiv.org/abs/2012.15573)|arXiv 2020|研究MRC模型的共指消解能力，已有的数据集例如：`DROP`、`DuoRC`、`MultiRC`等都需要MRC模型需要共指消解的能力才能很好的推理出答案，`Quoref`数据集是专门用于评估MRC模型能力的数据集，作者研究发现该数据集并不能够很好的反应出真实场景中的共指消解问题，因此设定了一些规则让标注员基于`Quoref`数据集中的文章，标注了200个更具有挑战性的QA对，以此来更好地检测模型的共指消解能力。除此之外，作者在训练MRC模型的时候，使用到了共指消解数据集进行转换后的数据以此来增强MRC模型的共指消解能力。|
 |6|[A Joint Training Dual-MRC Framework for Aspect Based Sentiment Analysis](https://arxiv.org/abs/2101.00816)|AAAI 2021|[TODO]|
+|7|[Read, Retrospect, Select: An MRC Framework to Short Text Entity Linking](https://arxiv.org/abs/2101.02394)|AAAI 2021||
 
 
 
@@ -224,6 +232,7 @@
 |6|[Learning Dense Representations of Phrases at Scale](https://arxiv.org/abs/2012.12624) | arXiv 2020 | 陈丹琦，一个phrase级别的信息检索工作，旨在为大量的phrase学习到一个稠密的表示，本文提出的方法`DensePhrase`卖点在于速度快，其准确度方面和`DPR`之间存在一点差距。为了学习到稠密的phrase表示，对于每一个候选phrase都会利用QG模型生成一个问题，以此来训练。在训练过程当中，还是用了蒸馏方法，在负采样方面也使用了一些技巧。 |
 |7|[HopRetriever: Retrieve Hops over Wikipedia to Answer Complex Questions](https://arxiv.org/abs/2012.15534)| AAAI 2021| 一个比较新颖的工作，和`CogQA`的思路有一点像，从已有文档上进行下一跳的检索，每次检索的单位就是hop，一个hop包含了一个超链接以及目标文档，将超链接通过mention左右加特殊符号的方式通过PTM获得表示，这里的表示就代表着从当前文档到下一文档的结构关系，而下一个文档中的非结构文本信息则直接与问题拼接并通过PTM获得，最后将这两部分信息融合，再来计算概率，选中概率最高的目标文档当做本次检索的结果。 |
 |8|[Reader-Guided Passage Reranking for Open-Domain Question Answering](https://arxiv.org/abs/2101.00294)|arXiv 2021| rerank上的工作，号称不用任何训练就可以直接提升检索的概率（在rerank后） [TODO] |
+|9|[EfficientQA : a RoBERTa Based Phrase-Indexed Question-Answering System](https://arxiv.org/abs/2101.02157)|arXiv 2021|宣称在`PIQA`上达到了SOTA|
 
 ## 15.可解释性研究
 | 序号 | 论文 | 发表会议 | 备注 |
