@@ -44,7 +44,7 @@
 |9|[R4C: A Benchmark for Evaluating RC Systems to Get the Right Answer for the Right Reason](https://arxiv.org/abs/1910.04601)|ACL 2020|`R4C` **给出半结构化的derivation** 对`HotpotQA`数据集进行了标注，一共标注了约5K个实例，每个实例被标注了三个*derivation*。`R4C`觉得*Supporting Sentence*是一个非常粗粒度的概念，因为一句*Supporting Sentence*里面可能有些内容并不是推理答案所必须的，而另一部分是必须的，因此作者标注了更加细粒度的*derivation*，这是一种半结构化的形式来表达推理信息，比*Supporting Sentences*更加有挑战性，也对模型的可解释性要求更高。|
 |10|[QASC:A dataset for question answering via sentence composition](https://arxiv.org/abs/1910.11473)|AAAI 2020|`QASC` **多选式** 也是基于多个句子间的推理从候选答案中选出正确答案的数据集。含有9980个八项选择题，每个问题都被标注了两个fact sentences用来推理出最终的答案。还提供了一个包含了17M个句子的语料库，所有的fact sentences都在里面|
 |11|[Learning to Explain: Datasets and Models for Identifying Valid Reasoning Chains in Multihop Question-Answering](https://arxiv.org/abs/2010.03274)|EMNLP 2020|`eQASC`、`eQASC-perturbed`以及`eOBQA` `Textual entailment` **多选式** 这个工作其实是在研究多跳推理问题的可解释性。在`QASC`数据集的基础上，针对于每个问题又标注了多个推理链（有效或无效都有）构成了`eQASC`，接着又将推理链模板化（使推理链更加通用）构成了`eQASC-perturbed`数据集，最后为了进行out-domain test，也基于`OpenBookQA`数据集标注了推理链形成了`eOBQA`并进行测试|  
-|12|[Did Aristotle Use a Laptop? A Question Answering Benchmark with Implicit Reasoning Strategies](https://arxiv.org/abs/2101.02235)|TACL 2021||
+|12|[Did Aristotle Use a Laptop? A Question Answering Benchmark with Implicit Reasoning Strategies](https://arxiv.org/abs/2101.02235)|TACL 2021|`StrategyQA` **布尔式** 2780个隐式多跳推理问题，推理步数不局限于二跳，问题极为精简，模型需要先推断出推理策略，进而才能求解。在检索支撑文档方面也非常有挑战，因为问题本身与文档间的词汇overlap极低。|
 
 
 ## 2.改进传统单步阅读理解方法
@@ -127,9 +127,9 @@
 |10|[Modular Networks: Learning to Decompose Neural Computation](https://arxiv.org/abs/1811.05249)|NIPS 2018|||
 |11|[Self-assembling modular networks for interpretable multi-hop reasoning](https://arxiv.org/abs/1909.05803)|EMNLP 2019|`non-Open` 在`HotpotQA`上的工作，入栈出栈，三个模组`Find`、`Relocate`以及`Compare`|[repo](https://github.com/jiangycTarheel/NMN-MultiHopQA)|
 |12|[Explore, Propose, and Assemble: An Interpretable Model for Multi-Hop Reading Comprehension](https://arxiv.org/abs/1906.05210)| ACL 2019 |分为三部分，三部分联合优化。Document Explore：一个级联的memory network迭代式地选取相关文档；Answer Proposer：对于推理树上的每一个从跟到结点的推理路径提出一个proposed答案；Evidence Assembler：从每一条推理路径上提取包含proposed答案的关键句，并将这些关键句结合起来以预测最终的答案。| |
-|13|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|EMNLP 2020|`non-Open` 感觉本文，在NMN上的创新度不及其余文章，然后选取的数据集也不是主流的`HotpotQA`，而是`ROPES`||
+|13|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|EMNLP 2020|`non-Open` 在`ROPES`上进行了验证，设计了三个模组：`Select`、`Chain`以及`Predict`，最后对candidate span进行了rerank||
 |14|[Neural module networks for reasoning over text](https://arxiv.org/abs/1912.04971)|ICLR 2020|`non-Open` NMN在`DROP`上的工作，设计了10个模组||
-|15|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020|`non-Open` 在`DROP`上的工作，也可以用于`HotpotQA`，两个模组`next-question generator`与`QA model`||
+|15|[Text Modular Networks: Learning to Decompose Tasks in the Language of Existing Models](https://arxiv.org/abs/2009.00751)|arXiv 2020|`non-Open` 在`DROP`与`HotpotQA`上均进行了验证，是一个通用的分解复杂问题的框架，分为两个模组`next-question generator`与`QA model`，其核心在于`next-question generator`，为了训练`next-question generator`，在SQUAD上训练一个问题生成器，输入context、answer（以及词汇提示集合）来生成question，接着对于目标数据集的训练集，利用一些规则的方法捕获hint（子问题答案），接着利用问题生成器产生多个子问题，除此之外还有剪枝步骤。若已经训练好`nqg`，之后对于一个问题，不断利用`nqg`以及现有的简单QA模型交互来逐步推理出最终的答案，在每一步子问题生成时，使用了`nucleus sampling`技术采样多个生成的问题，依次建模成一个有向图结构，最终会对图中每一条路径进行打分，分数最高的路径所对应的答案为最终答案，中间的trick非常多。||
 
 
 
@@ -232,7 +232,7 @@
 |6|[Learning Dense Representations of Phrases at Scale](https://arxiv.org/abs/2012.12624) | arXiv 2020 | 陈丹琦，一个phrase级别的信息检索工作，旨在为大量的phrase学习到一个稠密的表示，本文提出的方法`DensePhrase`卖点在于速度快，其准确度方面和`DPR`之间存在一点差距。为了学习到稠密的phrase表示，对于每一个候选phrase都会利用QG模型生成一个问题，以此来训练。在训练过程当中，还是用了蒸馏方法，在负采样方面也使用了一些技巧。 |
 |7|[HopRetriever: Retrieve Hops over Wikipedia to Answer Complex Questions](https://arxiv.org/abs/2012.15534)| AAAI 2021| 一个比较新颖的工作，和`CogQA`的思路有一点像，从已有文档上进行下一跳的检索，每次检索的单位就是hop，一个hop包含了一个超链接以及目标文档，将超链接通过mention左右加特殊符号的方式通过PTM获得表示，这里的表示就代表着从当前文档到下一文档的结构关系，而下一个文档中的非结构文本信息则直接与问题拼接并通过PTM获得，最后将这两部分信息融合，再来计算概率，选中概率最高的目标文档当做本次检索的结果。 |
 |8|[Reader-Guided Passage Reranking for Open-Domain Question Answering](https://arxiv.org/abs/2101.00294)|arXiv 2021| rerank上的工作，号称不用任何训练就可以直接提升检索的概率（在rerank后） [TODO] |
-|9|[EfficientQA : a RoBERTa Based Phrase-Indexed Question-Answering System](https://arxiv.org/abs/2101.02157)|arXiv 2021|宣称在`PIQA`上达到了SOTA|
+|9|[EfficientQA : a RoBERTa Based Phrase-Indexed Question-Answering System](https://arxiv.org/abs/2101.02157)|arXiv 2021|宣称在`PIQA`上达到了SOTA[TODO]|
 
 ## 15.可解释性研究
 | 序号 | 论文 | 发表会议 | 备注 |
