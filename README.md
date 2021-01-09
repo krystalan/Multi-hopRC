@@ -15,7 +15,7 @@
 - [11.数学推理能力](#11numerical-reasoning)     
 - [12.与其他任务相关联](#12与其他任务相关联)    
 - [13.OBQA](#13obqa)    
-- [14.信息检索](#14信息检索包括rerank)
+- [14.信息检索](#14information-retrieval)
 - [15.可解释性研究](#15可解释性研究)
 - [Leaderboard](#aleaderboard-of-hotpotqa)    
 
@@ -219,7 +219,7 @@
 |16|[Benchmarking Knowledge-Enhanced Commonsense Question Answering via Knowledge-to-Text Transformation](https://arxiv.org/abs/2101.00797)|AAAI 2021|[TODO]|
 |17|[Understanding Few-Shot Commonsense Knowledge Models](https://arxiv.org/abs/2101.00297)|arXiv 2021||
 
-## 14.信息检索（包括rerank）
+## 14.Information Retrieval
 > 因为许多数据集要面临检索过程，例如open-domain question answering，本部分记录一下自己看到过的主要在做检索工作的文章。
 
 | 序号 | 论文 | 发表会议 | 备注 |
