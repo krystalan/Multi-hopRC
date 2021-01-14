@@ -251,7 +251,9 @@
 ## 16.KD
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
-| 1 | [Improving Multi-hop Knowledge Base Question Answering by Learning Intermediate Supervision Signals](https://arxiv.org/abs/2101.03737) | WSDM 2021 | 在KBQA问题中，已有数据集对模型的监督信号仅仅只有answer，而缺乏KG上的路径监督，因此本文借助知识蒸馏的思想，训练一个teacher模型产生在KG上多跳推理时的中间实体分布概率，在teacher模型收敛后，将teacher模型预测出的中间实体分布当做伪/软标签加入到student模型的训练当中，来帮助student模型在任务上有更加出色的表现。 | 
+| 1 | [Attention-Guided Answer Distillation for Machine Reading Comprehension](https://arxiv.org/abs/1808.07644) | EMNLP 2018 | [TODO] |
+| 2 | [Model Compression with Two-stage Multi-teacher Knowledge Distillation for Web Question Answering System](https://arxiv.org/abs/1910.08381) | WSDM 2020 | [TODO] |
+| 3 | [Improving Multi-hop Knowledge Base Question Answering by Learning Intermediate Supervision Signals](https://arxiv.org/abs/2101.03737) | WSDM 2021 | 在KBQA问题中，已有数据集对模型的监督信号仅仅只有answer，而缺乏KG上的路径监督，因此本文借助知识蒸馏的思想，训练一个teacher模型产生在KG上多跳推理时的中间实体分布概率，在teacher模型收敛后，将teacher模型预测出的中间实体分布当做伪/软标签加入到student模型的训练当中，来帮助student模型在任务上有更加出色的表现。 | 
 
 ## [PLAN]
 | 论文 | 发表会议 | 备注 |
