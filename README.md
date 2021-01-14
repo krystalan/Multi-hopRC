@@ -17,6 +17,7 @@
 - [13.OBQA](#13obqa)    
 - [14.信息检索](#14information-retrieval)
 - [15.可解释性研究](#15可解释性研究)
+- [16.知识蒸馏](#16kd)
 - [Leaderboard](#aleaderboard-of-hotpotqa)    
 
 ## 综述
@@ -149,6 +150,7 @@
 |3*|[Logic-Guided Data Augmentation and Regularization for Consistent Question Answering](https://arxiv.org/abs/2004.10157)|ACL 2020|讨论核心点是对比问题的数据增强，基于对称一致性和传递一致性来增强训练样本|
 |4*|[Generating Multi-hop Reasoning Questions to Improve Machine Reading Comprehension](https://dl.acm.org/doi/pdf/10.1145/3366423.3380114)|WWW 2020|QG工作|
 |5*|[Asking Complex Questions with Multi-hop Answer-focused Reasoning](https://arxiv.org/abs/2009.07402)|arXiv 2020|QG工作|
+|6*|[Improving Commonsense Causal Reasoning by Adversarial Training and Data Augmentation](https://arxiv.org/abs/2101.04966)|arXiv 2021||
 
 (*代表仅属于本分类下的工作)
 
@@ -245,6 +247,11 @@
 
 
 (*代表仅属于本分类下的工作)
+
+## 16.KD
+| 序号 | 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: | :---: |
+| 1 | [Improving Multi-hop Knowledge Base Question Answering by Learning Intermediate Supervision Signals](https://arxiv.org/abs/2101.03737) | WSDM 2021 | 在KBQA问题中，已有数据集对模型的监督信号仅仅只有answer，而缺乏KG上的路径监督，因此本文借助知识蒸馏的思想，训练一个teacher模型产生在KG上多跳推理时的中间实体分布概率，在teacher模型收敛后，将teacher模型预测出的中间实体分布当做伪/软标签加入到student模型的训练当中，来帮助student模型在任务上有更加出色的表现。 | 
 
 ## [PLAN]
 | 论文 | 发表会议 | 备注 |
