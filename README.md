@@ -251,13 +251,15 @@
 ## 16.KD
 >知识蒸馏，vanilla 知识蒸馏是训练student model来拟合teacher model result的过程，teacher model一般是一个集成的大型复杂精密的系统，而student则是一个轻量级的模型，所以这其实是一个模型压缩的过程。最终的student模型理当拥有和teacher模型差不多的效果。后续的研究也探索了将 teacher模型学习到的一些中间表示 加入到student模型的训练过程当中来充当附加监督信号，在student训练的loss中占据一席之地，来帮助student模型取得更好的效果。本节内容面向整个阅读理解领域。
 
-关于BERT的知识蒸馏：
+### 关于BERT的知识蒸馏：
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
 |1| [DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter](https://arxiv.org/abs/1910.01108) | NIPS 2019| Hugging Face出品，student model跟BERT的总体结构差不多，只不过去除了`token type embeddings`、`pooler`，并且减少了层数。最终的模型是66M。 |
 |2| [TinyBERT: Distilling BERT for Natural Language Understanding](https://arxiv.org/abs/1909.10351) | EMNLP 2020 Findings | |
 
-阅读理解中的知识蒸馏
+多说一句，这两个其实都是BERT的压缩工作，知识蒸馏是模型压缩的一大手法，其余的BERT压缩工作还有：[ALBERT](https://arxiv.org/abs/1909.11942)、[BinaryBERT](https://arxiv.org/abs/2012.15701)等。
+
+### **阅读理解中的知识蒸馏：**
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
 | 1 | [Attention-Guided Answer Distillation for Machine Reading Comprehension](https://arxiv.org/abs/1808.07644) | EMNLP 2018 | 第一篇在MRC场景下探索知识蒸馏的工作，作者分别在MRC场景下探索了`vanilla knowledge distillation`、`answer distillation`以及`attention distillation`，其中`vanilla kd`就是让student model来拟合teacher model的predict span，`answer distillation`是为了解决biased distillation问题（如果teacher模型预测出错，那么学生模型很有可能在错误的答案上拥有更高的confidence），为此在teacher预测结果中取top k答案，然后将每一个答案与gold answer对比，选取与gold answer无overlap的概率最高预测答案为confusing anwer，然后在训练的过程当中强制学生模型也来预测confusing answer的边界。即对每一个token，预测四个值：gold anwer 开始概率、gold answer结尾概率、confusing answer开始概率、confusing answer结尾概率。`attention distillation`则是用于对齐老师模型和学生模型的中间attention分布，相当于使用老师模型的中间表示来额外监督学生模型的训练。|
