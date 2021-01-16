@@ -255,9 +255,9 @@
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
 |1| [DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter](https://arxiv.org/abs/1910.01108) | NIPS 2019| Hugging Face出品，student model跟BERT的总体结构差不多，只不过去除了`token type embeddings`、`pooler`，并且减少了层数。最终的模型是66M。 |
-|2| [TinyBERT: Distilling BERT for Natural Language Understanding](https://arxiv.org/abs/1909.10351) | EMNLP 2020 Findings | |
+|2| [TinyBERT: Distilling BERT for Natural Language Understanding](https://arxiv.org/abs/1909.10351) | EMNLP 2020 Findings | 设计了针对于基于transformer的模型的蒸馏方式：（1）`Transformer-layer Distillation`：包含多头注意力机制的蒸馏以及隐层表示的蒸馏。（2）`Embedding-layer Distillation`：对于embedding look up的蒸馏。（3）`Prediction-layer Distillation`：对于输出分布的蒸馏。student的模型结构是M层transformer，teacher model的结构是N层transformer。在`TinyBERT`的学习过程中，分为`general distillation`以及`task-specific distillation`两个阶段。|
 
-多说一句，这两个其实都是BERT的压缩工作，知识蒸馏是模型压缩的一大手法，其余的BERT压缩工作还有：[ALBERT](https://arxiv.org/abs/1909.11942)、[BinaryBERT](https://arxiv.org/abs/2012.15701)等。
+多说一句，这两个其实都是BERT的压缩工作，知识蒸馏（`knowledge distillation`）是模型压缩的一大手法，除此之外还有`quantization`以及`weights pruning`压缩方法。其余的BERT压缩工作还有：[ALBERT](https://arxiv.org/abs/1909.11942)、[BinaryBERT](https://arxiv.org/abs/2012.15701)等。
 
 ### **阅读理解中的知识蒸馏：**
 | 序号 | 论文 | 发表会议 | 备注 |
