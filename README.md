@@ -249,10 +249,12 @@
 (*代表仅属于本分类下的工作)
 
 ## 16.KD
+>知识蒸馏，vanilla 知识蒸馏是训练student model来拟合teacher model result的过程，teacher model一般是一个集成的大型复杂精密的系统，而student则是一个轻量级的模型，所以这其实是一个模型压缩的过程。最终的student模型理当拥有和teacher模型差不多的效果。后续的研究也探索了将 teacher模型学习到的一些中间表示 加入到student模型的训练过程当中来充当附加监督信号，在student训练的loss中占据一席之地，来帮助student模型取得更好的效果。本节内容面向整个阅读理解领域。
+
 | 序号 | 论文 | 发表会议 | 备注 |
 | :---: | :---: | :---: | :---: |
-| 1 | [Attention-Guided Answer Distillation for Machine Reading Comprehension](https://arxiv.org/abs/1808.07644) | EMNLP 2018 | [TODO] |
-| 2 | [Model Compression with Two-stage Multi-teacher Knowledge Distillation for Web Question Answering System](https://arxiv.org/abs/1910.08381) | WSDM 2020 | [TODO] |
+| 1 | [Attention-Guided Answer Distillation for Machine Reading Comprehension](https://arxiv.org/abs/1808.07644) | EMNLP 2018 | 第一篇在MRC场景下探索知识蒸馏的工作，作者分别在MRC场景下探索了`vanilla knowledge distillation`、`answer distillation`以及`attention distillation`，其中`vanilla kd`就是让student model来拟合teacher model的predict span，`answer distillation`是为了解决biased distillation问题（如果teacher模型预测出错，那么学生模型很有可能在错误的答案上拥有更高的confidence），为此在teacher预测结果中取top k答案，然后将每一个答案与gold answer对比，选取与gold answer无overlap的概率最高预测答案为confusing anwer，然后在训练的过程当中强制学生模型也来预测confusing answer的边界。即对每一个token，预测四个值：gold anwer 开始概率、gold answer结尾概率、confusing answer开始概率、confusing answer结尾概率。`attention distillation`则是用于对齐老师模型和学生模型的中间attention分布，相当于使用老师模型的中间表示来额外监督学生模型的训练。|
+| 2 | [Model Compression with Two-stage Multi-teacher Knowledge Distillation for Web Question Answering System](https://arxiv.org/abs/1910.08381) | WSDM 2020 | 先利用搜索引擎以及teacher models创造大量的伪标签QA数据集，然后预训练student model，之后利用多对一（多个teacher对一个student）来在下游任务上训练，训练时使用golden label以及soft label，多对一可以解决biase问题。 |
 | 3 | [Improving Multi-hop Knowledge Base Question Answering by Learning Intermediate Supervision Signals](https://arxiv.org/abs/2101.03737) | WSDM 2021 | 在KBQA问题中，已有数据集对模型的监督信号仅仅只有answer，而缺乏KG上的路径监督，因此本文借助知识蒸馏的思想，训练一个teacher模型产生在KG上多跳推理时的中间实体分布概率，在teacher模型收敛后，将teacher模型预测出的中间实体分布当做伪/软标签加入到student模型的训练当中，来帮助student模型在任务上有更加出色的表现。 | 
 
 ## [PLAN]
