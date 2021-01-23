@@ -18,6 +18,7 @@
 - [14.信息检索](#14information-retrieval)
 - [15.可解释性研究](#15可解释性研究)
 - [16.知识蒸馏](#16kd)
+- [17.Rerank](#17rerank)
 - [Leaderboard](#aleaderboard-of-hotpotqa)    
 
 ## 综述
@@ -266,6 +267,19 @@
 | 3 | [Cross-lingual Machine Reading Comprehension with Language Branch Knowledge Distillation](https://arxiv.org/abs/2010.14271) | COLING 2020 | [TODO] 在cross lingual的角度下，通过知识蒸馏的方式提升低资源语言阅读理解的表现。 |
 | 4 | [Model Compression with Two-stage Multi-teacher Knowledge Distillation for Web Question Answering System](https://arxiv.org/abs/1910.08381) | WSDM 2020 | 先利用搜索引擎以及teacher models创造大量的伪标签QA数据集，然后预训练student model，之后利用多对一（多个teacher对一个student）来在下游任务上训练，训练时使用golden label以及soft label，多对一可以解决biase问题。 |
 | 5 | [Improving Multi-hop Knowledge Base Question Answering by Learning Intermediate Supervision Signals](https://arxiv.org/abs/2101.03737) | WSDM 2021 | 在KBQA问题中，已有数据集对模型的监督信号仅仅只有answer，而缺乏KG上的路径监督，因此本文借助知识蒸馏的思想，训练一个teacher模型产生在KG上多跳推理时的中间实体分布概率，在teacher模型收敛后，将teacher模型预测出的中间实体分布当做伪/软标签加入到student模型的训练当中，来帮助student模型在任务上有更加出色的表现。 | 
+
+## 17.rerank
+>rerank机制是指在QA/MRC任务中，先利用模型获得候选答案集合，再根据一些更加细粒度的特征，对所有候选答案重新进行排序，以此来得到准确率更高的答案。
+
+| 序号 | 论文 | 发表会议 | 备注 |
+| :---: | :---: | :---: | :---: |
+|1*|[Evidence Aggregation for Answer Re-Ranking in Open-Domain Question Answering](https://arxiv.org/abs/1711.05116)|ICLR 2018|当时验证的数据集中，ground truth答案会出现在多个evidence sentences中，作者的rerank设计主要思想是：（1）`strength-based re-ranking`：某候选答案出现的次数越多，包含候选答案的支撑句出现的次数越多，证明该候选答案的概率越大。（2）`coverage-based re-ranking`：包含候选答案的多个支撑句对问题的覆盖情况，如果覆盖的越全面，那么该候选答案的概率越大。|
+|2*|[RankQA: Neural Question Answering with Answer Re-Ranking](https://arxiv.org/abs/1906.03008)|ACL 2019|为获选答案人工设定了非常多的特征，然后利用一个两层的前馈网络，输入候选答案的所有特征，输出候选的答案的概率。训练reranker时采用pair-wise ranking loss。|
+|3|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|EMNLP 2020|`non-Open` 在`ROPES`上进行了验证，设计了三个模组：`Select`、`Chain`以及`Predict`，最后对candidate span进行了rerank|
+|4*|[Towards Confident Machine Reading Comprehension](https://arxiv.org/abs/2101.07942)|arXiv 2021|使用了`Gradient Boosted Machine`思想，训练了一个弱学习器为`regression tree`的集成学习模型。也是人工设定了非常多且复杂的特征来对候选答案进行重排序。|
+
+
+(*代表仅属于本分类下的工作)
 
 ## [PLAN]
 | 论文 | 发表会议 | 备注 |
