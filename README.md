@@ -277,6 +277,7 @@
 |2*|[RankQA: Neural Question Answering with Answer Re-Ranking](https://arxiv.org/abs/1906.03008)|ACL 2019|为获选答案人工设定了非常多的特征，然后利用一个两层的前馈网络，输入候选答案的所有特征，输出候选的答案的概率。训练reranker时采用pair-wise ranking loss。|
 |3|[Multi-Step Inference for Reasoning Over Paragraphs](https://arxiv.org/abs/2004.02995)|EMNLP 2020|`non-Open` 在`ROPES`上进行了验证，设计了三个模组：`Select`、`Chain`以及`Predict`，最后对candidate span进行了rerank|
 |4*|[Towards Confident Machine Reading Comprehension](https://arxiv.org/abs/2101.07942)|arXiv 2021|使用了`Gradient Boosted Machine`思想，训练了一个弱学习器为`regression tree`的集成学习模型。也是人工设定了非常多且复杂的特征来对候选答案进行重排序。|
+|5*|[Model Agnostic Answer Reranking System for Adversarial Question Answering](https://arxiv.org/abs/2102.03016)|EACL 2021 Workshop|在对抗QA场景下，对QA模型预测出的候选答案span进行rerank，参考的依据是候选答案所在候选句与问题中所有实体word之间的overlap。其rerank部分非常简单。|
 
 
 (*代表仅属于本分类下的工作)
