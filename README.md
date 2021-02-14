@@ -82,7 +82,8 @@
 |3|[Revealing the Importance of Semantic Retrieval for Machine Reading at Scale](https://www.aclweb.org/anthology/D19-1258/)|EMNLP 2019|`Open` 只用原始问题检索了一次文档，但在这一次检索中，先利用了基于TFIDF的方法筛选一遍，然后对于每个paragraph又通过语义相似度计算再筛选一遍，然后将还剩下的paragraph分解成句子，再在句子级别利用语义相似度计算得到最终所有的支撑句。最终利用支撑句和问题进行答案预测。虽然只检索了一次，但其实在第一次的基础上进行了后续的多次筛选与更加细粒度的检索。| 
 |4|[Unsupervised Alignment-based Iterative Evidence Retrieval for Multi-hop Question Answering](https://www.aclweb.org/anthology/2020.acl-main.414)|ACL 2020|`Open`&`non-Open` 在`MultiRC`以及`QASC`上的工作，做与问题相关的支撑句的检索。采用无监督的对其方法。每次检索会修改query，修改的规则主要是当前检索到的句子没有包含query中的那些terms，检索也使用了基本的基于词向量语义相似度的方式，属于无监督模型。但达到了很好的效果。|  
 |5|[Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756)|arXiv 2020|`Open` 没啥感觉，把检索文档看成序列建模问题然后beam search|
-|6|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020|`Open` 动态检索文档，只有最终确定的才进入到下一步|  
+|6|[DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465)|arXiv 2020|`Open` 动态检索文档，只有最终确定的才进入到下一步|
+|7|[Memory Augmented Sequential Paragraph Retrieval for Multi-hop Question Answering](https://arxiv.org/abs/2102.03741)|arXiv 2021|迭代式的检索文档，以往主流的方法将paras建模成一个图结构，para之间的连线依赖于超链接或para之间的共享实体。本文提出了一个新的检索方式，将para看成一种序列数据，并且将检索文档看成序列标注问题。最终在`HotpotQA`数据集上取得了不错的效果，distractor setting下达到了69.6EM|
 
 ## 5.推理链
 > 最终形成一条推理链。
