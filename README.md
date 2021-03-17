@@ -46,8 +46,9 @@
 |9|[R4C: A Benchmark for Evaluating RC Systems to Get the Right Answer for the Right Reason](https://arxiv.org/abs/1910.04601)|ACL 2020|`R4C` **给出半结构化的derivation** 对`HotpotQA`数据集进行了标注，一共标注了约5K个实例，每个实例被标注了三个*derivation*。`R4C`觉得*Supporting Sentence*是一个非常粗粒度的概念，因为一句*Supporting Sentence*里面可能有些内容并不是推理答案所必须的，而另一部分是必须的，因此作者标注了更加细粒度的*derivation*，这是一种半结构化的形式来表达推理信息，比*Supporting Sentences*更加有挑战性，也对模型的可解释性要求更高。|
 |10|[QASC:A dataset for question answering via sentence composition](https://arxiv.org/abs/1910.11473)|AAAI 2020|`QASC` **多选式** 也是基于多个句子间的推理从候选答案中选出正确答案的数据集。含有9980个八项选择题，每个问题都被标注了两个fact sentences用来推理出最终的答案。还提供了一个包含了17M个句子的语料库，所有的fact sentences都在里面|
 |11|[Learning to Explain: Datasets and Models for Identifying Valid Reasoning Chains in Multihop Question-Answering](https://arxiv.org/abs/2010.03274)|EMNLP 2020|`eQASC`、`eQASC-perturbed`以及`eOBQA` `Textual entailment` **多选式** 这个工作其实是在研究多跳推理问题的可解释性。在`QASC`数据集的基础上，针对于每个问题又标注了多个推理链（有效或无效都有）构成了`eQASC`，接着又将推理链模板化（使推理链更加通用）构成了`eQASC-perturbed`数据集，最后为了进行out-domain test，也基于`OpenBookQA`数据集标注了推理链形成了`eOBQA`并进行测试|  
-|12|[WorldTree V2: A Corpus of Science-Domain Structured Explanations and Inference Patterns supporting Multi-Hop Inference](https://www.aclweb.org/anthology/2020.lrec-1.671/)|LREC 2020|[TODO]|
-|13|[Did Aristotle Use a Laptop? A Question Answering Benchmark with Implicit Reasoning Strategies](https://arxiv.org/abs/2101.02235)|TACL 2021|`StrategyQA` **布尔式** 2780个隐式多跳推理问题，推理步数不局限于二跳，问题极为精简，模型需要先推断出推理策略，进而才能求解。在检索支撑文档方面也非常有挑战，因为问题本身与文档间的词汇overlap极低。|
+|12|[HybridQA: A Dataset of Multi-Hop Question Answering over Tabular and Textual Data](https://arxiv.org/abs/2004.07347)|EMNLP 2020 Findings|[TODO] 在文本与表格上共同进行多跳推理|  
+|13|[WorldTree V2: A Corpus of Science-Domain Structured Explanations and Inference Patterns supporting Multi-Hop Inference](https://www.aclweb.org/anthology/2020.lrec-1.671/)|LREC 2020|[TODO]|
+|14|[Did Aristotle Use a Laptop? A Question Answering Benchmark with Implicit Reasoning Strategies](https://arxiv.org/abs/2101.02235)|TACL 2021|`StrategyQA` **布尔式** 2780个隐式多跳推理问题，推理步数不局限于二跳，问题极为精简，模型需要先推断出推理策略，进而才能求解。在检索支撑文档方面也非常有挑战，因为问题本身与文档间的词汇overlap极低。|
 
 
 ## 2.改进传统单步阅读理解方法
