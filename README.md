@@ -154,6 +154,7 @@
 |4*|[Generating Multi-hop Reasoning Questions to Improve Machine Reading Comprehension](https://dl.acm.org/doi/pdf/10.1145/3366423.3380114)|WWW 2020|QG工作|
 |5*|[Asking Complex Questions with Multi-hop Answer-focused Reasoning](https://arxiv.org/abs/2009.07402)|arXiv 2020|QG工作|
 |6*|[Improving Commonsense Causal Reasoning by Adversarial Training and Data Augmentation](https://arxiv.org/abs/2101.04966)|arXiv 2021||
+|7*|[Unsupervised Multi-hop Question Answering by Question Generation](https://arxiv.org/abs/2010.12623)|NAACL 2021|无监督多跳问答数据增强工作|
 
 (*代表仅属于本分类下的工作)
 
