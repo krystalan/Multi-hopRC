@@ -100,8 +100,7 @@
 |  5   | [PullNet: Open Domain Question Answering with Iterative Retrieval on Knowledge Bases and Text](https://arxiv.org/abs/1904.09537) | EMNLP 2019 | `MetaQA`、`WebQuestionsSP`以及`Complex WebQ` `Open` 从两种实体源中检索知识资源：文本语料库与知识库。作者定义了问题子图（question subgraph）这一概念，它的作用是包含足够多的与问题相关的信息然后以此来回答一个问题，该图是迭代生成的，且分为三类结点：①实体结点（存在于KB中）②文本结点（通常情况下是文本语料库中某个实体的mention）③事实结点（KB中的事实三元组）。一开始先仅利用问题中的信息来初始化问题子图，之后进行T轮迭代扩充，每次扩充会选取问题子图中的部分结点，对每一个选取到的结点，为其检索其相关的（1）文档（2）事实，对于（1）还会进一步利用实体链接模型提取其中的实体mention，对于（2）来说会提取三元组中的头尾实体。这样的构建直到问题子图可以回答问题为止，之后再进行答案预测。 |
 |  6   | [Answering Complex Open-domain Questions Through Iterative Query Generation](https://arxiv.org/abs/1910.07000) | EMNLP 2019 |                      `Open` GOLDEN模型                       |
 |  7   | [Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering](https://arxiv.org/abs/1911.10470) | ICLR 2020  | `Open` 不断检索文档，在整个wikipedia的文章上建立了一个图，然后一直跳 |
-| 8 | [Multi-Step Reasoning Over Unstructured Text with Beam Dense Retrieval](https://arxiv.org/abs/2104.05883) | NAACL 2021 | `BeamDR` 在dense representation上逐渐组成推理链。 |
-
+| 8 | [Multi-Step Reasoning Over Unstructured Text with Beam Dense Retrieval](https://arxiv.org/abs/2104.05883) | NAACL 2021 | `BeamDR` 在dense representation上逐渐组成推理链，并且不使用wiki中的结构化超链接信息，在每一步中会更新query表示。 |
 
 ## 6.分解问题相关
 > 可解释性也很强，但是分解问题需要额外的工作，如何训练模型合适地分解问题是一个challenge。
