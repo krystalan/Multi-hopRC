@@ -50,7 +50,7 @@
 |  14  | [Did Aristotle Use a Laptop? A Question Answering Benchmark with Implicit Reasoning Strategies](https://arxiv.org/abs/2101.02235) |        TACL 2021         | `StrategyQA` **布尔式** 2780个隐式多跳推理问题，推理步数不局限于二跳，问题极为精简，模型需要先推断出推理策略，进而才能求解。在检索支撑文档方面也非常有挑战，因为问题本身与文档间的词汇overlap极低。 |
 | 15 | [VisualMRC: Machine Reading Comprehension on Document Images](https://arxiv.org/abs/2101.11272) | AAAI 2021 |-|
 | 16 | [MultiModalQA: Complex Question Answering over Text, Tables and Images](https://arxiv.org/abs/2104.06039) | ICLR 2021 |-|
-
+| 17 | [SpartQA: : A Textual Question Answering Benchmark for Spatial Reasoning](https://arxiv.org/abs/2104.05832) | NAACL 2021 | 强调空间推理，与`DocRed`类似，数据集分为两部分：`SpartQA-Human`与`SpartQA-Auto`。 |
 
 ## 2.改进传统单步阅读理解方法
 | 序号 |                             论文                             |  发表会议  |                        备注                        |
@@ -101,6 +101,7 @@
 |  6   | [Answering Complex Open-domain Questions Through Iterative Query Generation](https://arxiv.org/abs/1910.07000) | EMNLP 2019 |                      `Open` GOLDEN模型                       |
 |  7   | [Learning to Retrieve Reasoning Paths over Wikipedia Graph for Question Answering](https://arxiv.org/abs/1911.10470) | ICLR 2020  | `Open` 不断检索文档，在整个wikipedia的文章上建立了一个图，然后一直跳 |
 | 8 | [Multi-Step Reasoning Over Unstructured Text with Beam Dense Retrieval](https://arxiv.org/abs/2104.05883) | NAACL 2021 | `BeamDR` 在dense representation上逐渐组成推理链，并且不使用wiki中的结构化超链接信息，在每一步中会更新query表示。 |
+
 
 ## 6.分解问题相关
 > 可解释性也很强，但是分解问题需要额外的工作，如何训练模型合适地分解问题是一个challenge。
