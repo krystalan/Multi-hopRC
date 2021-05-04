@@ -52,6 +52,7 @@
 | 16 | [MultiModalQA: Complex Question Answering over Text, Tables and Images](https://arxiv.org/abs/2104.06039) | ICLR 2021 |-|
 | 17 | [SpartQA: A Textual Question Answering Benchmark for Spatial Reasoning](https://arxiv.org/abs/2104.05832) | NAACL 2021 | 强调空间推理，与`DocRed`类似，数据集分为两部分：`SpartQA-Human`与`SpartQA-Auto`。 |
 | 18 | [GooAQ: Open Question Answering with Diverse Answer Types](https://arxiv.org/abs/2104.08727) | arXiv 2021 | 一个问题考虑多个类型的答案 |
+| 19 | [InfographicVQA](https://arxiv.org/abs/2104.12756) | arXiv 2021 | 感觉和`VisualMRC`挺像的 |
 
 ## 2.改进传统单步阅读理解方法
 | 序号 |                             论文                             |  发表会议  |                        备注                        |
