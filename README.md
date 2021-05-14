@@ -243,6 +243,7 @@
 |  7   | [HopRetriever: Retrieve Hops over Wikipedia to Answer Complex Questions](https://arxiv.org/abs/2012.15534) | AAAI 2021  | 一个比较新颖的工作，和`CogQA`的思路有一点像，从已有文档上进行下一跳的检索，每次检索的单位就是hop，一个hop包含了一个超链接以及目标文档，将超链接通过mention左右加特殊符号的方式通过PTM获得表示，这里的表示就代表着从当前文档到下一文档的结构关系，而下一个文档中的非结构文本信息则直接与问题拼接并通过PTM获得，最后将这两部分信息融合，再来计算概率，选中概率最高的目标文档当做本次检索的结果。 |
 |  8   | [Reader-Guided Passage Reranking for Open-Domain Question Answering](https://arxiv.org/abs/2101.00294) | arXiv 2021 | rerank上的工作，号称不用任何训练就可以直接提升检索的概率（在rerank后） [TODO] |
 |  9   | [EfficientQA : a RoBERTa Based Phrase-Indexed Question-Answering System](https://arxiv.org/abs/2101.02157) | arXiv 2021 |                宣称在`PIQA`上达到了SOTA[TODO]                |
+| 10 | [Generative Context Pair Selection for Multi-hop Question Answering](https://arxiv.org/abs/2104.08744) | arXiv 2021 | 以往在`hotpotqa`上的工作会先选取与问题相关的段落再进行答案预测。然而这些段落选取基本上都是基于RoBERTa模型为每一个paragraph预测概率，本文则通过T5来预测context pair的概率。除此之外，本来提出了一个新的方法来完成context pair的选取：模型先不根据问题选取context pair，再根据context pair生成问题。最后选取最容易生成question的context pair，比较有意思。这个方法选取到的paragraph比预测单个para的概率要好。 |
 
 
 ## 15.可解释性研究
