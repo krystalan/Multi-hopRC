@@ -95,6 +95,7 @@
 |  5   | [Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval](https://arxiv.org/abs/2009.12756) | arXiv 2020 |  `Open` 没啥感觉，把检索文档看成序列建模问题然后beam search  |
 |  6   | [DDRQA: Dynamic Document Reranking for Open-domain Multi-hop Question Answering](https://arxiv.org/abs/2009.07465) | arXiv 2020 |      `Open` 动态检索文档，只有最终确定的才进入到下一步       |
 |  7   | [Memory Augmented Sequential Paragraph Retrieval for Multi-hop Question Answering](https://arxiv.org/abs/2102.03741) | arXiv 2021 | 迭代式的检索文档，以往主流的方法将paras建模成一个图结构，para之间的连线依赖于超链接或para之间的共享实体。本文提出了一个新的检索方式，将para看成一种序列数据，并且将检索文档看成序列标注问题。最终在`HotpotQA`数据集上取得了不错的效果，distractor setting下达到了69.6EM |
+| 8 | [Efficient Passage Retrieval with Hashing for Open-domain Question Answering](https://arxiv.org/abs/2106.00882) | ACL 2021 short | 文档检索工作，在`DPR`的基础上提出了`BPR`，利用二分编码来降低内存的使用，在用`BERT`得到编码后的问题和段落表示后，通过一层哈希层来得到二分编码，并基于二分编码做相似度计算。设定了两个任务来训练`BPR`分别是候选生成和候选排序，其中候选生成用二分编码做，候选排序用连续向量做。 |
 
 ## 5.推理链
 > 最终形成一条推理链。
