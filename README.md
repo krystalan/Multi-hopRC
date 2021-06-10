@@ -10,7 +10,7 @@
 - [7.神经模块网络NMN](#7neural-module-networks)     
 - [8.PTM for MhRC](#8针对于多跳mrc问题的ptm改进)    
 - [9.数据增强](#9数据增强)    
-- [10.本质方面的探索](#10在本质方面的探索)    
+- [10.本质方面的探索](#10在本质方面的探索鲁棒性思考)    
 - [11.数学推理能力](#11numerical-reasoning)     
 - [12.与其他任务相关联](#12与其他任务相关联)    
 - [13.OBQA](#13obqa)    
@@ -169,7 +169,7 @@
 (*代表仅属于本分类下的工作)
 
 
-## 10.在本质方面的探索
+## 10.在本质方面的探索&鲁棒性思考
 | 序号 |                             论文                             |    发表会议     |                             备注                             |
 | :--: | :----------------------------------------------------------: | :-------------: | :----------------------------------------------------------: |
 |  1   | [Compositional Questions Do Not Necessitate Multi-hop Reasoning](https://arxiv.org/abs/1906.02900) | ACL 2019(short) | 作者发现`hotpotQA`中许多多跳问题都能够被单跳模型回答正确，于是展开了分析 |
@@ -179,6 +179,7 @@
 |  5   | [Is Graph Structure Necessary for Multi-hop Question Answering?](https://www.aclweb.org/anthology/2020.emnlp-main.583) |   EMNLP 2020    | `non-Open` 改进了`DFGN`模型，探索了图结构在多跳QA中是否必要，结论是：如果PTM是特征提取器的话就重要，如果微调PTM的话其实图结构不是很重要 |
 |  6   | [Is Multihop QA in DiRe Condition? Measuring and Reducing Disconnected Reasoning](https://www.aclweb.org/anthology/2020.emnlp-main.712) |   EMNLP 2020    | `HotpotQA`上的一个研究，也是探索了当前多跳模型到底有没有推理能力。作者将推理分为连贯推理（connected resoning）与不连贯推理。连贯推理是我们希望能够赋予模型的能力，也就是在多个文档中进行信息间的交互以此得到答案。而不连贯推理则是不交互信息就得到答案。作者设计了一些实验去探索模型通过不连贯推理所能达到的分数以此来说明现有的模型可能并没有达到我们想要赋予他们多跳推理能力的初衷。除此之外，作者还设计了一种方案将数据集进行转换以此让模型更难cheat。该工作有着非常高的借鉴价值。对于模型设计者来说，可以帮助我们鉴别自己设计的模型到底有没有连贯推理，对于数据集制造者来说，可以让其明白自己的数据集容不容易被cheat |
 |  7   | [Do Multi-Hop Question Answering Systems Know How to Answer the Single-Hop Sub-Questions?](https://arxiv.org/abs/2002.09919) |   arXiv 2020    | 研究问题：多跳QA系统能否回答单跳子问题；除此之外引用了`DecompRC`中划分子问题的方法 |
+| 8 | [On the Efficacy of Adversarial Data Collection for Question Answering: Results from a Large-Scale Randomized Study](https://arxiv.org/abs/2106.00872) | ACL 2021 | 鲁棒性思考工作，重要结论：（1）只在大规模对抗样本上训练出的模型在对抗测试集上的效果表现得好，但泛化性能比较差（没有在标准数据集上训练出的模型在Out-of-domain场景下表现好）；（2）人工构建对抗样本的时候，许多劳动力都用在了如何fool模型，这是不对的。 |
 
 
 ## 11.Numerical Reasoning
@@ -305,6 +306,7 @@
 | 序号 |                             论文                             |      发表会议      |                             备注                             |
 | :--: | :----------------------------------------------------------: | :----------------: | :----------------------------------------------------------: |
 |  1  | [A Multilingual Modeling Method for Span-Extraction Reading Comprehension](https://arxiv.org/abs/2105.14880) |     arXiv 2021      |在`CMRC 2018`中文阅读理解数据集上达到了SOTA，对一个给定的目标语言（中文）<问题，段落>对，将其翻译为英语与日语，并通过MBERT分别编码这三个语言的同一个<问题，段落>对，最后进行特征融合，并基于最终的表示预测答案区间。|
+| 2 | [Towards More Equitable Question Answering Systems: How Much More Data Do You Need?](https://arxiv.org/abs/2105.14115) | ACL 2021 short | 是一篇专注于如何提升稀缺语言上的QA任务表现的论文，做了很多对比实验。（1）Zero Shot：在高资源语言上训练`mBERT`并在低资源语言上直接测试；（2）Few Shot：在高资源语言上训练`mBERT`并在低资源语言数据上进行少量的fine-tuning；（3）翻译增强1：将高资源语言数据集整个翻译成低资源的语言，并利用翻译后的数据训练模型，并在最终的低资源数据集上测试结果。（4）翻译增强2：将高资源数据集中的问题翻译成低资源语言，上下文和答案不变，然后训练`mBERT`，再在低资源语言数据集上测试效果。（5）翻译增强+few shot：前面的方法的结合，结合后的方式达到了最好的效果。|
 
 ## 19.Code
 | 序号 |                             论文                             |      发表会议      |                             备注                             |
