@@ -155,6 +155,7 @@
 |  1   | [Transformer-XH: Multi-hop question answering with eXtra Hop attention](https://openreview.net/forum?id=r1eIiCNYwS) | ICLR 2020 |          让transformer在图结构上也进行学习，评分686          |
 |  2   | [CogLTX: Applying BERT to Long Texts](http://keg.cs.tsinghua.edu.cn/jietang/publications/NIPS20-Ding-et-al-CogLTX.pdf) | NIPS 2020 | 在长文本上应用BERT，并且使得BERT有一定的推理能力，重点句迭代选取最后保留对于当前任务最相关的句子，进行下一轮计算。 |
 |  3   | [Pre-training Text-to-Text Transformers for Concept-centric Common Sense](https://arxiv.org/abs/2011.07956) | ICLR 2021 | 在`T5`模型基础上附加常识（concept）感知能力。提出了两个生成式的预训练任务和一个判别式的预训练任务：（1）`C2S`：给定一个无序的`concept`（通过POS抽取一个句子中的名词、动词得到）集合，让模型还原原本的句子，该任务使得模型需要感知到不同`concept`之间的关系。（2）`COR`：打乱一句话当中的`concept`字段的顺序，让模型恢复原有顺序。（3）`GenerativeQA`：输入两句话判断哪句话更符合常识。这三个预训练任务还设定了一个联合训练的流程。最终预训练好的large模型用于`OBQA`任务可以达到66的acc。 |
+| 4 | [Hi-Transformer: Hierarchical Interactive Transformer for Efficient and Effective Long Document Modeling](https://arxiv.org/abs/2106.01040)| ACL 2021 short | 提出了`Hi-Transformer`模型，对于长文档先进行句子编码，再利用句子表示获得文档表示，接着反过来利用文档表示去增强句子表示，最后利用增强后的句子表示获得整个文档的表示。在`Amazon`、`IMDB`以及`MIND`数据集上的效果优于`Longformer`。 |
 
 ## 9.数据增强
 | 序号 |                             论文                             |  发表会议  |                             备注                             |
