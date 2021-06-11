@@ -27,6 +27,7 @@
 | :--: | :----------------------------------------------------------: | :--------: | :----------------------------------------------------------: |
 |  1   | [Natural Language QA Approaches using Reasoning with External Knowledge](https://arxiv.org/abs/2003.03446) | arXiv 2020 | 是一篇Survey，总结了现有的利用外部知识完成QA的方法，包括数据集的整理，常用的外部知识整理还有使用外部知识的一些常用方法。知识方面，无结构知识：`Wikipedia Corpus`、`TorontoBookCorpus`、`ARC Corpus`、`WikiHow`、`RocStories`、`Story Cloze`等，结构化知识：`Yago`、`NELL`、`DBPedia`、`ConceptNet`、`WordNet`。对于无结构知识，可以考虑利用记忆网络来存储知识，对于结构化知识可以考虑利用GNN或Tree-based LSTM来存储知识。 |
 |  2   | [NeurIPS 2020 EfficientQA Competition: Systems, Analyses and Lessons Learned](https://arxiv.org/abs/2101.00133) | arXiv 2021 |                            [TODO]                            |
+| 3 | [Conversational Question Answering: A Survey](https://arxiv.org/abs/2106.00874) | arXiv 2021 | CQA Survey，研究方向由单轮对话QA转换为多轮对话QA，第四章介绍了对话MRC任务，第五章介绍了相关数据集（其中5.2介绍了对话MRC相关数据集，主要有`CoQA`和`QuAC`）。 |
 
 ## 工具
 | 序号 |                             论文                             |  发表会议  |                   备注                   |
@@ -182,6 +183,7 @@
 |  6   | [Is Multihop QA in DiRe Condition? Measuring and Reducing Disconnected Reasoning](https://www.aclweb.org/anthology/2020.emnlp-main.712) |   EMNLP 2020    | `HotpotQA`上的一个研究，也是探索了当前多跳模型到底有没有推理能力。作者将推理分为连贯推理（connected resoning）与不连贯推理。连贯推理是我们希望能够赋予模型的能力，也就是在多个文档中进行信息间的交互以此得到答案。而不连贯推理则是不交互信息就得到答案。作者设计了一些实验去探索模型通过不连贯推理所能达到的分数以此来说明现有的模型可能并没有达到我们想要赋予他们多跳推理能力的初衷。除此之外，作者还设计了一种方案将数据集进行转换以此让模型更难cheat。该工作有着非常高的借鉴价值。对于模型设计者来说，可以帮助我们鉴别自己设计的模型到底有没有连贯推理，对于数据集制造者来说，可以让其明白自己的数据集容不容易被cheat |
 |  7   | [Do Multi-Hop Question Answering Systems Know How to Answer the Single-Hop Sub-Questions?](https://arxiv.org/abs/2002.09919) |   arXiv 2020    | 研究问题：多跳QA系统能否回答单跳子问题；除此之外引用了`DecompRC`中划分子问题的方法 |
 | 8 | [On the Efficacy of Adversarial Data Collection for Question Answering: Results from a Large-Scale Randomized Study](https://arxiv.org/abs/2106.00872) | ACL 2021 | 鲁棒性思考工作，重要结论：（1）只在大规模对抗样本上训练出的模型在对抗测试集上的效果表现得好，但泛化性能比较差（没有在标准数据集上训练出的模型在Out-of-domain场景下表现好）；（2）人工构建对抗样本的时候，许多劳动力都用在了如何fool模型，这是不对的。 |
+| 9 | [Why Machine Reading Comprehension Models Learn Shortcuts?](https://arxiv.org/abs/2106.01024) | ACL 2021 Findings | 以往很多工作都发现了模型在数据集上往往学习到的是捷径而不是复杂的解题思路，本文更深层次的关注为什么会出现这种现象，具体地，本文标了两个数据集，`QWM-para`和`SpM-para`，这两个数据集分别对应了两种常见的捷径，并且每个para-question对提供了一个捷径版的question，与一个非捷径版的question。在这两个数据集上进行深入研究，作者发现如果一个数据集的大部分sample都是可以捷径的sample，那么会趋势模型在训练早期阶段先学习这种捷径而不是复杂的推理过程。| 
 
 
 ## 11.Numerical Reasoning
