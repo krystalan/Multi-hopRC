@@ -319,6 +319,8 @@
 | :--: | :----------------------------------------------------------: | :----------------: | :----------------------------------------------------------: |
 | 1 | [CoSQA](https://arxiv.org/abs/2105.13239) | ACL 2021 | `CosQA`是一个代码问答数据集，有20604个查询-代码对|
 | 2 | [CoDesc](https://arxiv.org/abs/2105.14220) | ACL 2021 Findings | 提出了一个大规模的自然语言-Java语言对数据集`CoDesc`，可以用来提升下游任务，例如Code Summarization或者Code Search|
+| 3 | [Reading StackOverflow Encourages Cheating: Adding Question Text Improves Extractive Code Generation](https://arxiv.org/abs/2106.04447) | [ACL 2021 NLP4Prog](https://nlp4prog.github.io/2021/) | [TODO] |
+| 4 | [Energy-Based Models for Code Generation under Compilability Constraints](https://arxiv.org/abs/2106.04985) | [ACL 2021 NLP4Prog](https://nlp4prog.github.io/2021/) | [TODO] |
 
 ## [PLAN]
 |                             论文                             |  发表会议  |                             备注                             |
