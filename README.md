@@ -186,6 +186,7 @@
 | 8 | [On the Efficacy of Adversarial Data Collection for Question Answering: Results from a Large-Scale Randomized Study](https://arxiv.org/abs/2106.00872) | ACL 2021 | 鲁棒性思考工作，重要结论：（1）只在大规模对抗样本上训练出的模型在对抗测试集上的效果表现得好，但泛化性能比较差（没有在标准数据集上训练出的模型在Out-of-domain场景下表现好）；（2）人工构建对抗样本的时候，许多劳动力都用在了如何fool模型，这是不对的。 |
 | 9 | [Why Machine Reading Comprehension Models Learn Shortcuts?](https://arxiv.org/abs/2106.01024) | ACL 2021 Findings | 以往很多工作都发现了模型在数据集上往往学习到的是捷径而不是复杂的解题思路，本文更深层次的关注为什么会出现这种现象，具体地，本文标了两个数据集，`QWM-para`和`SpM-para`，这两个数据集分别对应了两种常见的捷径，并且每个para-question对提供了一个捷径版的question，与一个非捷径版的question。在这两个数据集上进行深入研究，作者发现如果一个数据集的大部分sample都是可以捷径的sample，那么会趋势模型在训练早期阶段先学习这种捷径而不是复杂的推理过程。| 
 | 10 | [Can Generative Pre-trained Language Models Serve as Knowledge Bases for Closed-book QA?](https://arxiv.org/abs/2106.01561) | ACL 2021| 利用生成式的预训练语言模型`BART`来做闭卷问答（只给问题和答案，没有上下文），发现（1）BART会随着看过的知识的增加，而遗忘学到过的知识。（2）BART很难把自己学到过的知识用在下游QA任务中。除此之外，作者提出了一些小技巧来缓解上述问题。 |
+| 11 | [Robustifying Multi-hop QA through Pseudo-Evidentiality Training](https://arxiv.org/abs/2107.03242) | ACL 2021 |[TODO]|
 
 
 ## 11.Numerical Reasoning
