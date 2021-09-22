@@ -269,6 +269,7 @@
 |  4   | [Learning to Explain: Datasets and Models for Identifying Valid Reasoning Chains in Multihop Question-Answering](https://arxiv.org/abs/2010.03274) | EMNLP 2020 | `eQASC`、`eQASC-perturbed`以及`eOBQA` `Textual entailment` **多选式** 这个工作其实是在研究多跳推理问题的可解释性。在`QASC`数据集的基础上，针对于每个问题又标注了多个推理链（有效或无效都有）构成了`eQASC`，接着又将推理链模板化（使推理链更加通用）构成了`eQASC-perturbed`数据集，最后为了进行out-domain test，也基于`OpenBookQA`数据集标注了推理链形成了`eOBQA`并进行测试 |
 |  5*  | [Unsupervised Explanation Generation for Machine Reading Comprehension](https://arxiv.org/abs/2011.06737) | arXiv 2020 | 可解释性研究，崔神新作，在MRC中通过无监督的方式来让模型输出推理所需的句子。只有少数的数据集有支撑句标注信号，例如`HotpotQA`，大量的数据集上都没有这样的支撑句监督信号，所以作者基于假设：**系统可以使用原有上下文中的少量信息来达到和原来推理类似的结论** 设计了循环动态门控机制（Recursive Dynamic Gating）。在模型的整体框架方面，采用了知识蒸馏的部分思想，分为Teacher模型和Student模型，其中Teacher模型接受原有问题、候选答案以及上下文来学习预测答案，而Student模型则意旨用更少量的上下文信息也能够达到和Teacher模型类似的效果。最终使用Teacher模型来预测答案，用Student模型来预测支撑句。那么如何使用更少量的信息呢？这里就用到了循环动态门控机制，该机制可以使BERT类模型（在本文中采用了ALBERT）中每一层transformer的输出在传递到下一层transformer中进行衰减。具体细节就不赘述了。在Loss方面使用了答案预测的loss，模型蒸馏的loss以及一个余弦相似度loss用来使模型更好的学习循环动态门控机制中的参数 |
 | 6 | [ExpMRC](https://arxiv.org/abs/2105.04126) | arXiv 2021 | 可解释性研究，给`SQuAD`（英）、`CMRC 2018`（中）、`RACE+`（英）、`C3`（中）数据集标注了支撑句。 |
+| 7 | [SuQA](https://arxiv.org/abs/2109.06853) | EMNLP 2021 | 为多跳阅读理解问题生成简短的解释，使用了summarization。 |
 
 
 (*代表仅属于本分类下的工作)
