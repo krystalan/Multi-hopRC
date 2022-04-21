@@ -28,6 +28,7 @@
 |  1   | [Natural Language QA Approaches using Reasoning with External Knowledge](https://arxiv.org/abs/2003.03446) | arXiv 2020 | 是一篇Survey，总结了现有的利用外部知识完成QA的方法，包括数据集的整理，常用的外部知识整理还有使用外部知识的一些常用方法。知识方面，无结构知识：`Wikipedia Corpus`、`TorontoBookCorpus`、`ARC Corpus`、`WikiHow`、`RocStories`、`Story Cloze`等，结构化知识：`Yago`、`NELL`、`DBPedia`、`ConceptNet`、`WordNet`。对于无结构知识，可以考虑利用记忆网络来存储知识，对于结构化知识可以考虑利用GNN或Tree-based LSTM来存储知识。 |
 |  2   | [NeurIPS 2020 EfficientQA Competition: Systems, Analyses and Lessons Learned](https://arxiv.org/abs/2101.00133) | arXiv 2021 |                            [TODO]                            |
 | 3 | [Conversational Question Answering: A Survey](https://arxiv.org/abs/2106.00874) | arXiv 2021 | CQA Survey，研究方向由单轮对话QA转换为多轮对话QA，第四章介绍了对话MRC任务，第五章介绍了相关数据集（其中5.2介绍了对话MRC相关数据集，主要有`CoQA`和`QuAC`）。 |
+| 4 | [A Survey on Multi-hop Question Answering and Generation](https://arxiv.org/abs/2204.09140) | arXiv 2022 | MHQA Survey |
 
 ## 工具
 | 序号 |                             论文                             |  发表会议  |                   备注                   |
